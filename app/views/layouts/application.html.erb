@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Syria</title>
+    <%= csrf_meta_tags %>
+
+    <%= stylesheet_link_tag    'application', media: 'all' %>
+    <%= javascript_include_tag 'application' %>
+  </head>
+
+  <body>
+    <% if flash.now[:errors] %>
+      <% flash.now[:errors].each do |error| %>
+        <p><%= error %></p>
+      <% end %>
+    <% end %>
+
+    <% if logged_in? %>
+      <p>Welcome, <%= current_user.username %></p>
+      <%= button_to "Logout", session_url, method: :delete %>
+    <% end %>
+
+    <%= yield %>
+  </body>
+</html>

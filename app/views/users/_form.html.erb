@@ -1,0 +1,32 @@
+<% action_url = action_type == :new ? users_url : user_url(user) %>
+<% message = action_type == :new ? "Sign Up" : "Edit Information" %>
+
+<form class="" action="<%= action_url %>" method="post">
+  <%= form_auth_token %>
+
+  <% if action_type == :edit %>
+    <input type="hidden" name="_method" value="patch">
+  <% end %>
+
+  <label for="user_username"></label>
+  <input type="text" name="user[username]" value="<%= user.username %>" placeholder="choose a username">
+  <br>
+
+  <label for="uesr_password"></label>
+  <input type="password" name="user[password]" placeholder="password">
+  <br>
+
+  <label for="uesr_password_confirmation"></label>
+  <input type="password" name="user[password_confirmation]" placeholder="password confirmation">
+  <br>
+
+  <label for="user_email"></label>
+  <input type="email" name="user[email]" value="<%= user.email %>" placeholder="e-mail">
+  <br>
+
+  <label for="user_location"></label>
+  <input type="text" name="user[location]" value="<%= user.location %>" placeholder="location">
+  <br>
+
+  <input type="submit" name="" value="<%= message %>">
+</form>
