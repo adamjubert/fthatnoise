@@ -1,0 +1,26 @@
+<h1>All that I support</h1>
+
+<h3>My Ideas</h3>
+<ul>
+  <% @user.suggestions.each do |suggestion| %>
+    <li><%= idea_link(suggestion) %></li>
+    <%= upvote_buttons(suggestion) %>
+  <% end %>
+
+  <% @user.events.each do |event| %>
+    <li><%= idea_link(event) %></li>
+    <%= upvote_buttons(event) %>
+  <% end %>
+</ul>
+
+<h3>Other Ideas I Support</h3>
+<ul>
+  <% @user.supported_suggestions.each do |supported_suggestion| %>
+    <li><%= idea_link(supported_suggestion) %></li>
+    <%= upvote_buttons(supported_suggestion) %>
+  <% end %>
+  <% @user.supported_events.each do |supported_event| %>
+    <li><%= idea_link(supported_event) %></li>
+    <%= upvote_buttons(supported_event) %>
+  <% end %>
+</ul>

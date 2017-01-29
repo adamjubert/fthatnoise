@@ -1,1 +1,18 @@
-<h1>All the actions!</h1>
+<h1>Everything that has been suggested!</h1>
+
+<% if logged_in? %>
+  <%= link_to "Create New Action", new_suggestion_url %>
+  <%= link_to "Create New Event", new_event_url %>
+<% end %>
+
+<ul>
+<% @suggestions.each do |suggestion| %>
+  <li><%= link_to "#{suggestion.title}", suggestion_url(suggestion) %>
+    (<%= suggestion.upvotes_count %>)</li>
+  <%= upvote_buttons(suggestion) %>
+<% end %>
+<% @events.each do |event| %>
+  <li><%= link_to "#{event.title}", event_url(event) %>
+  <%= upvote_buttons(event) %>
+<% end %>
+</ul>

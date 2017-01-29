@@ -1,0 +1,56 @@
+<% action_url = action_type == :new ? events_url : event_url(event) %>
+<% message = action_type == :new ? "Create Event" : "Edit Event" %>
+
+<form class="" action="<%= action_url %>" method="post">
+  <%= form_auth_token %>
+
+  <% if action_type == :edit %>
+    <input type="hidden" name="_method" value="patch">
+  <% end %>
+
+  <label for="event_title">Title: </label>
+  <input id="event_title" type="text" name="event[title]" value="<%= event.title %>" placeholder="Title">
+  <br>
+
+  <label for="event_date">Date: </label>
+  <input type="date" name="event[date]" value="<%= event.date %>">
+  <br>
+
+  <label for="event_start_time">Start Time: </label>
+  <input type="time" name="event[start_time]" value="<%= event.start_time %>">
+  <br>
+
+  <label for="event_end_time">End Time: </label>
+  <input type="time" name="event[end_time]" value="<%= event.end_time %>">
+  <br>
+
+  <label for="event_address">Address: </label>
+  <input type="text" name="event[address]" value="<%= event.address %>">
+  <br>
+
+  <label for="event_city">City: </label>
+  <input type="text" name="event[city]" value="<%= event.city %>">
+  <br>
+
+  <label for="event_state">State: </label>
+  <%= select_tag :state, options_for_select(us_states), id: "event_state", name: "event[state]" %>
+  <br>
+
+  <label for="event_description">Description: </label>
+  <br>
+  <textarea id="event_description" name="event[description]" placeholder="Description"><%= event.description %></textarea>
+  <br>
+
+  <label for="event_categories">Categories: </label>
+  <input type="hidden" name="event[category_ids][]" value="">
+  <br>
+
+  <% Category.all.each do |category| %>
+    <input id="category_<%= category.name %>" type="checkbox" name="event[category_ids][]"
+    value="<%= category.id %>" <%= "checked" if event.category_ids.include?(category.id) %>>
+    <label for="category_<%= category.name %>"><%= category.name %></label>
+    <br>
+  <% end %>
+
+  <input type="submit" name="" value="<%= message %>">
+</form>

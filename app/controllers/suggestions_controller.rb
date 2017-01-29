@@ -1,8 +1,10 @@
 class SuggestionsController < ApplicationController
   before_action :only_creator_can_edit_suggestion, only: [:edit, :update, :destroy]
+  before_action :redirect_unless_logged_in, only: [:new, :create, :edit, :update, :destroy]
 
   def index
     @suggestions = Suggestion.all
+    @events = Event.all
     render :index
   end
 
@@ -15,11 +17,6 @@ class SuggestionsController < ApplicationController
     @suggestion = current_user.suggestions.new(suggestion_params)
 
     if @suggestion.save
-      # params[:suggestion][:category_ids].each do |category_id|
-      #   next if category_id.blank?
-      #   @suggestion.idea_categories.create(category_id: category_id.to_i)
-      # end
-
       redirect_to suggestion_url(@suggestion)
     else
       flash.now[:errors] = @suggestion.errors.full_messages
@@ -39,7 +36,7 @@ class SuggestionsController < ApplicationController
 
   def update
     @suggestion = Suggestion.find(params[:id])
-    # fail
+
     if @suggestion.update(suggestion_params)
       redirect_to suggestion_url(@suggestion)
     else
@@ -57,7 +54,7 @@ class SuggestionsController < ApplicationController
   private
 
   def suggestion_params
-    params.require(:suggestion).permit(:title, :description)
+    params.require(:suggestion).permit(:title, :description, category_ids: [])
   end
 
   def only_creator_can_edit_suggestion

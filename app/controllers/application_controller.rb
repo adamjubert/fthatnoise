@@ -20,4 +20,13 @@ class ApplicationController < ActionController::Base
     current_user.reset_session_token!
     session[:session_token] = nil
   end
+
+  private
+
+  def redirect_unless_logged_in
+    unless logged_in?
+      flash[:errors] = ["Please sign in or sign up to do this!"]
+      redirect_to new_session_url
+    end
+  end
 end

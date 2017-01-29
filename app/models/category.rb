@@ -12,5 +12,6 @@ class Category < ActiveRecord::Base
   validates :name, presence: true, uniqueness: true
 
   has_many :idea_categories, dependent: :destroy, inverse_of: :category
-  has_many :ideas, through: :idea_categories
+  has_many :suggestions, through: :idea_categories, source: :idea, source_type: "Suggestion"
+  has_many :events, through: :idea_categories, source: :idea, source_type: "Event"
 end

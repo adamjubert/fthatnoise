@@ -24,9 +24,14 @@
   <input type="email" name="user[email]" value="<%= user.email %>" placeholder="e-mail">
   <br>
 
-  <label for="user_location"></label>
-  <input type="text" name="user[location]" value="<%= user.location %>" placeholder="location">
+  <label for="user_city"></label>
+  <input type="text" name="user[city]" value="<%= user.city %>" placeholder="city (optional)">
   <br>
+
+  <label for="user_state">State: </label>
+  <%= select_tag :state, options_for_select(us_states), id: "user_state", name: "user[state]" %>
+  <br>
+
 
   <input type="submit" name="" value="<%= message %>">
 </form>

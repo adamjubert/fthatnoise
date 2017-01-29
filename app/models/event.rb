@@ -20,9 +20,36 @@ class Event < ActiveRecord::Base
   include Taggable
 
   validates :creator, :title, :address, :city, :state, :start_time, :date, presence: true
+  validate :date_not_in_past, :start_time_before_end_time
 
-  belongs_to :creator,
-    class_name: "User",
-    primary_key: :id,
-    foreign_key: :creator_id
+  def category_ids=(ids)
+    ids = ids.reject(&:blank?).map(&:to_i)
+    super(ids)
+  end
+
+  def formatted_date
+    date.strftime("%A, %B %d, %Y")
+  end
+
+  def formatted_start_time
+    start_time.strftime("%-I:%M %P")
+  end
+
+  def formatted_end_time
+    end_time.strftime("%-I:%M %P")
+  end
+
+  private
+
+  def date_not_in_past
+    if date < Date.today
+      errors[:date] << "cannot be in the past"
+    end
+  end
+
+  def start_time_before_end_time
+    if end_time && end_time < start_time
+      errors[:start_time] << "cannot be after end time"
+    end
+  end
 end

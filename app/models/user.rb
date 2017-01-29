@@ -7,10 +7,11 @@
 #  username        :string           not null
 #  password_digest :string           not null
 #  admin           :boolean          default("false"), not null
-#  location        :string
 #  created_at      :datetime         not null
 #  updated_at      :datetime         not null
 #  session_token   :string           not null
+#  city            :string
+#  state           :string
 #
 
 class User < ActiveRecord::Base
@@ -27,7 +28,20 @@ class User < ActiveRecord::Base
   has_many :suggestions,
     class_name: "Suggestion",
     primary_key: :id,
-    foreign_key: :creator_id
+    foreign_key: :creator_id,
+    dependent: :destroy
+
+  has_many :events,
+    class_name: "Event",
+    primary_key: :id,
+    foreign_key: :creator_id,
+    dependent: :destroy
+
+  has_many :comments
+
+  has_many :upvotes, dependent: :destroy
+  has_many :supported_suggestions, through: :upvotes, source: :idea, source_type: "Suggestion"
+  has_many :supported_events, through: :upvotes, source: :idea, source_type: "Event"
 
   def self.generate_random_token
     SecureRandom.urlsafe_base64(16)

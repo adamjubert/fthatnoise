@@ -1,5 +1,7 @@
 class EventsController < ApplicationController
   before_action :only_creator_can_edit_event, only: [:edit, :update, :destroy]
+  before_action :redirect_unless_logged_in, only: [:new, :create, :edit, :update, :destroy]
+
 
   def index
     @events = Event.all

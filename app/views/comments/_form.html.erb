@@ -1,0 +1,21 @@
+<% if action_type == :new %>
+  <% action_url = idea.is_a?(Suggestion) ? suggestion_comments_url(idea) : event_comments_url(idea) %>
+<% else %>
+  <% action_url = comment_url(comment) %>
+<% end %>
+
+<% message = action_type == :new ? "Add Comment" : "Edit Comment" %>
+
+<form class="" action="<%= action_url %>" method="post">
+  <%= form_auth_token %>
+
+  <% if action_type == :edit %>
+    <input type="hidden" name="_method" value="patch">
+  <% end %>
+
+  <label for="comment_body"></label>
+  <textarea id="comment_body" placeholder="Add comment" name="comment[body]"><%= comment.body %></textarea>
+  <br>
+  
+  <input type="submit" name="" value="<%= message %>">
+</form>
