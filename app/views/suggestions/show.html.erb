@@ -1,0 +1,16 @@
+<h1><%= @suggestion.title %></h1>
+<h3>Created by <%= @suggestion.creator_name %></h3>
+
+<% if current_user == @suggestion.creator %>
+  <%= link_to "Edit Action", edit_suggestion_url(@suggestion) %>
+  <%= button_to "Delete Action", suggestion_url(@suggestion), method: :delete %>
+<% end %>
+
+<p>Categories: <%= @suggestion.categories_string %></p>
+<ul>
+  <% @suggestion.categories.each do |category| %>
+  <li><%= category.name %></li>
+  <% end %>
+</ul>
+
+<h4><%= @suggestion.description %></h4>

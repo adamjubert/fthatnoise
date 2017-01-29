@@ -11,10 +11,11 @@
 #
 
 class IdeaCategory < ActiveRecord::Base
-  validates :idea_id, :idea_type, :category_id, presence: true
+  validates :idea, :idea_type, :category, presence: true
   validates :category_id, :uniqueness => { :scope => [:idea_type, :idea_id] }
 
   belongs_to :idea, polymorphic: true
+
   belongs_to :category,
     class_name: "Category",
     primary_key: :id,

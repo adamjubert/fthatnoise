@@ -13,10 +13,10 @@
 class Suggestion < ActiveRecord::Base
   include Taggable
 
-  validates :creator_id, :title, :description, presence: true
+  validates :creator, :title, :description, presence: true
 
-  belongs_to :user,
-    class_name: "User",
-    primary_key: :id,
-    foreign_key: :creator_id
+  def category_ids=(ids)
+    ids = ids.reject(&:blank?).map(&:to_i)
+    super(ids)
+  end
 end
