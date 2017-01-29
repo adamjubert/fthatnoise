@@ -14,6 +14,7 @@ class SessionsController < ApplicationController
 
     if user
       login!(user)
+      flash[:notice] = ["Welcome back to F*** That Noise!"]
       redirect_to user_url(user)
     else
       flash.now[:errors] = ["Invalid username/password combination. Please try again."]

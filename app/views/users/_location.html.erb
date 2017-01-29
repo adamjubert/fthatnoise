@@ -2,19 +2,29 @@
   <%= form_auth_token %>
   <input type="hidden" name="_method" value="patch">
 
-  <label for="user_city">City: </label>
-  <input type="text" name="user[city]" value="<%= user.city %>" placeholder="city (optional)">
-  <br>
+  <div class="form-group">
+    <label for="user_city" class="col-lg-2 control-label">City</label>
+    <div class="col-lg-10">
+      <input type="text" name="user[city]" class="form-control" value="<%= user.city %>" placeholder="city (optional)">
+    </div>
+  </div>
 
-  <label for="user_state">State: </label>
-  <select id="user_state" class="" name="user[state]">
-    <option disabled selected>Select State</option>
-    <% us_states.each do |state| %>
-      <option value="<%= state[0] %>"
-        <%= "selected" if user.state == state[0] %>><%= state[0] %></option>
-    <% end %>
-  </select>
-  <br>
+  <div class="form-group">
+    <label for="user_state" class="col-lg-2 control-label">State</label>
+    <div class="col-lg-10">
+      <select class="form-control" name="user[state]" id="user_state">
+        <option disabled selected>Select State</option>
+        <% us_states.each do |state| %>
+          <option value="<%= state[0] %>"
+            <%= "selected" if user.state == state[0] %>><%= state[0] %></option>
+        <% end %>
+      </select>
+    </div>
+  </div>
 
-  <input type="submit" name="" value="Edit Location">
+  <div class="form-group">
+    <div class="col-lg-10 col-lg-offset-2">
+      <button type="submit" class="btn btn-primary">Edit Location</button>
+    </div>
+  </div>
 </form>

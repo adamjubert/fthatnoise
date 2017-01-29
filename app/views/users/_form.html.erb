@@ -1,42 +1,67 @@
 <% action_url = action_type == :new ? users_url : user_url(user) %>
 <% message = action_type == :new ? "Sign Up" : "Edit Information" %>
 
-<form class="" action="<%= action_url %>" method="post">
-  <%= form_auth_token %>
+<form class="form-horizontal" action="<%= action_url %>" method="post">
+  <fieldset>
+    <%= form_auth_token %>
+    <legend><%= legend %></legend>
 
-  <% if action_type == :edit %>
-    <input type="hidden" name="_method" value="patch">
-  <% end %>
-
-  <label for="user_username"></label>
-  <input type="text" name="user[username]" value="<%= user.username %>" placeholder="choose a username">
-  <br>
-
-  <label for="uesr_password"></label>
-  <input type="password" name="user[password]" placeholder="password">
-  <br>
-
-  <label for="uesr_password_confirmation"></label>
-  <input type="password" name="user[password_confirmation]" placeholder="password confirmation">
-  <br>
-
-  <label for="user_email"></label>
-  <input type="email" name="user[email]" value="<%= user.email %>" placeholder="e-mail (never shown)">
-  <br>
-
-  <label for="user_city"></label>
-  <input type="text" name="user[city]" value="<%= user.city %>" placeholder="city (optional)">
-  <br>
-
-  <label for="user_state">State: </label>
-  <select id="user_state" class="" name="user[state]">
-    <option disabled selected>Select State</option>
-    <% us_states.each do |state| %>
-      <option value="<%= state[0] %>"
-        <%= "selected" if user.state == state[0] %>><%= state[0] %></option>
+    <% if action_type == :edit %>
+      <input type="hidden" name="_method" value="patch">
     <% end %>
-  </select>
-  <br>
 
-  <input type="submit" name="" value="<%= message %>">
+    <div class="form-group">
+      <label for="user_username" class="col-lg-2 control-label">Username</label>
+      <div class="col-lg-10">
+        <input id="user_username" type="text" name="user[username]" class="form-control" value="<%= user.username %>" placeholder="choose a username">
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="user_password" class="col-lg-2 control-label">Password</label>
+      <div class="col-lg-10">
+        <input id="user_password" type="password" name="user[password]" class="form-control" placeholder="password">
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="uesr_password_confirmation" class="col-lg-2 control-label">Password Confirmation</label>
+      <div class="col-lg-10">
+        <input id="uesr_password_confirmation" type="password" name="user[password_confirmation]" class="form-control" placeholder="confirm password">
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="user_email" class="col-lg-2 control-label">E-mail</label>
+      <div class="col-lg-10">
+        <input id="user_email" type="text" name="user[email]" class="form-control" value="<%= user.email %>" placeholder="e-mail (never shown)">
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="user_city" class="col-lg-2 control-label">City</label>
+      <div class="col-lg-10">
+        <input type="text" name="user[city]" class="form-control" value="<%= user.city %>" placeholder="city (optional)">
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="user_state" class="col-lg-2 control-label">State</label>
+      <div class="col-lg-10">
+        <select class="form-control" name="user[state]" id="user_state">
+          <option disabled selected>Select State</option>
+          <% us_states.each do |state| %>
+            <option value="<%= state[0] %>"
+              <%= "selected" if user.state == state[0] %>><%= state[0] %></option>
+          <% end %>
+        </select>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <div class="col-lg-10 col-lg-offset-2">
+        <button type="submit" class="btn btn-primary"><%= message %></button>
+      </div>
+    </div>
+  </fieldset>
 </form>

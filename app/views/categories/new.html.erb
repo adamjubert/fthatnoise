@@ -1,10 +1,19 @@
-<h1>Add Category</h1>
+<form class="form-horizontal" action="<%= categories_url %>" method="post">
+  <fieldset>
+    <%= form_auth_token %>
+    <legend>Add Category</legend>
 
-<form class="" action="<%= categories_url %>" method="post">
-  <%= form_auth_token %>
+    <div class="form-group">
+      <label for="category_name" class="col-lg-2 control-label">E-mail</label>
+      <div class="col-lg-10">
+        <input id="category_name" type="text" name="category.name" class="form-control" value="<%= @category.name %>" placeholder="name">
+      </div>
+    </div>
 
-  <label for="category_name">Name: </label>
-  <input id="category_name" type="text" placeholder="category name" name="category[name]" value="<%= @category.name %>">
-  <br>
-  <input type="submit" name="" value="Create Category!">
+    <div class="form-group">
+      <div class="col-lg-10 col-lg-offset-2">
+        <button type="submit" class="btn btn-primary">Add Category</button>
+      </div>
+    </div>
+  </fieldset>
 </form>

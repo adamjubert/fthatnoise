@@ -3,62 +3,94 @@
 <% parsed_start_time = event.start_time ? event.parse_start_time : "" %>
 <% parsed_end_time = event.end_time ? event.parse_end_time : "" %>
 
-<form class="" action="<%= action_url %>" method="post">
-  <%= form_auth_token %>
+<form class="form-horizontal" action="<%= action_url %>" method="post">
+  <fieldset>
+    <%= form_auth_token %>
+    <legend><%= message %></legend>
 
-  <% if action_type == :edit %>
-    <input type="hidden" name="_method" value="patch">
-  <% end %>
-
-  <label for="event_title">Title: </label>
-  <input id="event_title" type="text" name="event[title]" value="<%= event.title %>" placeholder="Title">
-  <br>
-
-  <label for="event_date">Date: </label>
-  <input type="date" name="event[date]" value="<%= event.date %>">
-  <br>
-
-  <label for="event_start_time">Start Time: </label>
-  <input type="time" name="event[start_time]" value="<%= parsed_start_time %>">
-  <br>
-
-  <label for="event_end_time">End Time (optional): </label>
-  <input type="time" name="event[end_time]" value="<%= parsed_end_time %>">
-  <br>
-
-  <label for="event_address">Address: </label>
-  <input type="text" name="event[address]" value="<%= event.address %>">
-  <br>
-
-  <label for="event_city">City: </label>
-  <input type="text" name="event[city]" value="<%= event.city %>">
-  <br>
-
-  <label for="event_state">State: </label>
-  <select id="event_state" class="" name="event[state]">
-    <option disabled selected>Select State</option>
-    <% us_states.each do |state| %>
-      <option value="<%= state[0] %>"
-        <%= "selected" if event.state == state[0] %>><%= state[0] %></option>
+    <% if action_type == :edit %>
+      <input type="hidden" name="_method" value="patch">
     <% end %>
-  </select>
-  <br>
 
-  <label for="event_description">Description: </label>
-  <br>
-  <textarea id="event_description" name="event[description]" placeholder="Description"><%= event.description %></textarea>
-  <br>
+    <div class="form-group">
+      <label for="event_title" class="col-lg-2 control-label">Title</label>
+      <div class="col-lg-10">
+        <input id="event_title" type="text" name="event[title]" class="form-control" value="<%= event.title %>" placeholder="title">
+      </div>
+    </div>
 
-  <label for="event_categories">Categories: </label>
-  <input type="hidden" name="event[category_ids][]" value="">
-  <br>
+    <div class="form-group">
+      <label for="event_date" class="col-lg-2 control-label">Date</label>
+      <div class="col-lg-10">
+        <input id="event_date" type="date" name="event[date]" class="form-control" value="<%= event.date %>">
+      </div>
+    </div>
 
-  <% Category.all.each do |category| %>
-    <input id="category_<%= category.name %>" type="checkbox" name="event[category_ids][]"
-    value="<%= category.id %>" <%= "checked" if event.category_ids.include?(category.id) %>>
-    <label for="category_<%= category.name %>"><%= category.name %></label>
-    <br>
-  <% end %>
+    <div class="form-group">
+      <label for="event_start_time" class="col-lg-2 control-label">Start Time</label>
+      <div class="col-lg-10">
+        <input id="event_start_time" type="time" name="event[start_time]" class="form-control" value="<%= parsed_start_time %>">
+      </div>
+    </div>
 
-  <input type="submit" name="" value="<%= message %>">
+    <div class="form-group">
+      <label for="event_end_time" class="col-lg-2 control-label">End Time</label>
+      <div class="col-lg-10">
+        <input id="event_end_time" type="time" name="event[end_time]" class="form-control" value="<%= parsed_end_time %>">
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="event_address" class="col-lg-2 control-label">Address</label>
+      <div class="col-lg-10">
+        <input id="event_address" type="text" name="event[address]" class="form-control" value="<%= event.address %>" placeholder="address">
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="event_city" class="col-lg-2 control-label">City</label>
+      <div class="col-lg-10">
+        <input id="event_city" type="text" name="event[city]" class="form-control" value="<%= event.city %>" placeholder="city">
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="event_state" class="col-lg-2 control-label">State</label>
+      <div class="col-lg-10">
+        <select class="form-control" name="event[state]" id="event_state">
+          <option disabled selected>Select State</option>
+          <% us_states.each do |state| %>
+            <option value="<%= state[0] %>"
+              <%= "selected" if event.state == state[0] %>><%= state[0] %></option>
+          <% end %>
+        </select>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="event_description" class="col-lg-2 control-label">Description</label>
+      <div class="col-lg-10">
+        <textarea class="form-control" name="event[description]" rows="3" id="event_description" placeholder="description"><%= event.description %></textarea>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="event_categories" class="col-lg-2 control-label">Categories</label>
+      <input type="hidden" name="event[category_ids][]" value="">
+      <div class="col-lg-10">
+        <% Category.all.each do |category| %>
+          <input id="category_<%= category.name %>" type="checkbox" name="event[category_ids][]"
+          value="<%= category.id %>" <%= "checked" if event.category_ids.include?(category.id) %>>
+          <label for="category_<%= category.name %>"><%= category.name %></label>
+          <br>
+        <% end %>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <div class="col-lg-10 col-lg-offset-2">
+        <button type="submit" class="btn btn-primary"><%= message %></button>
+      </div>
+    </div>
+  </fieldset>
 </form>

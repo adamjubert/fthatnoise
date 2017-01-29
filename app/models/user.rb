@@ -74,6 +74,8 @@ class User < ActiveRecord::Base
       "#{city}, #{state}"
     elsif state
       state
+    elsif city
+      city
     else
       "Not set"
     end

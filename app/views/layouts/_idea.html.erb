@@ -1,6 +1,6 @@
 <% edit_url = idea_type == :event ? edit_event_url(idea) : edit_suggestion_url(idea) %>
 <% delete_url = idea_type == :event ? event_url(idea) : suggestion_url(idea)%>
-
+<% idea_string = idea_type == :event ? "Event" : "Action" %>
 <h1><%= idea.title %></h1>
 <h3>Created by <%= idea.creator_name %></h3>
 
@@ -9,8 +9,8 @@
 <%= upvote_buttons(idea) %>
 
 <% if current_user == idea.creator %>
-  <%= link_to "Edit Event", edit_url %>
-  <%= button_to "Delete Event", delete_url, method: :delete %>
+  <%= link_to "Edit #{idea_string}", edit_url %>
+  <%= button_to "Delete #{idea_string}", delete_url, method: :delete %>
 <% end %>
 
 <%= categories_string(idea) %>

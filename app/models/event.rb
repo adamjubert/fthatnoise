@@ -96,7 +96,7 @@ class Event < ActiveRecord::Base
   end
 
   def start_time_before_end_time
-    if end_time && end_time < start_time
+    if end_time && start_time && end_time < start_time
       errors[:start_time] << "cannot be after end time"
     end
   end

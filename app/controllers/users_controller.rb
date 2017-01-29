@@ -13,6 +13,7 @@ class UsersController < ApplicationController
 
     if @user.save
       login!(@user)
+      flash[:notice] = ["Welcome to F*** That Noise!"]
       redirect_to user_url(@user)
     else
       flash.now[:errors] = @user.errors.full_messages
