@@ -20,4 +20,8 @@ class Comment < ActiveRecord::Base
   def author_name
     user.username
   end
+
+  def time_string
+    "#{created_at.in_time_zone("EST").strftime("%b %d %-I:%M %P")} EST"
+  end
 end

@@ -27,7 +27,7 @@ module ApplicationHelper
     categories = idea.categories
 
     categories.each_with_index do |category, i|
-      categories_string << "<a href=#{categories_url(category)}>#{category.name}</a>"
+      categories_string << "<a href=\"#{category_url(category)}\">#{h(category.name)}</a>"
       categories_string << ", " unless i >= categories.length - 1
     end
 
@@ -37,9 +37,15 @@ module ApplicationHelper
 
   def idea_link(idea)
     if idea.is_a?(Suggestion)
-      link_to idea.title, suggestion_url(idea)
+      (link_to idea.title, suggestion_url(idea))
     elsif idea.is_a?(Event)
-      link_to idea.title, event_url(idea)
+      (link_to idea.title, event_url(idea))
+    end
+  end
+
+  def time_info(idea)
+    if idea.is_a?(Event)
+      "#{h(idea.formatted_date)} #{h(idea.formatted_time_range)}<br>".html_safe
     end
   end
 

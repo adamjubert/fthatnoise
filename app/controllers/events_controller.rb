@@ -4,8 +4,30 @@ class EventsController < ApplicationController
 
 
   def index
-    @events = Event.all
+    @ideas = Event.paginate(:page => params[:page], per_page: 30).order('created_at DESC')
     render :index
+  end
+
+  def near_me
+    @ideas = Event.by_city_and_state(current_user.city, current_user.state)
+
+    if @ideas.empty?
+      @ideas = Event.by_state(current_user.state)
+    end
+
+    @ideas = @ideas.paginate(:page => params[:page], per_page: 30).order('created_at DESC')
+
+    render :near_me
+  end
+
+  def most_upvoted
+    @ideas = Event.order_by_upvotes.paginate(:page => params[:page], per_page: 30)
+    render :most_upvoted
+  end
+
+  def trending
+    @ideas = Event.order_by_recent_upvotes.paginate(:page => params[:page], per_page: 30)
+    render :trending
   end
 
   def new
@@ -17,6 +39,7 @@ class EventsController < ApplicationController
     @event = current_user.events.new(event_params)
 
     if @event.save
+      Upvote.create(idea_id: @event.id, idea_type: "Event", user: current_user)
       redirect_to event_url(@event)
     else
       flash.now[:errors] = @event.errors.full_messages

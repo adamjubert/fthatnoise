@@ -35,7 +35,7 @@ end
   creator_id: user_ids.sample)
 end
 
-50.times do
+100.times do
   Event.create(title: Faker::Book.title,
   description: Faker::StarWars.wookie_sentence,
   creator_id: user_ids.sample,
@@ -76,4 +76,18 @@ end
 
   Upvote.create(user_id: user_ids.sample,
   idea_type: idea_type, idea_id: idea_id)
+end
+
+200.times do
+  idea_type = idea_types.sample
+
+  if idea_type == "Event"
+    idea_id = Event.all.ids.sample
+  else
+    idea_id = Suggestion.all.ids.sample
+  end
+
+  Comment.create(user_id: user_ids.sample,
+  idea_type: idea_type, idea_id: idea_id,
+  body: Faker::TwinPeaks.quote)
 end

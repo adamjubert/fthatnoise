@@ -1,1 +1,16 @@
-<h1>All the Events!</h1>
+<h1>All Events</h1>
+<%= link_to "Actions", suggestions_url %>
+<%= link_to "Near Me", events_near_me_url %>
+<%= link_to "Hot", events_most_upvoted_url %>
+<%= link_to "Trending", events_trending_url %>
+
+
+<% if logged_in? %>
+  <%= link_to "Create New Action", new_suggestion_url %>
+  <%= link_to "Create New Event", new_event_url %>
+<% end %>
+
+<ul>
+  <%= render partial: "layouts/short_idea", locals: { ideas: @ideas, idea_type: :event } %>
+  <%= will_paginate @ideas %>
+</ul>

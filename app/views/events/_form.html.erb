@@ -1,5 +1,7 @@
 <% action_url = action_type == :new ? events_url : event_url(event) %>
 <% message = action_type == :new ? "Create Event" : "Edit Event" %>
+<% parsed_start_time = event.start_time ? event.parse_start_time : "" %>
+<% parsed_end_time = event.end_time ? event.parse_end_time : "" %>
 
 <form class="" action="<%= action_url %>" method="post">
   <%= form_auth_token %>
@@ -17,11 +19,11 @@
   <br>
 
   <label for="event_start_time">Start Time: </label>
-  <input type="time" name="event[start_time]" value="<%= event.start_time %>">
+  <input type="time" name="event[start_time]" value="<%= parsed_start_time %>">
   <br>
 
-  <label for="event_end_time">End Time: </label>
-  <input type="time" name="event[end_time]" value="<%= event.end_time %>">
+  <label for="event_end_time">End Time (optional): </label>
+  <input type="time" name="event[end_time]" value="<%= parsed_end_time %>">
   <br>
 
   <label for="event_address">Address: </label>
@@ -33,7 +35,13 @@
   <br>
 
   <label for="event_state">State: </label>
-  <%= select_tag :state, options_for_select(us_states), id: "event_state", name: "event[state]" %>
+  <select id="event_state" class="" name="event[state]">
+    <option disabled selected>Select State</option>
+    <% us_states.each do |state| %>
+      <option value="<%= state[0] %>"
+        <%= "selected" if event.state == state[0] %>><%= state[0] %></option>
+    <% end %>
+  </select>
   <br>
 
   <label for="event_description">Description: </label>

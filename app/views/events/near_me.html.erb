@@ -1,0 +1,10 @@
+<h1>Events Near Me</h1>
+
+<% if @ideas.empty? %>
+  <p>No events are created near you. Why don't you <%= link_to "create one", new_event_url %>? Please make sure to <%= link_to "set your location", edit_user_url(current_user) %>.</p>
+<% else %>
+  <ul>
+    <%= render partial: "layouts/short_idea", locals: { ideas: @ideas, idea_type: :event } %>
+    <%= will_paginate @ideas %>
+  </ul>
+<% end %>

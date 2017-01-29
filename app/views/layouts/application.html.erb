@@ -15,8 +15,14 @@
       <% end %>
     <% end %>
 
+    <% if flash.now[:notice] %>
+      <% flash.now[:notice].each do |notice| %>
+        <p><%= notice %></p>
+      <% end %>
+    <% end %>
+
     <% if logged_in? %>
-      <p>Welcome, <%= current_user.username %></p>
+      <p>Welcome, <%= current_user.username %> <%= link_to "Profile", user_url(current_user) %></p>
       <%= button_to "Logout", session_url, method: :delete %>
       <% else %>
         <%= link_to "Create Account", new_user_url %>

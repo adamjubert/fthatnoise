@@ -1,0 +1,16 @@
+<h1>Contact Us!</h1>
+
+<% email = logged_in? ? current_user.email : "" %>
+
+<form class="" action="<%= contacts_url %>" method="post">
+  <%= form_auth_token %>
+  <label for="contact_email">E-mail: </label>
+  <input id="contact_email" type="text" name="contact[email]" value="<%= email %>" placeholder="E-mail">
+  <br>
+
+  <label for="contact_message">Message: </label>
+  <br>
+  <textarea name="contact[message]" id="contact_message"><%= @contact.message %></textarea>
+  <br>
+  <input type="submit" name="" value="Submit!">
+</form>

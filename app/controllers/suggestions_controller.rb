@@ -3,9 +3,18 @@ class SuggestionsController < ApplicationController
   before_action :redirect_unless_logged_in, only: [:new, :create, :edit, :update, :destroy]
 
   def index
-    @suggestions = Suggestion.all
-    @events = Event.all
+    @ideas = Suggestion.paginate(:page => params[:page], per_page: 30).order('created_at DESC')
     render :index
+  end
+
+  def most_upvoted
+    @ideas = Suggestion.order_by_upvotes.paginate(:page => params[:page], per_page: 30)
+    render :most_upvoted
+  end
+
+  def trending
+    @ideas = Suggestion.order_by_recent_upvotes.paginate(:page => params[:page], per_page: 30)
+    render :trending
   end
 
   def new
@@ -17,6 +26,7 @@ class SuggestionsController < ApplicationController
     @suggestion = current_user.suggestions.new(suggestion_params)
 
     if @suggestion.save
+      Upvote.create(idea_id: @suggestion.id, idea_type: "Suggestion", user: current_user)
       redirect_to suggestion_url(@suggestion)
     else
       flash.now[:errors] = @suggestion.errors.full_messages

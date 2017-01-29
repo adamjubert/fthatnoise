@@ -1,4 +1,7 @@
-<h1>Everything that has been suggested!</h1>
+<h1>All Actions</h1>
+<%= link_to "Events", events_url %>
+<%= link_to "Hot", suggestions_most_upvoted_url %>
+<%= link_to "Trending", suggestions_trending_url %>
 
 <% if logged_in? %>
   <%= link_to "Create New Action", new_suggestion_url %>
@@ -6,13 +9,6 @@
 <% end %>
 
 <ul>
-<% @suggestions.each do |suggestion| %>
-  <li><%= link_to "#{suggestion.title}", suggestion_url(suggestion) %>
-    (<%= suggestion.upvotes_count %>)</li>
-  <%= upvote_buttons(suggestion) %>
-<% end %>
-<% @events.each do |event| %>
-  <li><%= link_to "#{event.title}", event_url(event) %>
-  <%= upvote_buttons(event) %>
-<% end %>
+  <%= render partial: "layouts/short_idea", locals: { ideas: @ideas, idea_type: :suggestion } %>
+  <%= will_paginate @ideas %>
 </ul>

@@ -1,0 +1,10 @@
+<% ideas.each do |idea| %>
+  <% next if idea_type == :event && idea.in_past? %>
+  <li><%= idea_link(idea) %>
+  <%= upvote_buttons(idea) %>
+  (<%= idea.upvotes_count %>)
+  <br>
+  <%= time_info(idea) %>
+  <%= categories_string(idea) %>
+  <%= idea.shortened_description %></li>
+<% end %>

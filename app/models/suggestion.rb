@@ -15,8 +15,18 @@ class Suggestion < ActiveRecord::Base
 
   validates :creator, :title, :description, presence: true
 
-  def category_ids=(ids)
-    ids = ids.reject(&:blank?).map(&:to_i)
-    super(ids)
+  def self.order_by_upvotes
+    self.select("suggestions.*, COUNT(upvotes.id) AS upvotes_count")
+    .joins(:upvotes)
+    .group(:idea_id, "suggestions.id")
+    .order("upvotes_count DESC")
+  end
+
+  def self.order_by_recent_upvotes
+    self.select("suggestions.*, COUNT(upvotes.id) AS upvotes_count")
+    .joins(:upvotes)
+    .where("upvotes.created_at > ?", 1.day.ago)
+    .group(:idea_id, "suggestions.id")
+    .order("upvotes_count DESC")
   end
 end

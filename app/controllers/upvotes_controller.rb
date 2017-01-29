@@ -22,7 +22,7 @@ class UpvotesController < ApplicationController
 
   def go_back_unless_logged_in
     unless logged_in?
-      flash[:errors] = ["Please sign in or sign up to upvote!"]
+      flash[:errors] = ["Please sign in or sign up to commit to something!"]
       redirect_to :back
     end
   end
@@ -30,7 +30,7 @@ class UpvotesController < ApplicationController
   def only_destroy_own_upvotes
     upvote = Upvote.find(params[:id])
     unless upvote.user == current_user
-      flash[:errors] = ["You can't downvote as someone else!"]
+      flash[:errors] = ["You can't say 'Never mind' as someone else!"]
       redirect_to :back
     end
   end

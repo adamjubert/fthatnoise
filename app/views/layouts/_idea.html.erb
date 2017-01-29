@@ -1,0 +1,44 @@
+<h1><%= idea.title %></h1>
+<h3>Created by <%= idea.creator_name %></h3>
+
+<h3><%= idea.upvotes_count %> supporters</h3>
+
+<%= upvote_buttons(idea) %>
+
+<% if current_user == idea.creator %>
+  <%= link_to "Edit Event", edit_event_url(idea) %>
+  <%= button_to "Delete Event", event_url(idea), method: :delete %>
+<% end %>
+
+<%= categories_string(idea) %>
+
+<% if idea_type == :event %>
+  <h3><%= idea.formatted_date %></h3>
+  <% if idea.end_time %>
+    <h3><%= idea.formatted_start_time %> to <%= idea.formatted_end_time %></h3>
+  <% else %>
+    <h3><%= idea.formatted_start_time %></h3>
+  <% end %>
+
+  <h3><%= idea.address %></h3>
+  <h3><%= idea.city %>, <%= idea.state %></h3>
+<% end %>
+
+<p><%= idea.description %></p>
+
+<%= render partial: "comments/form",
+locals: { action_type: :new, idea: idea, comment: Comment.new } %>
+
+<p>All Comments</p>
+<% if idea.comments.empty? %>
+  <p>None so far!</p>
+  <% else %>
+    <% idea.comments.order(:created_at).each do |comment| %>
+      <h4><%= comment.author_name %></h4>
+      <% if comment.user == current_user %>
+        <%= button_to "Delete", comment_url(comment), method: :delete %>
+      <% end %>
+      <p><%= comment.time_string %></p>
+      <p><%= comment.body %></p>
+    <% end %>
+<% end %>

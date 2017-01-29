@@ -21,7 +21,7 @@ class User < ActiveRecord::Base
   validates :username, presence: true, uniqueness: true
   validates :password, length: { minimum: 6, allow_nil: true }
 
-  after_initialize :ensure_session_token
+  after_initialize :ensure_session_token, :basic_city_update
 
   attr_reader :password
 
@@ -69,9 +69,35 @@ class User < ActiveRecord::Base
     self.session_token
   end
 
+  def formatted_location
+    if city && state
+      "#{city}, #{state}"
+    elsif state
+      state
+    else
+      "Not set"
+    end
+  end
+
   private
 
   def ensure_session_token
     self.session_token ||= self.class.generate_random_token
+  end
+
+  def basic_city_update
+    return unless city
+
+    if ["nyc", "ny"].include?(city.downcase)
+      self.city = "New York"
+    elsif ["sf", "san fran"].include?(city.downcase)
+      self.city = "San Francisco"
+    elsif city.downcase == "philly"
+      self.city = "Philadelphia"
+    elsif city.downcase == "la"
+      self.city = "Los Angeles"
+    end
+
+    self.city = city.split(" ").map(&:capitalize).join(" ")
   end
 end

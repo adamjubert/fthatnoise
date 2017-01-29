@@ -23,10 +23,30 @@ module Taggable
     upvotes.count
   end
 
+  def recent_upvotes_count
+   upvotes
+     .select('id')
+     .where("created_at > ?", 1.day.ago)
+     .count
+  end
+
+  def shortened_description
+    if description.length < 140
+      description
+    else
+      "#{description[0..139]}..."
+    end
+  end
+
+  def category_ids=(ids)
+    ids = ids.reject(&:blank?).map(&:to_i)
+    super(ids)
+  end
+
   module ClassMethods
 
-    def by_category_name(category_name)
-      self.joins(:categories).where('categories.name' => category_name)
+    def by_category(category_name)
+      self.joins(:categories).where('categories.name' => category_name).order("created_at DESC")
     end
   end
 end

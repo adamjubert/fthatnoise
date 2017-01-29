@@ -1,0 +1,11 @@
+<% message = idea_type == :event ? "Events" : "Actions" %>
+<% ideas = idea_type == :event ? category.events_by_creation : category.suggestions_by_creation %>
+
+<h1><%= message %></h1>
+<ul>
+  <% ideas.each do |idea| %>
+    <% next if idea_type == :event && idea.in_past? %>
+    <% action_url = idea_type == :event ? event_url(idea) : suggestion_url(idea) %>
+    <li><%= link_to idea.title, action_url %></li>
+  <% end %>
+</ul>
