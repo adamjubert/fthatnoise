@@ -5,7 +5,7 @@ Rails.application.routes.draw do
   resources :users, only: [:new, :create, :edit, :update, :show]
   resource :session, only: [:new, :create, :destroy]
 
-  resources :categories, only: [:index, :show]
+  resources :categories, only: [:index, :show, :new, :create]
 
   resources :suggestions do
     resources :upvotes, only: [:create]
@@ -19,7 +19,7 @@ Rails.application.routes.draw do
 
   resources :upvotes, only: [:destroy]
   resources :comments, only: [:destroy]
-  resources :contacts, only: [:new, :create]
+  resources :contacts, only: [:new, :create, :index]
 
   get "/about", to: "static_pages#about", as: "about"
   get "/contact", to: "contacts#new", as: "contact"

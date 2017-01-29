@@ -1,0 +1,7 @@
+<h1>All the Messages!</h1>
+
+<ul>
+<% @contacts.each do |message| %>
+  <li><strong><%= message.email %></strong>: <%= message.message %></li>
+<% end %>
+</ul>

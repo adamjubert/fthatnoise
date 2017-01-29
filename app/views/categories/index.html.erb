@@ -1,4 +1,7 @@
 <h1>All the Categories!</h1>
+<% if admin? %>
+  <%= link_to "Add Category", new_category_url %>
+<% end %>
 
 <ul>
   <% @categories.each do |category| %>

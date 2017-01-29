@@ -13,7 +13,8 @@ IdeaCategory.destroy_all
 Upvote.destroy_all
 Comment.destroy_all
 
-User.create(username: "hilaura13", email: "laura@me.com", password: "password", password_confirmation: "password")
+User.create(username: "hilaura13", email: "laura@me.com",
+password: "password", password_confirmation: "password", admin: true)
 
 50.times do
   User.create(username: Faker::GameOfThrones.character, email: Faker::Internet.free_email,

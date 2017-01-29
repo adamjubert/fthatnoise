@@ -1,4 +1,6 @@
 class ContactsController < ApplicationController
+  before_action :only_admin_can_see_contacts, only: [:index]
+
   def new
     @contact = Contact.new
     render :new
@@ -16,9 +18,18 @@ class ContactsController < ApplicationController
     end
   end
 
+  def index
+    @contacts = Contact.all
+    render :index
+  end
+
   private
 
   def contact_params
     params.require(:contact).permit(:email, :message)
+  end
+
+  def only_admin_can_see_contacts
+    redirect_to new_contact_url unless admin?
   end
 end
