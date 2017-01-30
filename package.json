@@ -10,7 +10,7 @@
     "postinstall": "./node_modules/.bin/webpack"
   },
   "engines": {
-    "node": "6.2.1",
+    "node": "7.4.0",
     "npm": "4.2.0"
   },
   "repository": {
