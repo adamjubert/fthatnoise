@@ -1,6 +1,6 @@
 class EventsController < ApplicationController
   before_action :only_creator_can_edit_event, only: [:edit, :update, :destroy]
-  before_action :redirect_unless_logged_in, only: [:new, :create, :edit, :update, :destroy]
+  before_action :redirect_unless_logged_in, only: [:new, :create, :edit, :update, :destroy, :near_me]
 
 
   def index
@@ -39,6 +39,7 @@ class EventsController < ApplicationController
     @event = current_user.events.new(event_params)
 
     if @event.save
+      flash[:notice] = ["Event successfully created!"]
       Upvote.create(idea_id: @event.id, idea_type: "Event", user: current_user)
       redirect_to event_url(@event)
     else
@@ -61,6 +62,7 @@ class EventsController < ApplicationController
     @event = Event.find(params[:id])
 
     if @event.update(event_params)
+      flash[:notice] = ["Event successfully updated!"]
       redirect_to event_url(@event)
     else
       flash.now[:errors] = @event.errors.full_messages

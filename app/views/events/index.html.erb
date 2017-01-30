@@ -1,16 +1,11 @@
 <h1>All Events</h1>
-<%= link_to "Actions", suggestions_url %>
-<%= link_to "Near Me", events_near_me_url %>
-<%= link_to "Hot", events_most_upvoted_url %>
-<%= link_to "Trending", events_trending_url %>
-
 
 <% if logged_in? %>
-  <%= link_to "Create New Action", new_suggestion_url %>
-  <%= link_to "Create New Event", new_event_url %>
+  <h4><%= link_to "Create New Action", new_suggestion_url %></h4>
+  <h4><%= link_to "Create New Event", new_event_url %></h4>
+<% else %>
+  <h4><%= link_to "Sign up", new_user_url %> or <%= link_to "Sign In", new_session_url %> to create an action or event.</h4>
 <% end %>
 
-<ul>
-  <%= render partial: "layouts/short_idea", locals: { ideas: @ideas, idea_type: :event } %>
-  <%= will_paginate @ideas %>
-</ul>
+<%= render partial: "layouts/short_idea", locals: { ideas: @ideas, idea_type: :event } %>
+<%= will_paginate @ideas %>

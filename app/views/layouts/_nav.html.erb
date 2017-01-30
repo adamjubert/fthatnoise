@@ -14,13 +14,30 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
+      <%= image_tag "angry_cat.jpg", class: "navbar-brand navbar-brand-img" %>
       <a class="navbar-brand" href="<%= root_url %>">F*** That Noise</a>
     </div>
 
     <div class="collapse navbar-collapse" id="collapse-menu">
       <ul class="nav navbar-nav pull-right">
-        <li><%= link_to "Actions",suggestions_url %></li>
-        <li><%= link_to "Events", events_url %></li>
+        <% if logged_in? %>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><%= current_user.username %><span class="caret"></span></a>
+          <ul class="dropdown-menu" role="menu">
+            <li><a href="<%= user_url(current_user) %>" class="btn btn-link">Profile</a></li>
+            <li><%= button_to "Sign Out", session_url, method: :delete, class: "btn btn-link" %></li>
+          </ul>
+        </li>
+        <% else %>
+        <li><%= link_to "Sign In", new_session_url %></li>
+        <% end %>
+        <% if toggle_type == :event %>
+          <li class="active"><%= link_to "Actions",suggestions_url, class: "active" %></li>
+          <li><%= link_to "Events", events_url %></li>
+        <% else %>
+          <li><%= link_to "Actions",suggestions_url, class: "active" %></li>
+          <li class="active"><%= link_to "Events", events_url %></li>
+        <% end %>
         <li><%= link_to "Hot", hot_url %></li>
         <li><%= link_to "Trending", trending_url %></li>
         <% if toggle_type == :suggestion && logged_in? %>
@@ -31,6 +48,5 @@
         <li><%= link_to "Contact", contact_url %></li>
       </ul>
     </div>
-
   </div>
 </nav>

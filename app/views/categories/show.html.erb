@@ -1,9 +1,12 @@
 <h1><%= @category.name %></h1>
 
-<h3><%= link_to "Back to All Categories", categories_url %></h3>
+<a><%= link_to "Back to All Categories", categories_url %></a>
+<br>
 <a href="#events">Down to Events</a>
 
+<h2>Actions</h3>
 <%= render "ideas", idea_type: :suggestion, category: @category %>
 
+<h2 id="events">Events</h2>
 <p id="events"></p>
 <%= render "ideas", idea_type: :event, category: @category %>

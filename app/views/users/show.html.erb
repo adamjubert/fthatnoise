@@ -1,31 +1,18 @@
 <h3>Location: <%= @user.formatted_location %></h3>
 <p><%= link_to "Edit Location", edit_user_url(@user) %></p>
+<p><a href="#my_events">Down to my created events</p>
+<p><a href="#supported_actions">Down to actions I support</p>
+<p><a href="#supported_events">Down to events I support</p>
 
-<h3>All that I support</h3>
+<h3>My Created Actions</h3>
+<%= render partial: "layouts/short_idea", locals: { ideas: @user.suggestions, idea_type: :suggestion } %>
 
-<h3>My Ideas</h3>
-<ul>
-  <% @user.suggestions.each do |suggestion| %>
-    <li><%= idea_link(suggestion) %></li>
-    <%= upvote_buttons(suggestion) %>
-  <% end %>
+<h3 id="my_events">My Created Events</h3>
+<%= render partial: "layouts/short_idea", locals: { ideas: @user.events, idea_type: :event } %>
 
-  <% @user.events.each do |event| %>
-    <li><%= idea_link(event) %></li>
-    <%= upvote_buttons(event) %>
-  <% end %>
-</ul>
+<h3 id="supported_actions">Actions That I Support</h3>
+<%= render partial: "layouts/short_idea", locals: { ideas: @user.supported_suggestions, idea_type: :suggestion } %>
 
-<h3>Other Ideas I Support</h3>
-<ul>
-  <% @user.supported_suggestions.each do |supported_suggestion| %>
-    <% next if supported_suggestion.creator == @user %>
-    <li><%= idea_link(supported_suggestion) %></li>
-    <%= upvote_buttons(supported_suggestion) %>
-  <% end %>
-  <% @user.supported_events.each do |supported_event| %>
-    <% next if supported_event.creator == @user %>
-    <li><%= idea_link(supported_event) %></li>
-    <%= upvote_buttons(supported_event) %>
-  <% end %>
-</ul>
+
+<h3 id="supported_events">Events That I Support</h3>
+<%= render partial: "layouts/short_idea", locals: { ideas: @user.supported_events, idea_type: :event } %>

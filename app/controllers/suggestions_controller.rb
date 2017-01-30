@@ -27,6 +27,7 @@ class SuggestionsController < ApplicationController
 
     if @suggestion.save
       Upvote.create(idea_id: @suggestion.id, idea_type: "Suggestion", user: current_user)
+      flash[:notice] = ["Action successfully created!"]
       redirect_to suggestion_url(@suggestion)
     else
       flash.now[:errors] = @suggestion.errors.full_messages
@@ -48,6 +49,7 @@ class SuggestionsController < ApplicationController
     @suggestion = Suggestion.find(params[:id])
 
     if @suggestion.update(suggestion_params)
+      flash[:notice] = ["Action successfully updated!"]
       redirect_to suggestion_url(@suggestion)
     else
       flash.now[:errors] = @suggestion.errors.full_messages

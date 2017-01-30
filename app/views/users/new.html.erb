@@ -1,2 +1,3 @@
-<h6>Already a member? <a href="<%= new_session_url %>">Sign In</a></h6>
+<p>Already a member? <%= link_to "Sign In", new_session_url %></p>
+
 <%= render "form", action_type: :new, user: @user, legend: "Sign Up" %>

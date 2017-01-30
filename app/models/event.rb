@@ -63,6 +63,10 @@ class Event < ActiveRecord::Base
     date.strftime("%A, %B %d, %Y")
   end
 
+  def formatted_location
+    "#{address}, #{city}, #{state}"
+  end
+
   def formatted_time_range
     if end_time
       "#{formatted_start_time} - #{formatted_end_time}"

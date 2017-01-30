@@ -9,7 +9,6 @@
 <form class="form-horizontal" action="<%= action_url %>" method="post">
   <fieldset>
     <%= form_auth_token %>
-    <legend><%= message %></legend>
 
     <% if action_type == :edit %>
       <input type="hidden" name="_method" value="patch">
@@ -18,13 +17,13 @@
     <div class="form-group">
       <label for="comment_body" class="col-lg-2 control-label">Comment</label>
       <div class="col-lg-10">
-        <textarea class="form-control" name="comment[body]" rows="3" id="comment_body" placeholder="description"><%= comment.body %></textarea>
+        <textarea class="form-control" name="comment[body]" rows="3" id="comment_body" placeholder="Add comment here"><%= comment.body %></textarea>
       </div>
     </div>
 
     <div class="form-group">
       <div class="col-lg-10 col-lg-offset-2">
-        <button type="submit" class="btn btn-primary"><%= message %></button>
+        <button type="submit" class="btn btn-info"><%= message %></button>
       </div>
     </div>
   </fieldset>

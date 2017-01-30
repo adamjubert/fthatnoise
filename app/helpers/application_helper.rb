@@ -16,9 +16,9 @@ module ApplicationHelper
 
     if idea.supporters.include?(current_user)
       upvote = Upvote.find_by_user(idea, current_user)
-      button_to "Never mind...", upvote_url(upvote), method: :delete
+      button_to "Never mind...", upvote_url(upvote), method: :delete, class: "btn btn-info"
     else
-      button_to message, action_url, method: :post
+      button_to message, action_url, method: :post, class: "btn btn-info"
     end
   end
 
@@ -46,6 +46,12 @@ module ApplicationHelper
   def time_info(idea)
     if idea.is_a?(Event)
       "#{h(idea.formatted_date)} #{h(idea.formatted_time_range)}<br>".html_safe
+    end
+  end
+
+  def location_info(idea)
+    if idea.is_a?(Event)
+      "#{h(idea.formatted_location)}<br>".html_safe
     end
   end
 

@@ -1,10 +1,15 @@
 <% ideas.each do |idea| %>
   <% next if idea_type == :event && idea.in_past? %>
-  <li><%= idea_link(idea) %>
-  <%= upvote_buttons(idea) %>
-  (<%= idea.upvotes_count %>)
-  <br>
-  <%= time_info(idea) %>
-  <%= categories_string(idea) %>
-  <%= idea.shortened_description %></li>
+  <div class="panel panel-info">
+    <div class="panel-heading">
+      <h3 class="panel-title"><%= idea_link(idea) %> (<%= idea.upvotes_count %> activists)</h3>
+    </div>
+    <div class="panel-body">
+    <%= idea.shortened_description %>
+    <br>
+    <%= location_info(idea) %>
+    <%= time_info(idea) %>
+    <%= categories_string(idea) %>
+    <%= upvote_buttons(idea) %></div>
+  </div>
 <% end %>

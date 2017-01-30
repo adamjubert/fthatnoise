@@ -13,22 +13,20 @@
 
     <% if flash.now[:errors] %>
       <% flash.now[:errors].each do |error| %>
-        <p><%= error %></p>
+        <div class="alert alert-dismissible alert-danger">
+          <button type="button" class="close" data-dismiss="alert">&times;</button>
+          <strong><%= error %></strong>
+        </div>
       <% end %>
     <% end %>
 
     <% if flash.now[:notice] %>
       <% flash.now[:notice].each do |notice| %>
-        <p><%= notice %></p>
+      <div class="alert alert-dismissible alert-success">
+          <button type="button" class="close" data-dismiss="alert">&times;</button>
+          <strong><%= notice %></strong>
+        </div>
       <% end %>
-    <% end %>
-
-    <% if logged_in? %>
-      <p>Welcome, <%= current_user.username %> <%= link_to "Profile", user_url(current_user) %></p>
-      <%= button_to "Logout", session_url, method: :delete %>
-      <% else %>
-        <%= link_to "Create Account", new_user_url %>
-        <%= link_to "Sign In", new_session_url %>
     <% end %>
 
     <div class="container">

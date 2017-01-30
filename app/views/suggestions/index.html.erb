@@ -1,14 +1,15 @@
 <h1>All Actions</h1>
-<%= link_to "Events", events_url %>
-<%= link_to "Hot", suggestions_most_upvoted_url %>
-<%= link_to "Trending", suggestions_trending_url %>
 
 <% if logged_in? %>
-  <%= link_to "Create New Action", new_suggestion_url %>
-  <%= link_to "Create New Event", new_event_url %>
+  <h4><%= link_to "Create New Action", new_suggestion_url %></h4>
+  <h4><%= link_to "Create New Event", new_event_url %></h4>
+<% else %>
+  <h4><%= link_to "Sign up", new_user_url %> or <%= link_to "Sign In", new_session_url %> to create an action or event.</h4>
 <% end %>
 
-<ul>
+<% if @ideas.empty? %>
+  <p>No actions are created yet. Why don't you <%= link_to "create one", new_suggestion_url %>?</p>
+<% else %>
   <%= render partial: "layouts/short_idea", locals: { ideas: @ideas, idea_type: :suggestion } %>
   <%= will_paginate @ideas %>
-</ul>
+<% end %>
