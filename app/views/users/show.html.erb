@@ -5,14 +5,30 @@
 <p><a href="#supported_events">Down to events I support</p>
 
 <h3>My Created Actions</h3>
-<%= render partial: "layouts/short_idea", locals: { ideas: @user.suggestions, idea_type: :suggestion } %>
+<% if @user.suggestions.empty? %>
+  <p>You haven't created any actions yet! <%= link_to "Get started now!", new_suggestion_url %></p>
+<% else %>
+  <%= render partial: "layouts/short_idea", locals: { ideas: @user.suggestions, idea_type: :suggestion } %>
+<% end %>
+
 
 <h3 id="my_events">My Created Events</h3>
-<%= render partial: "layouts/short_idea", locals: { ideas: @user.events, idea_type: :event } %>
+<% if @user.events.empty? %>
+  <p>You haven't created any events yet! <%= link_to "Get started now!", new_event_url %></p>
+<% else %>
+  <%= render partial: "layouts/short_idea", locals: { ideas: @user.events, idea_type: :event } %>
+<% end %>
 
 <h3 id="supported_actions">Actions That I Support</h3>
-<%= render partial: "layouts/short_idea", locals: { ideas: @user.supported_suggestions, idea_type: :suggestion } %>
-
+<% if @user.supported_suggestions.empty? %>
+  <p>You haven't supported any actions yet! <%= link_to "Check some out now!", root_url %></p>
+<% else %>
+  <%= render partial: "layouts/short_idea", locals: { ideas: @user.supported_suggestions, idea_type: :suggestion } %>
+<% end %>
 
 <h3 id="supported_events">Events That I Support</h3>
-<%= render partial: "layouts/short_idea", locals: { ideas: @user.supported_events, idea_type: :event } %>
+<% if @user.supported_events.empty? %>
+  <p>You haven't signed up for any events yet! <%= link_to "Check some out now!", events_url %></p>
+<% else %>
+  <%= render partial: "layouts/short_idea", locals: { ideas: @user.supported_events, idea_type: :event } %>
+<% end %>

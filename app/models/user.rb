@@ -70,7 +70,7 @@ class User < ActiveRecord::Base
   end
 
   def formatted_location
-    if city && state
+    if city != "" && state
       "#{city}, #{state}"
     elsif state
       state

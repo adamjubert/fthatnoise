@@ -31,6 +31,7 @@
         <% else %>
         <li><%= link_to "Sign In", new_session_url %></li>
         <% end %>
+        <li><%= link_to "About", about_url %></li>
         <% if toggle_type == :event %>
           <li class="active"><%= link_to "Actions",suggestions_url, class: "active" %></li>
           <li><%= link_to "Events", events_url %></li>
@@ -44,7 +45,6 @@
           <li><%= link_to "Near Me", events_near_me_url %></li>
         <% end %>
         <li><%= link_to "Categories", categories_url %></li>
-        <li><%= link_to "About", about_url %></li>
         <li><%= link_to "Contact", contact_url %></li>
       </ul>
     </div>
