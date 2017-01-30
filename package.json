@@ -8,6 +8,11 @@
   },
   "scripts": {
     "test": "?"
+    "postinstall": "./node_modules/.bin/webpack"
+  },
+  "engines": {
+    "node": "6.2.1",
+    "npm": "3.9.3"
   },
   "repository": {
     "type": "git",
@@ -24,13 +29,4 @@
     "url": "https://github.com/hilaura13/mobilize/issues"
   },
   "homepage": "https://github.com/hilaura13/mobilize#readme"
-}
-
-"engines": {
-  "node": "6.2.1",
-  "npm": "3.9.3"
-},
-
-"scripts": {
-  "postinstall": "./node_modules/.bin/webpack"
 }
