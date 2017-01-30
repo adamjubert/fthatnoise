@@ -1,0 +1,34 @@
+{
+  "name": "syria",
+  "version": "0.0.0",
+  "description": "First version of f*** that noise",
+  "main": "index.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "postinstall": "./node_modules/.bin/webpack"
+  },
+  "engines": {
+    "node": "6.2.1",
+    "npm": "4.2.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/hilaura13/mobilize.git"
+  },
+  "keywords": [
+    "f***",
+    "that",
+    "noise"
+  ],
+  "author": "flaurida",
+  "license": "UNLICENSED",
+  "bugs": {
+    "url": "https://github.com/hilaura13/mobilize/issues"
+  },
+  "homepage": "https://github.com/hilaura13/mobilize#readme",
+  "dependencies": {
+    "babel-preset-es2015": "^6.22.0"
+  }
+}
