@@ -33,7 +33,7 @@ gem 'bcrypt', '~> 3.1.7'
 gem 'will_paginate'
 gem 'local_time'
 gem 'bootstrap-sass'
-
+gem 'faker'
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 
@@ -50,7 +50,6 @@ group :development do
   gem 'spring'
   gem 'spring-watcher-listen', '~> 2.0.0'
   gem 'annotate'
-  gem 'faker'
   gem 'better_errors'
   gem 'binding_of_caller'
 end
