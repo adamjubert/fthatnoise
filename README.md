@@ -10,11 +10,14 @@ Add search functionality for actions and events
 
 Improve location tracking to make it easier for people to find events near them
 
+
 A few minor but important tweaks (users index page for admins, e-mail password reset)
 
 Build upon the currently only accept/deny options for ideas to allow things like ignore
 
 Front end real time filtering of ideas based on various criteria
+
+Ability to share on other social media
 
 Improve styling and add JavaScript to front end (for example, buttons)
 
