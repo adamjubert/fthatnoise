@@ -19,6 +19,9 @@ password: "password", password_confirmation: "password", admin: true)
 User.create(username: "knehls96", email: "kristen@me.com",
 password: "password", password_confirmation: "password", admin: true)
 
+User.create(username: "aa", email: "aa@nyc.com",
+password: "password", password_confirmation: "password", admin: false)
+
 # comment the below in for development DB
 50.times do
   User.create(username: Faker::GameOfThrones.character, email: Faker::Internet.free_email,
