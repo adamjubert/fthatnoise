@@ -7,7 +7,7 @@
     "test": "test"
   },
   "scripts": {
-
+    "postinstall": "./node_modules/.bin/webpack"
   },
   "engines": {
     "node": "7.4.0",
