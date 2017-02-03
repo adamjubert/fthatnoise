@@ -18,8 +18,10 @@ class Suggestion < ActiveRecord::Base
   def self.order_by_upvotes
     self.select("suggestions.*, COUNT(upvotes.id) AS upvotes_count")
     .joins(:upvotes)
-    .group(:idea_id, "suggestions.id")
-    .order("upvotes_count DESC")
+    .group("suggestions.id")
+    # join categories
+    # see ajax twitter to see if person upvoted already
+    # use hash like object to get category names (see reddit even faster comments)
   end
 
   def self.order_by_recent_upvotes

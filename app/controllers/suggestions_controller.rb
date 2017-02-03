@@ -3,7 +3,7 @@ class SuggestionsController < ApplicationController
   before_action :redirect_unless_logged_in, only: [:new, :create, :edit, :update, :destroy]
 
   def index
-    @ideas = Suggestion.paginate(:page => params[:page], per_page: 30).order('created_at DESC')
+    @ideas = Suggestion.order_by_upvotes
     render :index
   end
 

@@ -19,9 +19,9 @@ module Taggable
     creator.username
   end
 
-  def upvotes_count
-    upvotes.count
-  end
+  # def upvotes_count
+  #   upvotes.count
+  # end
 
   def recent_upvotes_count
    upvotes

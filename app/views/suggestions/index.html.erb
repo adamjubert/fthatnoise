@@ -11,5 +11,4 @@
   <p>No actions are created yet. Why don't you <%= link_to "create one", new_suggestion_url %>?</p>
 <% else %>
   <%= render partial: "layouts/short_idea", locals: { ideas: @ideas, idea_type: :suggestion } %>
-  <%= will_paginate @ideas %>
 <% end %>

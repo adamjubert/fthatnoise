@@ -1,12 +1,13 @@
 <% ideas.each do |idea| %>
   <% next if idea_type == :event && idea.in_past? %>
   <div>
+
       <h3><%= idea_link(idea) %> (<%= idea.upvotes_count %> activists)</h3>
     <%= idea.shortened_description %>
     <br>
     <%= location_info(idea) %>
     <%= time_info(idea) %>
-    <%= categories_string(idea) %>
-    <%= upvote_buttons(idea) %>
+    <%#= categories_string(idea) %>
+    <%#= upvote_buttons(idea) %>
   </div>
 <% end %>
