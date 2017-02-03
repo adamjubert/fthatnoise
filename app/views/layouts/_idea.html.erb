@@ -42,7 +42,7 @@ locals: { action_type: :new, idea: idea, comment: Comment.new } %>
     <% idea.comments.order(:created_at).each do |comment| %>
       <h4><%= comment.author_name %> (<%= comment.time_string %>)</h4>
       <% if comment.user == current_user %>
-        <%= button_to "Delete", comment_url(comment), method: :delete, class: "btn btn-danger btn-xs" %>
+        <%= button_to "Delete", comment_url(comment), method: :delete %>
       <% end %>
       <p><%= comment.body %></p>
     <% end %>

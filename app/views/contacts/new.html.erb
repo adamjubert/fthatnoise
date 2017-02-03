@@ -1,28 +1,16 @@
 <% email = logged_in? ? current_user.email : "" %>
 
-<form class="form-horizontal" action="<%= contacts_url %>" method="post">
+<form action="<%= contacts_url %>" method="post">
   <fieldset>
     <%= form_auth_token %>
     <legend>Contact Us!</legend>
 
-    <div class="form-group">
-      <label for="contact_email" class="col-lg-2 control-label">E-mail</label>
-      <div class="col-lg-10">
-        <input id="contact_email" type="text" name="contact[email]" class="form-control" value="<%= email %>" placeholder="e-mail">
-      </div>
-    </div>
+    <label for="contact_email" class="col-lg-2 control-label">E-mail</label>
+    <input id="contact_email" type="text" name="contact[email]" class="form-control" value="<%= email %>" placeholder="e-mail">
 
-    <div class="form-group">
-      <label for="contact_message" class="col-lg-2 control-label">Message</label>
-      <div class="col-lg-10">
-        <textarea id="contact_message" class="form-control" name="contact[message]" rows="3" id="suggestion_description" placeholder="write your message here"><%= @contact.message %></textarea>
-      </div>
-    </div>
+    <label for="contact_message" class="col-lg-2 control-label">Message</label>
+    <textarea id="contact_message" class="form-control" name="contact[message]" rows="3" id="suggestion_description" placeholder="write your message here"><%= @contact.message %></textarea>
 
-    <div class="form-group">
-      <div class="col-lg-10 col-lg-offset-2">
-        <button type="submit" class="btn btn-info">Send Message!</button>
-      </div>
-    </div>
+    <button type="submit">Send Message!</button>
   </fieldset>
 </form>

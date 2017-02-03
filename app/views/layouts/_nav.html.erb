@@ -2,30 +2,22 @@
 <% hot_url = toggle_type == :event ? suggestions_most_upvoted_url : events_most_upvoted_url %>
 <% trending_url = toggle_type == :event ? suggestions_trending_url : events_trending_url %>
 
-<nav class="navbar navbar-default">
-  <div class="container-fluid">
+<nav>
+  <div>
 
-    <div class="navbar-header">
-      <button type="button" class="navbar-toggle collapsed"
-              data-toggle="collapse"
-              data-target="#collapse-menu"
-              aria-expanded="false">
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-      </button>
-      <%= image_tag "angry_cat.jpg", class: "navbar-brand navbar-brand-img" %>
-      <a class="navbar-brand" href="<%= root_url %>">F*** That Noise</a>
+    <div>
+      <%= image_tag "angry_cat.jpg" %>
+      <a href="<%= root_url %>">F*** That Noise</a>
     </div>
 
-    <div class="collapse navbar-collapse" id="collapse-menu">
-      <ul class="nav navbar-nav pull-right">
+    <div>
+      <ul>
         <% if logged_in? %>
-        <li class="dropdown">
-          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><%= current_user.username %><span class="caret"></span></a>
-          <ul class="dropdown-menu" role="menu">
-            <li><a href="<%= user_url(current_user) %>" class="btn btn-link">Profile</a></li>
-            <li><%= button_to "Sign Out", session_url, method: :delete, class: "btn btn-link" %></li>
+        <li>
+          <a href="#"><%= current_user.username %></a>
+          <ul>
+            <li><a href="<%= user_url(current_user) %>">Profile</a></li>
+            <li><%= button_to "Sign Out", session_url, method: :delete %></li>
           </ul>
         </li>
         <% else %>
@@ -33,11 +25,11 @@
         <% end %>
         <li><%= link_to "About", about_url %></li>
         <% if toggle_type == :event %>
-          <li class="active"><%= link_to "Actions",suggestions_url, class: "active" %></li>
+          <li><%= link_to "Actions",suggestions_url %></li>
           <li><%= link_to "Events", events_url %></li>
         <% else %>
-          <li><%= link_to "Actions",suggestions_url, class: "active" %></li>
-          <li class="active"><%= link_to "Events", events_url %></li>
+          <li><%= link_to "Actions",suggestions_url %></li>
+          <li><%= link_to "Events", events_url %></li>
         <% end %>
         <li><%= link_to "Hot", hot_url %></li>
         <li><%= link_to "Trending", trending_url %></li>
