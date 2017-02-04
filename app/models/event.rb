@@ -40,13 +40,6 @@ class Event < ActiveRecord::Base
     self.where(state: state, city: city).order("created_at DESC")
   end
 
-  def self.order_by_upvotes
-    self.select("events.*, COUNT(upvotes.id) AS upvotes_count")
-    .joins(:upvotes)
-    .group(:idea_id, "events.id")
-    .order("upvotes_count DESC")
-  end
-
   def self.order_by_recent_upvotes
     self.select("events.*, COUNT(upvotes.id) AS upvotes_count")
     .joins(:upvotes)

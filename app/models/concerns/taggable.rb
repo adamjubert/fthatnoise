@@ -43,7 +43,33 @@ module Taggable
     super(ids)
   end
 
+
   module ClassMethods
+    def find_with_upvotes(id)
+      self.select("#{self.table_name}.*, COUNT(upvotes.id) AS upvotes_count")
+      .joins(:upvotes)
+      .where("#{self.table_name}.id = ?", id)
+      .group("#{self.table_name}.id")
+      .includes(:categories)
+      .includes(:comments)
+      .first
+    end
+
+    def order_by_created_at
+      self.select("#{self.table_name}.*, COUNT(upvotes.id) AS upvotes_count")
+      .joins(:upvotes)
+      .group("#{self.table_name}.id")
+      .order("#{self.table_name}.created_at DESC")
+      .includes(:categories)
+    end
+
+    def order_by_upvotes
+      self.select("#{self.table_name}.*, COUNT(upvotes.id) AS upvotes_count")
+      .joins(:upvotes)
+      .group("#{self.table_name}.id")
+      .order("COUNT(upvotes.id) DESC")
+      .includes(:categories)
+    end
 
     def by_category(category_name)
       self.joins(:categories).where('categories.name' => category_name).order("created_at DESC")

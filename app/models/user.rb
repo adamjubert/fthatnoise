@@ -58,6 +58,14 @@ class User < ActiveRecord::Base
   #   self.password_digest = BCrypt::Password.create(password)
   # end
 
+  def upvoted_idea_ids
+    @upvoted_idea_ids ||= upvotes.pluck(:idea_id)
+  end
+
+  def upvoted?(idea)
+    upvoted_idea_ids.include?(idea.id)
+  end
+
   def is_password?(password)
     # BCrypt::Password.new(password_digest).is_password?(password)
     !!self.try(:authenticate, password)

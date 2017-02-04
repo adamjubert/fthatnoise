@@ -4,7 +4,7 @@ class EventsController < ApplicationController
 
 
   def index
-    @ideas = Event.paginate(:page => params[:page], per_page: 30).order('created_at DESC')
+    @ideas = Event.order_by_created_at
     render :index
   end
 
@@ -21,7 +21,7 @@ class EventsController < ApplicationController
   end
 
   def most_upvoted
-    @ideas = Event.order_by_upvotes.paginate(:page => params[:page], per_page: 30)
+    @ideas = Event.order_by_upvotes
     render :most_upvoted
   end
 
@@ -49,7 +49,7 @@ class EventsController < ApplicationController
   end
 
   def show
-    @event = Event.find(params[:id])
+    @event = Event.find_with_upvotes(params[:id])
     render :show
   end
 

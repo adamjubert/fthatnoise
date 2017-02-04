@@ -3,12 +3,12 @@ class SuggestionsController < ApplicationController
   before_action :redirect_unless_logged_in, only: [:new, :create, :edit, :update, :destroy]
 
   def index
-    @ideas = Suggestion.order_by_upvotes
+    @ideas = Suggestion.order_by_created_at
     render :index
   end
 
   def most_upvoted
-    @ideas = Suggestion.order_by_upvotes.paginate(:page => params[:page], per_page: 30)
+    @ideas = Suggestion.order_by_upvotes
     render :most_upvoted
   end
 
@@ -36,7 +36,7 @@ class SuggestionsController < ApplicationController
   end
 
   def show
-    @suggestion = Suggestion.find(params[:id])
+    @suggestion = Suggestion.find_with_upvotes(params[:id])
     render :show
   end
 

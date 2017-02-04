@@ -14,7 +14,7 @@ module ApplicationHelper
       action_url = event_upvotes_url(idea)
     end
 
-    if idea.supporters.include?(current_user)
+    if current_user.upvoted?(idea)
       upvote = Upvote.find_by_user(idea, current_user)
       button_to "Never mind...", upvote_url(upvote), method: :delete, class: "btn btn-info"
     else
