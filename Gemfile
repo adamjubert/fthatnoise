@@ -34,6 +34,7 @@ gem 'will_paginate'
 gem 'local_time'
 gem 'bootstrap-sass'
 gem 'faker'
+
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 
