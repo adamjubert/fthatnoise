@@ -13,5 +13,5 @@
 class Suggestion < ActiveRecord::Base
   include Taggable
 
-  validates :creator, :title, :description, presence: true
+  validates :description, presence: true
 end

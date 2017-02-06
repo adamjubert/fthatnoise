@@ -2,6 +2,12 @@ class UsersController < ApplicationController
   before_action :cannot_sign_up_when_logged_in, only: [:new, :create]
   before_action :can_only_view_own_profile, only: [:show]
   before_action :can_only_edit_own_profile, only: [:edit, :update, :destroy]
+  before_action :only_admin_can_see_index, only: [:index]
+
+  def index
+    @users = User.all
+    render :index
+  end
 
   def new
     @user = User.new
@@ -67,6 +73,13 @@ class UsersController < ApplicationController
 
     unless user == current_user
       flash[:errors] = ["You cannot mess with someone else's page."]
+      redirect_to user_url(current_user)
+    end
+  end
+
+  def only_admin_can_see_index
+    unless admin?
+      flash[:errors] = ["Only admins can see the list of all users."]
       redirect_to user_url(current_user)
     end
   end

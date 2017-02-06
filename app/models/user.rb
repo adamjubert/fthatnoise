@@ -18,7 +18,7 @@ class User < ActiveRecord::Base
   has_secure_password
 
   validates :email, :password_digest, :session_token, presence: true
-  validates :username, presence: true, uniqueness: true
+  validates :username, presence: true, uniqueness: true, length: { maximum: 25 }
   validates :password, length: { minimum: 6, allow_nil: true }
 
   after_initialize :ensure_session_token, :basic_city_update

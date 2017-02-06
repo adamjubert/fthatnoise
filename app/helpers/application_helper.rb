@@ -18,17 +18,17 @@ module ApplicationHelper
       upvote = Upvote.find_by_user(idea, current_user)
       button_to "Never mind...", upvote_url(upvote), method: :delete, class: "btn btn-info"
     else
-      button_to message, action_url, method: :post, class: "btn btn-info"
+      button_to message, action_url, method: :post, class: "accept-button"
     end
   end
 
   def categories_string(idea)
-    categories_string = "<p>Categories: "
+    categories_string = "<p class=\"short-idea-categories-wrapper\">"
     categories = idea.categories
 
     categories.each_with_index do |category, i|
-      categories_string << "<a href=\"#{category_url(category)}\">#{h(category.name)}</a>"
-      categories_string << ", " unless i >= categories.length - 1
+      categories_string << "<a class=\"short-idea-categories\" href=\"#{category_url(category)}\">#{h(category.name)}</a>"
+      categories_string << " " unless i >= categories.length - 1
     end
 
     categories_string << "</p>"

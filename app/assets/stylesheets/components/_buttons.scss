@@ -1,0 +1,17 @@
+.accept-button {
+  background-color: $accept;
+  border-bottom: 2px solid $accept-border;
+  margin: 10px 0;
+  padding: 0 10px;
+  font-family: $sans-serif;
+  color: $white;
+  border-radius: 5px;
+  box-sizing: border-box;
+  height: 35px;
+  position: relative;
+
+  &:hover {
+    border-bottom: 1px solid $accept-border;
+    top: 1px;
+  }
+}

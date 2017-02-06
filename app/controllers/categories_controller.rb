@@ -24,7 +24,12 @@ class CategoriesController < ApplicationController
   end
 
   def show
-    @category = Category.find(params[:id])
+    category_id = params[:id]
+
+    @category = Category.find(category_id)
+    @suggestions = Suggestion.get_by_category(category_id)
+    @events = Event.get_by_category(category_id)
+    
     render :show
   end
 

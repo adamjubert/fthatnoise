@@ -1,3 +1,5 @@
+<!-- STILL N + 1 QUERY HERE! -->
+
 <h1><%= @category.name %></h1>
 
 <a><%= link_to "Back to All Categories", categories_url %></a>
@@ -5,8 +7,8 @@
 <a href="#events">Down to Events</a>
 
 <h2>Actions</h3>
-<%= render "ideas", idea_type: :suggestion, category: @category %>
+<%= render "ideas", idea_type: :suggestion, category: @category, ideas: @suggestions %>
 
 <h2 id="events">Events</h2>
 <p id="events"></p>
-<%= render "ideas", idea_type: :event, category: @category %>
+<%= render "ideas", idea_type: :event, category: @category, ideas: @events %>

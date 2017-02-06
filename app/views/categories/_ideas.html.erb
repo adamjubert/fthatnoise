@@ -1,7 +1,8 @@
-<% ideas = idea_type == :event ? category.events_by_creation : category.suggestions_by_creation %>
+<% message = idea_type == :event ? "events" : "actions" %>
+<% action_url = idea_type == :event ? new_event_url : new_suggestion_url %>
 
 <% if ideas.empty? %>
-  <p>No actions are created yet in this category. Why don't you <%= link_to "create one", new_suggestion_url %>?</p>
+  <p>No <%= message %> are created yet in this category. Why don't you <%= link_to "create one", action_url %>?</p>
 <% else %>
-  <%= render partial: "layouts/short_idea", locals: { ideas: ideas, idea_type: :suggestion } %>
+  <%= render partial: "layouts/short_idea", locals: { ideas: ideas, idea_type: idea_type } %>
 <% end %>

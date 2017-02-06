@@ -19,7 +19,7 @@
 class Event < ActiveRecord::Base
   include Taggable
 
-  validates :creator, :title, :address, :city, :state, :start_time, :date, presence: true
+  validates :address, :city, :state, :start_time, :date, presence: true
   validate :date_not_in_past, :start_time_before_end_time
 
   after_initialize :basic_city_update

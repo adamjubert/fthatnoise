@@ -1,0 +1,46 @@
+.short-idea {
+  border: 1px solid black;
+  width: 80%;
+  margin: 15px auto;
+  border-radius: 10px;
+  box-shadow: -1px 4px 6px 1px rgba(0, 0, 0, 0.25);
+}
+
+.short-idea-header {
+  background-color: $main;
+  font-family: $sans-serif;
+  font-size: 18px;
+  color: $white;
+  border-top-right-radius: 10px;
+  border-top-left-radius: 10px;
+  padding: 3px 10px;
+  // color: $main;
+  // background-color: #e2dede;
+  &:hover {
+    text-decoration: underline;
+  }
+}
+
+.short-idea-body {
+  padding: 0 10px;
+}
+
+.short-idea-categories-wrapper {
+  margin: 5px 0;
+}
+
+.short-idea-categories {
+  background-color: $light-gray;
+  padding: 0 5px;
+
+  &:hover {
+    background-color: $shiny-gray;
+    text-decoration: underline;
+  }
+}
+
+@media all and (max-width: 600px) {
+  .short-idea {
+    width: 90%;
+  }
+}
