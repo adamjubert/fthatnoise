@@ -16,9 +16,9 @@ module ApplicationHelper
 
     if current_user.upvoted?(idea)
       upvote = Upvote.find_by_user(idea, current_user)
-      button_to "Never mind...", upvote_url(upvote), method: :delete, class: "btn btn-info"
+      button_to "Never mind...", upvote_url(upvote), method: :delete, class: "button ignore-button"
     else
-      button_to message, action_url, method: :post, class: "accept-button"
+      button_to message, action_url, method: :post, class: "button accept-button"
     end
   end
 

@@ -1,11 +1,4 @@
-<h1>All Actions</h1>
-
-<% if logged_in? %>
-  <h4><%= link_to "Create New Action", new_suggestion_url %></h4>
-  <h4><%= link_to "Create New Event", new_event_url %></h4>
-<% else %>
-  <h4><%= link_to "Sign up", new_user_url %> or <%= link_to "Sign In", new_session_url %> to create an action or event.</h4>
-<% end %>
+<%= render "shared/sub_nav" %>
 
 <% if @ideas.empty? %>
   <p>No actions are created yet. Why don't you <%= link_to "create one", new_suggestion_url %>?</p>
