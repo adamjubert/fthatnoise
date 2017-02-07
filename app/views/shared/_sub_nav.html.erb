@@ -1,14 +1,17 @@
-<a href="<%= suggestions_url %>" class="main-options">Actions</a>
-<a href="<%= events_url %>" class="main-options">Events</a>
+<div class="options">
+  <a href="<%= suggestions_url %>" class="main-options main-selected">Actions</a>
+  <a href="<%= events_url %>" class="main-options">Events</a>
 
-<a href="#" class="sub-options">Hot</a>
-<a href="#" class="sub-options">Trending</a>
-<a href="#" class="sub-options">Near Me</a>
-
+  <a href="#" class="sub-options sub-selected">Hot</a>
+  <a href="#" class="sub-options">Trending</a>
+  <a href="#" class="sub-options">Near Me</a>
+  <a href="#" class="sub-options">Category</a>
+  <input type="text" name="" value="" placeholder="Search...">
+</div>
 
 <% if logged_in? %>
-  <h4><%= link_to "Create New Action", new_suggestion_url %></h4>
-  <h4><%= link_to "Create New Event", new_event_url %></h4>
+  <h4 class="create-options"><i class="fa fa-plus-circle" aria-hidden="true"></i> <%= link_to "Create Action", new_suggestion_url  %></h4>
+  <h4 class="create-options"><i class="fa fa-plus-circle" aria-hidden="true"></i> <%= link_to "Create Event", new_event_url %></h4>
 <% else %>
   <h4><%= link_to "Sign up", new_user_url %> or <%= link_to "Sign In", new_session_url %> to create an action or event.</h4>
 <% end %>

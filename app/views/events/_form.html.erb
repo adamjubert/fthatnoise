@@ -1,12 +1,12 @@
 <% action_url = action_type == :new ? events_url : event_url(event) %>
-<% message = action_type == :new ? "Create Event" : "Edit Event" %>
+<% message = action_type == :new ? "Create Event!" : "Edit Event" %>
 <% parsed_start_time = event.start_time ? event.parse_start_time : "" %>
 <% parsed_end_time = event.end_time ? event.parse_end_time : "" %>
 
-<form action="<%= action_url %>" method="post">
+<form action="<%= action_url %>" method="post" class="form">
   <fieldset>
     <%= form_auth_token %>
-    <legend><%= message %></legend>
+    <legend class="form-title"><%= message %></legend>
 
     <% if action_type == :edit %>
       <input type="hidden" name="_method" value="patch">
@@ -15,14 +15,16 @@
     <label for="event_title">Title</label>
     <input id="event_title" type="text" name="event[title]" value="<%= event.title %>" placeholder="title">
 
-    <label for="event_date">Date</label>
-    <input id="event_date" type="date" name="event[date]" value="<%= event.date %>">
+    <div class="date-time">
+      <label for="event_date">Date</label>
+      <input id="event_date" type="date" name="event[date]" value="<%= event.date %>">
 
-    <label for="event_start_time">Start Time</label>
-    <input id="event_start_time" type="time" name="event[start_time]" value="<%= parsed_start_time %>">
+      <label for="event_start_time">Start Time</label>
+      <input id="event_start_time" type="time" name="event[start_time]" value="<%= parsed_start_time %>">
 
-    <label for="event_end_time">End Time</label>
-    <input id="event_end_time" type="time" name="event[end_time]" value="<%= parsed_end_time %>">
+      <label for="event_end_time">End Time</label>
+      <input id="event_end_time" type="time" name="event[end_time]" value="<%= parsed_end_time %>">
+    </div>
 
     <label for="event_address">Address</label>
     <input id="event_address" type="text" name="event[address]" value="<%= event.address %>" placeholder="address">
@@ -42,7 +44,7 @@
     <label for="event_description">Description</label>
     <textarea name="event[description]" id="event_description" placeholder="description"><%= event.description %></textarea>
 
-    <label for="event_categories">Categories</label>
+    <label for="event_categories">Categories (choose 1-3)</label><br>
     <input type="hidden" name="event[category_ids][]" value="">
 
     <% Category.all.each do |category| %>
@@ -53,6 +55,6 @@
     <% end %>
 
 
-    <button type="submit"><%= message %></button>
+    <button type="submit" class="button accept-button"><%= message %></button>
   </fieldset>
 </form>

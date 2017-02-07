@@ -2,48 +2,49 @@
 <% delete_url = idea_type == :event ? event_url(idea) : suggestion_url(idea)%>
 <% idea_string = idea_type == :event ? "Event" : "Action" %>
 
-<h1><%= idea.title %></h1>
-<h3><%= idea.upvotes_count %> activists</h3>
-<h3>Created by <%= idea.creator_name %></h3>
-<% if current_user == idea.creator %>
-  <%= link_to "Edit #{idea_string}", edit_url, class: "btn btn-warning" %>
-<% end %>
+<div class="idea">
+  <h1 class="idea-title"><%= idea.title  %></h1>
+  <h3><%= categories_string(idea) %></h3>
 
-<% if current_user == idea.creator %>
-  <%= button_to "Delete #{idea_string}", delete_url, method: :delete, class: "btn btn-danger" %>
-<% end %>
-
-<%= upvote_buttons(idea) %>
-
-<h3><%= categories_string(idea) %></h3>
-
-<% if idea_type == :event %>
-  <h3><%= idea.formatted_date %></h3>
-  <% if idea.end_time %>
-    <h3><%= idea.formatted_start_time %> to <%= idea.formatted_end_time %></h3>
-  <% else %>
-    <h3><%= idea.formatted_start_time %></h3>
+  <h3 class="idea-info"><%= idea.upvotes_count %> activists</h3>
+  <h3 class="idea-info">Created by: <%= idea.creator_name %></h3>
+  <% if current_user == idea.creator %>
+    <%= link_to "Edit #{idea_string}", edit_url, class: "button button-accept" %>
   <% end %>
 
-  <h3><%= idea.address %></h3>
-  <h3><%= idea.city %>, <%= idea.state %></h3>
-<% end %>
+  <% if current_user == idea.creator %>
+    <%= button_to "Delete #{idea_string}", delete_url, method: :delete, class: "button button-accept" %>
+  <% end %>
 
-<h3>Description</h3>
-<p><%= idea.description %></p>
+  <%= upvote_buttons(idea) %>
 
-<%= render partial: "comments/form",
-locals: { action_type: :new, idea: idea, comment: Comment.new } %>
-
-<p>All Comments</p>
-<% if idea.comments.empty? %>
-  <p>None so far!</p>
-  <% else %>
-    <% idea.comments.order(:created_at).each do |comment| %>
-      <h4><%= comment.author_name %> (<%= comment.time_string %>)</h4>
-      <% if comment.user == current_user %>
-        <%= button_to "Delete", comment_url(comment), method: :delete %>
-      <% end %>
-      <p><%= comment.body %></p>
+  <% if idea_type == :event %>
+    <h3><%= idea.formatted_date %></h3>
+    <% if idea.end_time %>
+      <h3><%= idea.formatted_start_time %> to <%= idea.formatted_end_time %></h3>
+    <% else %>
+      <h3><%= idea.formatted_start_time %></h3>
     <% end %>
-<% end %>
+
+    <h3><%= idea.address %></h3>
+    <h3><%= idea.city %>, <%= idea.state %></h3>
+  <% end %>
+
+  <p><%= idea.description %></p>
+
+  <%= render partial: "comments/form",
+  locals: { action_type: :new, idea: idea, comment: Comment.new } %>
+
+  <p>All Comments</p>
+  <% if idea.comments.empty? %>
+    <p>None so far!</p>
+    <% else %>
+      <% idea.comments.order(:created_at).each do |comment| %>
+        <h4><%= comment.author_name %> (<%= comment.time_string %>)</h4>
+        <% if comment.user == current_user %>
+          <%= button_to "Delete", comment_url(comment), method: :delete %>
+        <% end %>
+        <p><%= comment.body %></p>
+      <% end %>
+  <% end %>
+</div>

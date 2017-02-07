@@ -1,0 +1,54 @@
+.form {
+  width: 80%;
+  margin: auto;
+
+  input[type='text'], select, textarea {
+    display: block;
+  }
+
+  input[type='text'], textarea, .date-time > input {
+    padding: 5px;
+    width: 100%;
+    border: 1px solid $dark-gray;
+    border-radius: 5px;
+    margin: 5px 0;
+    box-shadow: inset -1px -1px 4px 1px rgba(0, 0, 0, 0.25);
+
+    &:focus {
+      border: 1px solid $main;
+    }
+  }
+
+  .date-time > input, input[type='text'] {
+    height: 25px;
+  }
+
+  select {
+    border: 1px solid $dark-gray;
+    border-radius: 5px;
+    padding: 5px;
+    height: 30px;
+    font-size: 16px;
+
+    &:focus {
+      border: 1px solid $main;
+      outline: none;
+    }
+  }
+}
+
+.form-title {
+  color: $main;
+  font-size: 36px;
+  margin: 15px 0;
+}
+
+@media all and (max-width: 600px) {
+  .idea {
+    width: 90%;
+  }
+
+  input[type='date'], input[type='time'] {
+    display: block;
+  }
+}

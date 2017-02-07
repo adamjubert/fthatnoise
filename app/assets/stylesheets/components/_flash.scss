@@ -1,0 +1,15 @@
+.flash {
+  border-radius: 5px;
+  margin: 5px;
+  padding: 5px;
+  background: $error-flash;
+
+  button {
+
+  }
+}
+
+.error-flash {
+  border: 2px solid $ignore-border;
+
+}

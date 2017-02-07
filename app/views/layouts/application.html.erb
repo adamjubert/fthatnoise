@@ -14,7 +14,7 @@
 
     <% if flash.now[:errors] %>
       <% flash.now[:errors].each do |error| %>
-        <div>
+        <div class="flash error-flash">
           <button type="button">X</button>
           <strong><%= error %></strong>
         </div>
@@ -23,7 +23,7 @@
 
     <% if flash.now[:notice] %>
       <% flash.now[:notice].each do |notice| %>
-        <div>
+        <div "flash success-flash">
           <button type="button">X</button>
           <strong><%= notice %></strong>
         </div>

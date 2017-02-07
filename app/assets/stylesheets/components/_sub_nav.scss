@@ -1,0 +1,51 @@
+.options {
+  display: flex;
+  align-items: center;
+}
+
+.main-options {
+  font-size: 20px;
+  margin: 5px;
+  padding: 5px;
+  border-radius: 5px;
+  color: $main;
+  border: 1px solid $main;
+
+  &:first-child {
+    margin-left: 10px;
+  }
+}
+
+.main-selected {
+  color: $white;
+  background-color: $main;
+}
+
+.sub-options {
+  color: $dark-gray;
+  margin: 5px;
+  padding: 5px;
+  font-size: 18px;
+}
+
+.sub-selected {
+  color: $black;
+  border: 1px solid $black;
+  border-radius: 5px;
+}
+
+.create-options {
+  display: inline-block;
+  margin: 5px;
+  margin-left: 15px;
+  color: $navy;
+
+  &:hover {
+    text-decoration: underline;
+  }
+
+}
+
+@media all and (max-width: 600px) {
+  // ADD DROPDOWN FOR BROWSING OPTIONS
+}
