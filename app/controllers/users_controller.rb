@@ -52,7 +52,7 @@ class UsersController < ApplicationController
 
   def user_params
     params.require(:user).permit(:email, :username, :password,
-    :password_confirmation, :city, :state)
+    :password_confirmation, :zip_code)
   end
 
   def cannot_sign_up_when_logged_in

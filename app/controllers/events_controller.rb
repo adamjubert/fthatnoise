@@ -80,7 +80,7 @@ class EventsController < ApplicationController
 
   def event_params
     params.require(:event).permit(:title, :description,
-    :address, :city, :state, :date, :start_time, :end_time, category_ids: [])
+    :address, :address2, :city, :state, :date, :start_time, :end_time, category_ids: [])
   end
 
   def only_creator_can_edit_event

@@ -14,6 +14,9 @@
 #  end_time    :time
 #  created_at  :datetime         not null
 #  updated_at  :datetime         not null
+#  address2    :string
+#  latitude    :float
+#  longitude   :float
 #
 
 class Event < ActiveRecord::Base
@@ -22,7 +25,8 @@ class Event < ActiveRecord::Base
   validates :address, :city, :state, :start_time, :date, presence: true
   validate :date_not_in_past, :start_time_before_end_time
 
-  after_initialize :basic_city_update
+  geocoded_by :full_street_address
+  after_validation :geocode
 
   def self.upcoming
     self.where("date >= ?", Date.today)
@@ -98,19 +102,7 @@ class Event < ActiveRecord::Base
     end
   end
 
-  def basic_city_update
-    return unless city
-
-    if ["nyc", "ny"].include?(city.downcase)
-      self.city = "New York"
-    elsif ["sf", "san fran"].include?(city.downcase)
-      self.city = "San Francisco"
-    elsif city.downcase == "philly"
-      self.city = "Philadelphia"
-    elsif city.downcase == "la"
-      self.city = "Los Angeles"
-    end
-
-    self.city = city.split(" ").map(&:capitalize).join(" ")
+  def full_street_address
+    [address, city, state, "US"].compact.join(", ")
   end
 end

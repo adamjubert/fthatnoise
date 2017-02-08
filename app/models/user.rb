@@ -10,8 +10,7 @@
 #  created_at      :datetime         not null
 #  updated_at      :datetime         not null
 #  session_token   :string           not null
-#  city            :string
-#  state           :string
+#  zip_code        :string
 #
 
 class User < ActiveRecord::Base
@@ -20,8 +19,8 @@ class User < ActiveRecord::Base
   validates :email, :password_digest, :session_token, presence: true
   validates :username, presence: true, uniqueness: true, length: { maximum: 25 }
   validates :password, length: { minimum: 6, allow_nil: true }
-
-  after_initialize :ensure_session_token, :basic_city_update
+  validates_format_of :zip_code, :with => /\d{5}/, :message => "should be in the form 12345"
+  after_initialize :ensure_session_token
 
   attr_reader :password
 
@@ -78,36 +77,21 @@ class User < ActiveRecord::Base
   end
 
   def formatted_location
-    if city != "" && state
-      "#{city}, #{state}"
-    elsif state
-      state
-    elsif city
-      city
-    else
-      "Not set"
-    end
+    "Laura fix this!"
+    # if city != "" && state
+    #   "#{city}, #{state}"
+    # elsif state
+    #   state
+    # elsif city
+    #   city
+    # else
+    #   "Not set"
+    # end
   end
 
   private
 
   def ensure_session_token
     self.session_token ||= self.class.generate_random_token
-  end
-
-  def basic_city_update
-    return unless city
-
-    if ["nyc", "ny"].include?(city.downcase)
-      self.city = "New York"
-    elsif ["sf", "san fran"].include?(city.downcase)
-      self.city = "San Francisco"
-    elsif city.downcase == "philly"
-      self.city = "Philadelphia"
-    elsif city.downcase == "la"
-      self.city = "Los Angeles"
-    end
-
-    self.city = city.split(" ").map(&:capitalize).join(" ")
   end
 end
