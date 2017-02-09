@@ -1,0 +1,32 @@
+<%= render partial: "shared/nav" %>
+
+<% if flash.now[:errors] %>
+  <% flash.now[:errors].each do |error| %>
+    <div class="flash error-flash">
+      <button type="button"><i class="fa fa-times-circle" aria-hidden="true"></i></button>
+      <strong><%= error %></strong>
+    </div>
+  <% end %>
+<% end %>
+
+<% if flash.now[:notice] %>
+  <% flash.now[:notice].each do |notice| %>
+    <div class="flash notice-flash">
+      <button type="button"><i class="fa fa-times-circle" aria-hidden="true"></i></button>
+      <strong><%= notice %></strong>
+    </div>
+  <% end %>
+<% end %>
+
+<!-- // < if logged_in? >
+// <li>
+//   <a href="#"><%= current_user.username %></a>
+//   <ul className="dropdown-nav hidden">
+//     <li><a href="<%= user_url(current_user) %>">Profile</a></li>
+//     <li><%= button_to "Sign Out", session_url, method: :delete %></li>
+//   </ul>
+// </li>
+// <% else %>
+// <li><%= link_to "Sign In", new_session_url %></li>
+// <li><%= link_to "Sign Up", new_user_url %></li>
+// <% end %> -->

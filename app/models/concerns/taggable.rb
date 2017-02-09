@@ -65,7 +65,7 @@ module Taggable
       .joins(:upvotes)
       .group("#{self.table_name}.id")
       .order("#{self.table_name}.created_at DESC")
-      .includes(:categories)
+      .includes(:categories, :creator)
     end
 
     def order_by_upvotes

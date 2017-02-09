@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170208034010) do
+ActiveRecord::Schema.define(version: 20170209030136) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -79,9 +79,10 @@ ActiveRecord::Schema.define(version: 20170208034010) do
   create_table "upvotes", force: :cascade do |t|
     t.integer  "idea_id"
     t.string   "idea_type"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.integer  "user_id",    null: false
+    t.datetime "created_at",                     null: false
+    t.datetime "updated_at",                     null: false
+    t.integer  "user_id",                        null: false
+    t.string   "status",     default: "pending", null: false
     t.index ["idea_type", "idea_id"], name: "index_upvotes_on_idea_type_and_idea_id", using: :btree
     t.index ["user_id"], name: "index_upvotes_on_user_id", using: :btree
   end
