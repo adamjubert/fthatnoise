@@ -10,16 +10,17 @@
 #  created_at      :datetime         not null
 #  updated_at      :datetime         not null
 #  session_token   :string           not null
-#  zip_code        :string
+#  zip_code        :integer
 #
 
 class User < ActiveRecord::Base
-  # has_secure_password
+  has_secure_password
 
   validates :email, :password_digest, :session_token, presence: true
   validates :username, presence: true, uniqueness: true, length: { maximum: 25 }
   validates :password, length: { minimum: 6, allow_nil: true }
-  validates_format_of :zip_code, :with => /\d{5}/, :message => "should be in the form 12345"
+  validates_format_of :zip_code, :with => /\d{5}/, :message => "should be in the form 12345", allow_nil: true
+  validates :zip_code, numericality: { only_integer: true }, allow_nil: true
   after_initialize :ensure_session_token
 
   attr_reader :password
@@ -52,10 +53,10 @@ class User < ActiveRecord::Base
     nil
   end
 
-  def password=(password)
-    @password = password
-    self.password_digest = BCrypt::Password.create(password)
-  end
+  # def password=(password)
+  #   @password = password
+  #   self.password_digest = BCrypt::Password.create(password)
+  # end
 
   def upvoted_idea_ids
     @upvoted_idea_ids ||= upvotes.pluck(:idea_id)
@@ -66,8 +67,8 @@ class User < ActiveRecord::Base
   end
 
   def is_password?(password)
-    BCrypt::Password.new(password_digest).is_password?(password)
-    # !!self.try(:authenticate, password)
+    # BCrypt::Password.new(password_digest).is_password?(password)
+    !!self.try(:authenticate, password)
   end
 
   def reset_session_token!

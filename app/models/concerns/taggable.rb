@@ -5,8 +5,8 @@ module Taggable
   # validations and associations usually go here
     validates :creator, presence: true
     validates :title, presence: true, length: { maximum: 50 }
-    validates :categories, presence: { message: "- must have between 1 and 3 categories"},
-      length: { maximum: 3, message: "- cannot have more than 3 categories" }
+    # validates :categories, presence: { message: "- must have between 1 and 3 categories"},
+    #   length: { maximum: 3, message: "- cannot have more than 3 categories" }
 
     has_many :idea_categories, as: :idea, dependent: :destroy, inverse_of: :idea
     has_many :categories, through: :idea_categories
@@ -61,11 +61,9 @@ module Taggable
     end
 
     def order_by_created_at
-      self.select("#{self.table_name}.*, COUNT(upvotes.id) AS upvotes_count")
-      .joins(:upvotes)
-      .group("#{self.table_name}.id")
+      self.select("#{self.table_name}.*")
       .order("#{self.table_name}.created_at DESC")
-      .includes(:categories, :creator)
+      .includes(:categories, :creator, :upvotes)
     end
 
     def order_by_upvotes

@@ -12,8 +12,7 @@ Suggestion.destroy_all
 IdeaCategory.destroy_all
 Upvote.destroy_all
 Comment.destroy_all
-
-User.create(username: "flaurida", email: "laura@me.com",
+laura = User.create(username: "flaurida", email: "laura@me.com",
 password: "password", password_confirmation: "password", admin: true)
 
 User.create(username: "knehls96", email: "kristen@me.com",
@@ -27,8 +26,7 @@ password: "password", password_confirmation: "password", admin: false)
   User.create(username: Faker::GameOfThrones.character, email: Faker::Internet.free_email,
   password: "password",
   password_confirmation: "password",
-  city: Faker::Address.city,
-  state: Faker::Address.state)
+  zip_code: Faker::Address.zip_code)
 end
 
 user_ids = User.all.ids
