@@ -14,7 +14,7 @@
 #
 
 class User < ActiveRecord::Base
-  has_secure_password
+  # has_secure_password
 
   validates :email, :password_digest, :session_token, presence: true
   validates :username, presence: true, uniqueness: true, length: { maximum: 25 }
@@ -52,10 +52,10 @@ class User < ActiveRecord::Base
     nil
   end
 
-  # def password=(password)
-  #   @password = password
-  #   self.password_digest = BCrypt::Password.create(password)
-  # end
+  def password=(password)
+    @password = password
+    self.password_digest = BCrypt::Password.create(password)
+  end
 
   def upvoted_idea_ids
     @upvoted_idea_ids ||= upvotes.pluck(:idea_id)
@@ -66,8 +66,8 @@ class User < ActiveRecord::Base
   end
 
   def is_password?(password)
-    # BCrypt::Password.new(password_digest).is_password?(password)
-    !!self.try(:authenticate, password)
+    BCrypt::Password.new(password_digest).is_password?(password)
+    # !!self.try(:authenticate, password)
   end
 
   def reset_session_token!
