@@ -26,7 +26,7 @@ class App extends React.Component {
       <nav className="main-nav">
         <div className="logo" onMouseEnter={this.angrifyLogo} onMouseLeave={this.deAngrifyLogo}>
           <Link to="/" className="logo">
-          <img src="/assets/images/angry_cat.png" />
+          <img src="assets/angry_cat.png" />
           { this.state.title }</Link>
         </div>
 
