@@ -17,14 +17,12 @@ user = current_user
 
     json.upvotes_status nil
 
-    json.upvotes do
-      event.upvotes.each do |upvote|
-        # json.set! upvote.user_id do
-        #   json.extract! upvote, :id, :user_id, :status
-        # end
-        if user && upvote.user_id == user.id
-          json.upvote_status upvote.status
-        end
+    event.upvotes.each do |upvote|
+      # json.set! upvote.user_id do
+      #   json.extract! upvote, :id, :user_id, :status
+      # end
+      if user && upvote.user_id == user.id
+        json.upvotes_status upvote.status
       end
     end
 

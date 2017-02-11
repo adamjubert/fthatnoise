@@ -9,16 +9,14 @@ Rails.application.routes.draw do
     resources :categories, only: [:index, :show, :new, :create]
 
     resources :suggestions, except: [:new, :edit] do
-      resources :upvotes, only: [:create]
       resources :comments, only: [:create]
     end
 
     resources :events, except: [:new, :edit] do
-      resources :upvotes, only: [:create]
       resources :comments, only: [:create]
     end
 
-    resources :upvotes, only: [:destroy]
+    resources :upvotes, only: [:create, :update]
     resources :comments, only: [:destroy]
     resources :contacts, only: [:new, :create, :index]
 

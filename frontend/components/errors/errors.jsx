@@ -1,14 +1,22 @@
 import React from 'react';
+import { clearAllErrors } from '../../actions/error_actions';
 
-const Errors = ({ errors }) => {
-  if (errors.length > 0) {
-    const errorItems = this.props.errors.map((error, i) => (
-      <li key={i}>{ error }</li>
-    ));
+class Errors extends React.Component {
+  componentDidMount() {
+    clearAllErrors();
+  }
 
-    return <ul>{ errorItems }</ul>;
-  } else {
-    return null;
+  render() {
+    const { errors } = this.props;
+    if (errors.length > 0) {
+      const errorItems = errors.map((error, i) => (
+        <li key={i}>{ error }</li>
+      ));
+
+      return <ul>{ errorItems }</ul>;
+    } else {
+      return null;
+    }
   }
 }
 

@@ -1,5 +1,6 @@
 import { RECEIVE_ERRORS,
   CLEAR_ERRORS } from '../actions/session_actions';
+import { CLEAR_ALL_ERRORS } from '../actions/error_actions';
 
 const defaultState = {
   session: [],
@@ -17,6 +18,8 @@ export const ErrorsReducer = (oldState = defaultState, action) => {
     case CLEAR_ERRORS:
       newState = { [action.key]: [] };
       return Object.assign({}, oldState, newState);
+    case CLEAR_ALL_ERRORS:
+      return defaultState;
     default:
       return oldState;
   }

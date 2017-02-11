@@ -1,21 +1,21 @@
 export const fetchAllSuggestions = () => {
   return $.ajax({
     method: 'GET',
-    url: 'api/suggestions'
+    url: '/api/suggestions'
   });
 };
 
 export const fetchSingleSuggestion = id => {
   return $.ajax({
     method: 'GET',
-    url: `api/suggestions/${id}`
+    url: `/api/suggestions/${id}`
   });
 };
 
 export const postSuggestion = suggestion => {
   return $.ajax({
     method: 'POST',
-    url: 'api/suggestions',
+    url: '/api/suggestions',
     data: { suggestion }
   });
 };
@@ -23,7 +23,7 @@ export const postSuggestion = suggestion => {
 export const updateSuggestion = suggestion => {
   return $.ajax({
     method: 'PATCH',
-    url: `api/suggestions/${suggestion.id}`,
+    url: `/api/suggestions/${suggestion.id}`,
     data: { suggestion }
   });
 };

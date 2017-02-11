@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router';
 import CategoriesString from '../categories/categories_string';
+import UpvoteButtons from '../upvotes/upvote_buttons';
 
 const IdeaIndexItem = ({ idea, ideaType }) => {
   const ideaLink = `${ideaType}s/${idea.id}`;
@@ -16,7 +17,7 @@ const IdeaIndexItem = ({ idea, ideaType }) => {
       </div>
     );
   }
-  
+
   return (
   <div className="short-idea">
       <h3 className="short-idea-header">
@@ -29,6 +30,7 @@ const IdeaIndexItem = ({ idea, ideaType }) => {
         { eventLogistics }
         <p>Created by: { idea.creator.username }</p>
         { idea.shortened_description }
+        <UpvoteButtons idea={ idea } ideaType={ ideaType } />
       </div>
     </div>
   );
