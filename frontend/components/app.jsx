@@ -23,20 +23,23 @@ class App extends React.Component {
 
   render() {
     return (
-      <nav className="main-nav">
-        <div className="logo" onMouseEnter={this.angrifyLogo} onMouseLeave={this.deAngrifyLogo}>
-          <Link to="/" className="logo">
-          <img src="assets/angry_cat.png" />
-          { this.state.title }</Link>
-        </div>
+      <div>
+        <nav className="main-nav">
+          <div className="logo" onMouseEnter={this.angrifyLogo} onMouseLeave={this.deAngrifyLogo}>
+            <Link to="/" className="logo">
+            <img src="assets/angry_cat.png" />
+            { this.state.title }</Link>
+          </div>
 
-        <ul className="nav-items">
-          <li><Link to="/">flaurida</Link></li>
-          <li><Link to="/about">About</Link></li>
-          <li><Link to="/contact">Contact</Link></li>
-        </ul>
-        <a href="#" className="nav-dropdown"><i className="fa fa-bars" aria-hidden="true"></i></a>
-      </nav>
+          <ul className="nav-items">
+            <li><Link to="/">flaurida</Link></li>
+            <li><Link to="/about">About</Link></li>
+            <li><Link to="/contact">Contact</Link></li>
+          </ul>
+          <a href="#" className="nav-dropdown"><i className="fa fa-bars" aria-hidden="true"></i></a>
+        </nav>
+        { this.props.children }
+      </div>
       //
       // <div className="tagline">
       //   <h3>Do stuff that makes a difference</h3>

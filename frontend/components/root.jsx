@@ -1,11 +1,15 @@
 import React from 'react';
 import { Provider } from 'react-redux';
-import { Router, Route, IndexRoute, hashHistory } from 'react-router';
+import { Router, Route, IndexRoute, IndexRedirect, hashHistory } from 'react-router';
 import App from './app';
+import SuggestionsIndexContainer from './suggestions/suggestions_index_container';
+import SuggestionShowContainer from './suggestions/suggestion_show_container';
 
 const routes = (
   <Route path="/" component={App}>
-
+    <IndexRedirect to="/actions" />
+    <Route path="/actions" component={SuggestionsIndexContainer} />
+    <Route path="/actions/:suggestionId" component={SuggestionShowContainer} />
   </Route>
 );
 

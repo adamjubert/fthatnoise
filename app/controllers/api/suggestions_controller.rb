@@ -7,6 +7,14 @@ class Api::SuggestionsController < ApplicationController
     render :index
   end
 
+  def show
+    @suggestion = Suggestion.includes(:categories, :upvotes)
+    .find(params[:id])
+    # @comments = Comment.includes(:user).where("idea_type = ? AND idea_id = ?",
+    # "Suggestion", params[:id])
+    render :show
+  end
+
   # def most_upvoted
   #   @ideas = Suggestion.order_by_upvotes
   #   render :most_upvoted
