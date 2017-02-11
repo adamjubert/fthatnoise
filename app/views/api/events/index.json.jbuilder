@@ -1,13 +1,14 @@
 user = current_user
 
-@suggestions.each do |suggestion|
-  json.set! suggestion.id do
-    json.extract! suggestion, :id, :title, :shortened_description, :created_at
+@events.each do |event|
+  json.set! event.id do
+    json.extract! event, :id, :title, :shortened_description, :created_at, :formatted_date, :formatted_location,
+    :formatted_time_range
 
-    json.upvotes_count suggestion.upvotes.length
+    json.upvotes_count event.upvotes.length
 
     json.categories do
-      suggestion.categories.each do |category|
+      event.categories.each do |category|
         json.set! category.name do
           json.extract! category, :id, :name
         end
@@ -17,7 +18,7 @@ user = current_user
     json.upvotes_status nil
 
     json.upvotes do
-      suggestion.upvotes.each do |upvote|
+      event.upvotes.each do |upvote|
         # json.set! upvote.user_id do
         #   json.extract! upvote, :id, :user_id, :status
         # end
@@ -28,7 +29,7 @@ user = current_user
     end
 
     json.creator do
-      json.extract! suggestion.creator, :id, :username
+      json.extract! event.creator, :id, :username
     end
   end
 end

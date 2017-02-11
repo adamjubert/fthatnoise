@@ -6,7 +6,7 @@ const SuggestionsReducer = (oldState = {}, action) => {
 
   switch (action.type) {
     case RECEIVE_ALL_SUGGESTIONS:
-      return merge({}, action.suggestions);
+      return action.suggestions;
     default:
       return oldState;
   }

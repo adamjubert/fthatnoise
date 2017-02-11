@@ -1,16 +1,17 @@
 import { connect } from 'react-redux';
-import SuggestionShow from './suggestion_show';
+import IdeaShow from '../ideas/idea_show';
 import { requestSingleSuggestion } from '../../actions/suggestion_actions';
 
 const mapStateToProps = ({ suggestion }) => ({
-  suggestion
+  idea: suggestion,
+  ideaType: "action"
 });
 
 const mapDisPatchtoProps = dispatch => ({
-  requestSingleSuggestion: id => dispatch(requestSingleSuggestion(id))
+  requestSingleIdea: id => dispatch(requestSingleSuggestion(id))
 });
 
 export default connect(
   mapStateToProps,
   mapDisPatchtoProps
-)(SuggestionShow);
+)(IdeaShow);

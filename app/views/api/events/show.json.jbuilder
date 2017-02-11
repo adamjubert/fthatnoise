@@ -1,19 +1,20 @@
 user = current_user
 
-json.extract! @suggestion, :id, :title, :description, :created_at
+json.extract! @event, :id, :title, :description, :created_at, :formatted_date, :formatted_location, :formatted_time_range
 
-json.upvotes_count @suggestion.upvotes.length
+json.upvotes_count @event.upvotes.length
 
 json.categories do
-  @suggestion.categories.each do |category|
+  @event.categories.each do |category|
     json.set! category.name do
       json.extract! category, :id, :name
     end
   end
 end
 
+
 json.comments do
-  json.array! @suggestion.comments do |comment|
+  json.array! @event.comments do |comment|
     json.extract! comment, :id, :user_id, :created_at, :body
     json.author comment.user.username
   end
@@ -22,7 +23,7 @@ end
 json.upvotes_status nil
 
 json.upvotes do
-  @suggestion.upvotes.each do |upvote|
+  @event.upvotes.each do |upvote|
     # json.set! upvote.user_id do
     #   json.extract! upvote, :id, :user_id, :status
     # end
@@ -33,7 +34,7 @@ json.upvotes do
 end
 
 json.creator do
-  json.extract! @suggestion.creator, :id, :username
+  json.extract! @event.creator, :id, :username
 end
 
-json.creator_viewing current_user == @suggestion.creator
+json.creator_viewing current_user == @event.creator

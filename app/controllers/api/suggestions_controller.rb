@@ -8,7 +8,7 @@ class Api::SuggestionsController < ApplicationController
   end
 
   def show
-    @suggestion = Suggestion.includes(:categories, :upvotes)
+    @suggestion = Suggestion.includes(:creator, :categories, :upvotes, { comments: :user })
     .find(params[:id])
     # @comments = Comment.includes(:user).where("idea_type = ? AND idea_id = ?",
     # "Suggestion", params[:id])
