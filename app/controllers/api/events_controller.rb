@@ -15,6 +15,30 @@ class Api::EventsController < ApplicationController
     # "Suggestion", params[:id])
     render :show
   end
+
+  def create
+    return unless logged_in?
+
+    @event = current_user.events.new(event_params)
+
+    if @event.save
+      render :show
+    else
+      render json: @event.errors.full_messages, status: 422
+    end
+  end
+
+  def update
+    @event = Suggestion.find(params[:id])
+
+    return unless @event.creator == current_user
+
+    if @event.update(event_params)
+      render :show
+    else
+      render json: @event.errors.full_messages, status: 422
+    end
+  end
   #
   # def near_me
   #   @ideas = Event.by_city_and_state(current_user.city, current_user.state)
@@ -84,12 +108,12 @@ class Api::EventsController < ApplicationController
   #   redirect_to events_url
   # end
   #
-  # private
-  #
-  # def event_params
-  #   params.require(:event).permit(:title, :description,
-  #   :address, :address2, :city, :state, :date, :start_time, :end_time, category_ids: [])
-  # end
+  private
+
+  def event_params
+    params.require(:event).permit(:title, :description,
+    :address, :address2, :city, :state, :date, :start_time, :end_time, category_ids: [])
+  end
   #
   # def only_creator_can_edit_event
   #   event = Event.find(params[:id])

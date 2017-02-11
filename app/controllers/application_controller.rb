@@ -31,7 +31,7 @@ class ApplicationController < ActionController::Base
     params.require(:user).permit(:email, :username, :password,
     :password_confirmation, :zip_code)
   end
-  
+
   def redirect_unless_logged_in
     unless logged_in?
       flash[:errors] = ["Please sign in or sign up to do this!"]

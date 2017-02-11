@@ -11,3 +11,19 @@ export const fetchSingleEvent = id => {
     url: `api/events/${id}`
   });
 };
+
+export const postEvent = event => {
+  return $.ajax({
+    method: 'POST',
+    url: 'api/events',
+    data: { event }
+  });
+};
+
+export const updateEvent = event => {
+  return $.ajax({
+    method: 'PATCH',
+    url: `api/events/${event.id}`,
+    data: { event }
+  });
+};

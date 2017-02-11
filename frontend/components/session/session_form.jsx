@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link, withRouter } from 'react-router';
+import Errors from '../errors/errors';
 
 class SessionForm extends React.Component {
   constructor(props) {
@@ -38,18 +39,6 @@ class SessionForm extends React.Component {
     }
   }
 
-  errors() {
-    if (this.props.errors.length > 0) {
-      const errorItems = this.props.errors.map((error, i) => (
-        <li key={i}>{ error }</li>
-      ));
-
-      return <ul>{ errorItems }</ul>;
-    } else {
-      return null;
-    }
-  }
-
   additionalFields() {
     if (this.props.formType === "signup") {
       const { password_confirmation, email, zip_code } = this.state;
@@ -71,7 +60,7 @@ class SessionForm extends React.Component {
     return (
       <div>
         { this.otherLink() }
-        { this.errors() }
+        <Errors errors={ this.props.errors } />
 
         <form className="form" onSubmit = { this.handleSubmit }>
           <legend>{ message }</legend>

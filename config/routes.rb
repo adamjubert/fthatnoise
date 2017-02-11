@@ -8,12 +8,12 @@ Rails.application.routes.draw do
 
     resources :categories, only: [:index, :show, :new, :create]
 
-    resources :suggestions do
+    resources :suggestions, except: [:new, :edit] do
       resources :upvotes, only: [:create]
       resources :comments, only: [:create]
     end
 
-    resources :events do
+    resources :events, except: [:new, :edit] do
       resources :upvotes, only: [:create]
       resources :comments, only: [:create]
     end

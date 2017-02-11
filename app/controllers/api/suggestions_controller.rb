@@ -15,6 +15,30 @@ class Api::SuggestionsController < ApplicationController
     render :show
   end
 
+  def create
+    return unless logged_in?
+
+    @suggestion = current_user.suggestions.new(suggestion_params)
+
+    if @suggestion.save
+      render :show
+    else
+      render json: @suggestion.errors.full_messages, status: 422
+    end
+  end
+
+  def update
+    @suggestion = Suggestion.find(params[:id])
+
+    return unless @suggestion.creator == current_user
+
+    if @suggestion.update(suggestion_params)
+      render :show
+    else
+      render json: @suggestion.errors.full_messages, status: 422
+    end
+  end
+
   # def most_upvoted
   #   @ideas = Suggestion.order_by_upvotes
   #   render :most_upvoted

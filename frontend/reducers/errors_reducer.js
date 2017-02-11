@@ -1,8 +1,9 @@
-import { RECEIVE_SESSION_ERRORS,
-  CLEAR_SESSION_ERRORS } from '../actions/session_actions';
+import { RECEIVE_ERRORS,
+  CLEAR_ERRORS } from '../actions/session_actions';
 
 const defaultState = {
-  session: []
+  session: [],
+  suggestion: []
 };
 
 export const ErrorsReducer = (oldState = defaultState, action) => {
@@ -10,11 +11,11 @@ export const ErrorsReducer = (oldState = defaultState, action) => {
   let newState;
 
   switch(action.type) {
-    case RECEIVE_SESSION_ERRORS:
-      newState = { session: action.errors };
+    case RECEIVE_ERRORS:
+      newState = { [action.key]: action.errors };
       return Object.assign({}, oldState, newState);
-    case CLEAR_SESSION_ERRORS:
-      newState = { session: [] };
+    case CLEAR_ERRORS:
+      newState = { [action.key]: [] };
       return Object.assign({}, oldState, newState);
     default:
       return oldState;
