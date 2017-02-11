@@ -9,7 +9,7 @@ user = current_user
 
     json.categories do
       event.categories.each do |category|
-        json.set! category.name do
+        json.set! category.id do
           json.extract! category, :id, :name
         end
       end

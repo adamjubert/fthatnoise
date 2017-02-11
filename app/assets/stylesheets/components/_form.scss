@@ -3,11 +3,11 @@
   max-width: 600px;
   margin: auto;
 
-  input[type='text'], select, textarea {
+  input[type='text'], input[type='password'], input[type='email'], select, textarea {
     display: block;
   }
 
-  input[type='text'], textarea, .date-time > input {
+  input[type='text'], input[type='password'], input[type='email'], textarea, .date-time > input {
     padding: 5px;
     width: 100%;
     border: 1px solid $dark-gray;
@@ -20,7 +20,7 @@
     }
   }
 
-  .date-time > input, input[type='text'] {
+  .date-time > input, input[type='text'], input[type='password'], input[type='email'] {
     height: 25px;
   }
 

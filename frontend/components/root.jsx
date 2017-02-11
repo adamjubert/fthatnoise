@@ -6,23 +6,30 @@ import SuggestionsIndexContainer from './suggestions/suggestions_index_container
 import SuggestionShowContainer from './suggestions/suggestion_show_container';
 import EventsIndexContainer from './events/events_index_container';
 import EventShowContainer from './events/event_show_container';
+import SessionFormContainer from './session/session_form_container';
 
-const routes = (
-  <Route path="/" component={App}>
-    <IndexRedirect to="/actions" />
-    <Route path="/actions" component={SuggestionsIndexContainer} />
-    <Route path="/actions/:ideaId" component={SuggestionShowContainer} />
-    <Route path="/events" component={EventsIndexContainer} />
-    <Route path="/events/:ideaId" component={EventShowContainer} />
-  </Route>
-);
+const Root = ({ store }) => {
+  const _redirectIfLoggedIn = (nextState, replace) => {
+    if (store.getState().session.currentUser) {
+      replace({ nextPathname: nextState.location.pathname }, "/");
+    }
+  };
 
-const Root = ({ store }) => (
-  <Provider store={store}>
-    <Router history={hashHistory}>
-      { routes }
-    </Router>
-  </Provider>
-);
+  return (
+    <Provider store={store}>
+      <Router history={hashHistory}>
+        <Route path="/" component={App}>
+          <IndexRedirect to="/actions" />
+          <Route path="/signin" component={SessionFormContainer} onEnter={_redirectIfLoggedIn}/>
+          <Route path="/signup" component={SessionFormContainer} onEnter={_redirectIfLoggedIn}/>
+          <Route path="/actions" component={SuggestionsIndexContainer} />
+          <Route path="/actions/:ideaId" component={SuggestionShowContainer} />
+          <Route path="/events" component={EventsIndexContainer} />
+          <Route path="/events/:ideaId" component={EventShowContainer} />
+        </Route>
+      </Router>
+    </Provider>
+  );
+};
 
 export default Root;

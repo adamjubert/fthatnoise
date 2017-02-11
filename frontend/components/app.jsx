@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router';
+import GreetingContainer from './greeting/greeting_container';
 
 class App extends React.Component {
   constructor(props) {
@@ -32,18 +33,13 @@ class App extends React.Component {
           </div>
 
           <ul className="nav-items">
-            <li><Link to="/">flaurida</Link></li>
+            <GreetingContainer />
             <li><Link to="/about">About</Link></li>
             <li><Link to="/contact">Contact</Link></li>
           </ul>
-          <a href="#" className="nav-dropdown"><i className="fa fa-bars" aria-hidden="true"></i></a>
         </nav>
         { this.props.children }
       </div>
-      //
-      // <div className="tagline">
-      //   <h3>Do stuff that makes a difference</h3>
-      // </div>
     );
   }
 }

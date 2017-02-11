@@ -8,7 +8,7 @@ user = current_user
 
     json.categories do
       suggestion.categories.each do |category|
-        json.set! category.name do
+        json.set! category.id do
           json.extract! category, :id, :name
         end
       end
