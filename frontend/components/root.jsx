@@ -22,6 +22,10 @@ const Root = ({ store }) => {
     }
   };
 
+  const SessionForm = () => {
+    return <SessionFormContainer {...props} />;
+  };
+
   return (
     <Provider store={store}>
       <Router history={hashHistory}>

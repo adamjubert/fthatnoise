@@ -14,6 +14,7 @@ class SuggestionForm extends React.Component {
     if (this.props.formType === "edit") {
       this.props.requestSingleSuggestion(this.props.params.ideaId);
     }
+    this.props.requestAllCategories();
   }
 
   componentWillReceiveProps(nextProps) {
@@ -32,8 +33,7 @@ class SuggestionForm extends React.Component {
 
   handleSubmit(e) {
     e.preventDefault();
-    const suggestion = Object.assign({}, this.state);
-    this.props.processForm(suggestion).then(suggestion => {
+    this.props.processForm(this.state).then(suggestion => {
       this.props.route.push(`/actions/${suggestion.id}`);
     });
   }
@@ -45,15 +45,50 @@ class SuggestionForm extends React.Component {
 
         return {
           title: suggestion.title,
-          description: suggestion.description
+          description: suggestion.description,
+          category_ids: suggestion.category_ids
         };
       }
     }
 
     return {
       title: "",
-      description: ""
+      description: "",
+      category_ids: []
     };
+  }
+
+  toggleCheckbox(id) {
+    return e => {
+      const { category_ids } = this.state;
+      let new_category_ids;
+
+      if (category_ids.includes(id)) {
+        const index = category_ids.indexOf(id);
+        new_category_ids = category_ids.splice(index, 1);
+        this.setState({ category_ids: new_category_ids });
+      } else {
+        new_category_ids = category_ids.slice();
+        new_category_ids.push(id);
+        this.setState({ category_ids: new_category_ids });
+      }
+    };
+  }
+
+  categoryTags() {
+    if (this.props.categories.length === 0) {
+      return null;
+    }
+
+    return this.props.categories.map((category, i) => {
+      return (
+        <li key={i}>
+          <input type="checkbox" value={ category.id }
+            onChange={this.toggleCheckbox(category.id)}/>
+          { category.name }
+        </li>
+      );
+    });
   }
 
   render() {
@@ -70,6 +105,9 @@ class SuggestionForm extends React.Component {
 
           <input type="text" onChange={this.handleChange("title")} value={ title } placeholder="title" />
           <textarea className="form-control" onChange={this.handleChange("desription")} value={ description } placeholder="description" />
+
+          <label>Categories</label>
+          <ul>{ this.categoryTags() }</ul>
 
           <input type="submit" value={ message } className="button accept-button" />
         </form>

@@ -7,7 +7,7 @@ const defaultState = {
   suggestion: []
 };
 
-export const ErrorsReducer = (oldState = defaultState, action) => {
+const ErrorsReducer = (oldState = defaultState, action) => {
   Object.freeze(oldState);
   let newState;
 

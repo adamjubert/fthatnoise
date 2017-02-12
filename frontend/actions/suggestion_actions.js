@@ -1,4 +1,4 @@
-import * as SuggestionApiUtil from '../util/suggestions_api_util';
+import * as SuggestionsApiUtil from '../util/suggestions_api_util';
 import { RECEIVE_ERRORS,
   CLEAR_ERRORS } from './session_actions';
 
@@ -8,12 +8,12 @@ export const RECEIVE_SUGGESTION_ERRORS = "RECEIVE_SUGGESTION_ERRORS";
 export const CLEAR_SUGGESTION_ERRORS = "CLEAR_SUGGESTION_ERRORS";
 
 export const requestAllSuggestions = () => dispatch => {
-  return SuggestionApiUtil.fetchAllSuggestions()
+  return SuggestionsApiUtil.fetchAllSuggestions()
     .then(suggestions => dispatch(receiveAllSuggestions(suggestions)));
 };
 
 export const requestSingleSuggestion = id => dispatch => {
-  return SuggestionApiUtil.fetchSingleSuggestion(id)
+  return SuggestionsApiUtil.fetchSingleSuggestion(id)
     .then(suggestion => {
       dispatch(receiveSingleSuggestion(suggestion));
     }
@@ -21,9 +21,9 @@ export const requestSingleSuggestion = id => dispatch => {
 };
 
 export const createSuggestion = suggestion => dispatch => {
-  return SuggestionApiUtil.postSuggestion(suggestion)
-    .then(suggestion => {
-      dispatch(receiveSingleSuggestion(suggestion));
+  return SuggestionsApiUtil.postSuggestion(suggestion)
+    .then(newSuggestion => {
+      dispatch(receiveSingleSuggestion(newSuggestion));
       dispatch(clearSuggestionErrors());
       return suggestion;
     },
@@ -31,9 +31,9 @@ export const createSuggestion = suggestion => dispatch => {
 };
 
 export const updateSuggestion = suggestion => dispatch => {
-  return SuggestionApiUtil.updateSuggestion(suggestion)
-    .then(suggestion => {
-      dispatch(receiveSingleSuggestion(suggestion));
+  return SuggestionsApiUtil.updateSuggestion(suggestion)
+    .then(updatedSuggestion => {
+      dispatch(receiveSingleSuggestion(updatedSuggestion));
       dispatch(clearSuggestionErrors());
       return suggestion;
     },
