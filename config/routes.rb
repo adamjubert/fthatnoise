@@ -7,21 +7,20 @@ Rails.application.routes.draw do
     resource :session, only: [:create, :destroy]
 
     resources :categories, only: [:index, :create]
+    resources :comments, only: [:create, :destroy]
 
     resources :suggestions, except: [:new, :edit] do
-      resources :comments, only: [:create]
-
       patch "/pending_upvote", to: "suggestions#pending_upvote", as: "pending_upvote"
       patch "/ignore_upvote", to: "suggestions#ignore_upvote", as: "ignore_upvote"
       patch "/complete_upvote", to: "suggestions#complete_upvote", as: "complete_upvote"
     end
 
     resources :events, except: [:new, :edit] do
-      resources :comments, only: [:create]
+      patch "/pending_upvote", to: "events#pending_upvote", as: "pending_upvote"
+      patch "/ignore_upvote", to: "events#ignore_upvote", as: "ignore_upvote"
+      patch "/complete_upvote", to: "events#complete_upvote", as: "complete_upvote"
     end
 
-    # resources :upvotes, only: [:create, :update]
-    resources :comments, only: [:destroy]
     resources :contacts, only: [:create, :index]
 
     # get "/about", to: "static_pages#about", as: "about"

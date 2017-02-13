@@ -32,6 +32,18 @@ class Api::EventsController < ApplicationController
       render json: @event.errors.full_messages, status: 422
     end
   end
+
+  def pending_upvote
+    upvote("pending")
+  end
+
+  def ignore_upvote
+    upvote("ignore")
+  end
+
+  def complete_upvote
+    upvote("complete")
+  end
   #
   # def near_me
   #   @ideas = Event.by_city_and_state(current_user.city, current_user.state)
@@ -102,13 +114,23 @@ class Api::EventsController < ApplicationController
   # end
   #
   private
+  def upvote(status)
+    @event = Event.find(params[:event_id])
+    upvote = current_user.upvotes.find_or_initialize_by(idea_type: "Event", idea_id: @event.id)
+    upvote.status = status
+    if upvote.save
+      render :show
+    else
+      render json: upvote.errors.full_messages, status: 422
+    end
+  end
 
   def event_params
     params.require(:event).permit(:title, :description,
     :address, :address2, :city, :state, :date, :start_time, :end_time, category_ids: [])
   end
 
-  #
+
   def only_creator_can_edit_event
     event = Event.find(params[:id])
     unless event.creator == current_user

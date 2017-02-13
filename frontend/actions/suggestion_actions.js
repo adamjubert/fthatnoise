@@ -1,6 +1,8 @@
 import * as SuggestionsApiUtil from '../util/suggestions_api_util';
+import * as CommentApiUtil from '../util/comments_api_util';
 import { RECEIVE_ERRORS,
   CLEAR_ERRORS } from './session_actions';
+import { clearCommentErrors, receiveCommentErrors } from './comment_actions';
 
 export const RECEIVE_ALL_SUGGESTIONS = "RECEIVE_ALL_SUGGESTIONS";
 export const RECEIVE_SINGLE_SUGGESTION = "RECEIVE_SINGLE_SUGGESTION";
@@ -41,6 +43,15 @@ export const updateSuggestion = suggestion => dispatch => {
       return updatedSuggestion;
     },
       err => dispatch(receiveSuggestionErrors(err.responseJSON)));
+};
+
+export const createSuggestionComment = comment => dispatch => {
+  return CommentApiUtil.createComment(comment).then(idea => {
+    dispatch(receiveSingleSuggestion(idea));
+    dispatch(clearCommentErrors());
+    return idea;
+  },
+    err => dispatch(receiveCommentErrors(err.responseJSON)));
 };
 
 export const pendingUpvoteSuggestion = suggestion => dispatch => {

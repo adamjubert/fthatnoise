@@ -1,5 +1,6 @@
 import React from 'react';
 import IdeaIndexItem from '../ideas/idea_index_item';
+import SubNavContainer from '../sub_nav/sub_nav_container';
 
 class IdeasIndex extends React.Component {
   componentDidMount() {
@@ -15,9 +16,12 @@ class IdeasIndex extends React.Component {
     ));
 
     return (
-      <ul className="idea-list">
-        { ideaIndexItems }
-      </ul>
+      <div>
+        <SubNavContainer />
+        <ul className="idea-list">
+          { ideaIndexItems }
+        </ul>
+      </div>
     );
   }
 }

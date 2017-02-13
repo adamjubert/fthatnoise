@@ -9,6 +9,8 @@ import EventShowContainer from './events/event_show_container';
 import SessionFormContainer from './session/session_form_container';
 import SuggestionFormContainer from './suggestions/suggestion_form_container';
 import EventFormContainer from './events/event_form_container';
+import ContactFormContainer from './contacts/contact_form_container';
+import AboutPage from './static/about';
 
 const Root = ({ store }) => {
   const _redirectIfLoggedIn = (nextState, replace) => {
@@ -46,6 +48,8 @@ const Root = ({ store }) => {
           <Route path="/events" component={EventsIndexContainer} />
           <Route path="/events/new" component={EventFormContainer} />
           <Route path="/events/:ideaId" component={EventShowContainer} />
+          <Route path="/about" component={AboutPage} />
+          <Route path="/contact" component={ContactFormContainer} />
         </Route>
       </Router>
     </Provider>

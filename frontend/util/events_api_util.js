@@ -27,3 +27,24 @@ export const updateEvent = event => {
     data: { event }
   });
 };
+
+export const pendingUpvoteEvent = id => {
+  return $.ajax({
+    method: 'PATCH',
+    url: `/api/events/${id}/pending_upvote`
+  });
+};
+
+export const ignoreUpvoteEvent = id => {
+  return $.ajax({
+    method: 'PATCH',
+    url: `/api/events/${id}/ignore_upvote`
+  });
+};
+
+export const completeUpvoteEvent = id => {
+  return $.ajax({
+    method: 'PATCH',
+    url: `/api/events/${id}/complete_upvote`
+  });
+};

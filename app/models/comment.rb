@@ -12,7 +12,7 @@
 #
 
 class Comment < ActiveRecord::Base
-  validates :idea, :idea_type, :user, presence: true
+  validates :idea, :idea_type, :user, :body, presence: true
 
   belongs_to :idea, polymorphic: true
   belongs_to :user

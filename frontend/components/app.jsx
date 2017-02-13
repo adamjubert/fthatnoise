@@ -31,12 +31,7 @@ class App extends React.Component {
             <img src="assets/angry_cat.png" />
             { this.state.title }</Link>
           </div>
-
-          <ul className="nav-items">
-            <GreetingContainer />
-            <li><Link to="/about">About</Link></li>
-            <li><Link to="/contact">Contact</Link></li>
-          </ul>
+          <GreetingContainer />
         </nav>
         { this.props.children }
       </div>

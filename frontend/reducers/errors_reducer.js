@@ -5,7 +5,9 @@ import { CLEAR_ALL_ERRORS } from '../actions/error_actions';
 const defaultState = {
   session: [],
   suggestion: [],
-  event: []
+  event: [],
+  comment: [],
+  contact: []
 };
 
 const ErrorsReducer = (oldState = defaultState, action) => {

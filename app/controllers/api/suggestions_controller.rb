@@ -120,7 +120,7 @@ class Api::SuggestionsController < ApplicationController
   def suggestion_params
     params.require(:suggestion).permit(:title, :description, category_ids: [])
   end
-  #
+
   def only_creator_can_edit_suggestion
     suggestion = Suggestion.find(params[:id])
     unless suggestion.creator == current_user

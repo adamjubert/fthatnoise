@@ -1,6 +1,8 @@
 import React from 'react';
 import CategoriesString from '../categories/categories_string';
 import FormattedComments from '../comments/formatted_comments';
+import CommentFormContainer from '../comments/comment_form_container';
+import UpvoteButtonsContainer from '../upvotes/upvote_buttons_container';
 
 class IdeaShow extends React.Component {
   componentDidMount() {
@@ -18,7 +20,7 @@ class IdeaShow extends React.Component {
     if (!idea.id) return null;
 
     let eventLogistics = null;
-    
+
     if (ideaType === "event") {
       eventLogistics = (
         <div>
@@ -36,10 +38,12 @@ class IdeaShow extends React.Component {
 
         <h3 className="idea-info">{ idea.upvotes_count } activists</h3>
         <h3 className="idea-info">Created by: { idea.creator.username }</h3>
+        <UpvoteButtonsContainer idea={idea} ideaType={ideaType} />
         { eventLogistics }
         <p>{ idea.description }</p>
 
         <FormattedComments comments={ idea.comments } />
+        <CommentFormContainer ideaType={ ideaType } idea={ idea } />
       </div>
     );
   }

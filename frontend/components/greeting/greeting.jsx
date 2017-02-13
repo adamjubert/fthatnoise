@@ -4,15 +4,22 @@ import { Link } from 'react-router';
 const Greeting = ({ currentUser, logout }) => {
   if (currentUser) {
     return (
-      <li><button onClick={ logout }>Log Out</button></li>
+      <ul className="nav-items">
+        <li><Link to="/profile">{ currentUser.username }</Link></li>
+        <li><button onClick={ logout }>Log Out</button></li>
+        <li><Link to="/about">About</Link></li>
+        <li><Link to="/contact">Contact</Link></li>
+      </ul>
     );
   }
 
   return (
-    <div>
-      <Link to="/signup">Sign Up</Link>
-      <Link to="/signin">Sign In</Link>
-    </div>
+    <ul className="nav-items">
+      <li><Link to="/signup">Sign Up</Link></li>
+      <li><Link to="/signin">Sign In</Link></li>
+      <li><Link to="/about">About</Link></li>
+      <li><Link to="/contact">Contact</Link></li>
+    </ul>
   );
 };
 
