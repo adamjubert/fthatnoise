@@ -8,7 +8,6 @@ const mapStateToProps = (state, ownProps) => {
   let formType = "new";
 
   if (pathName === "edit") formType = "edit";
-
   return {
     errors: state.errors.suggestion,
     suggestion: state.suggestion,

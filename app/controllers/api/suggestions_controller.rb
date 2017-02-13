@@ -16,12 +16,10 @@ class Api::SuggestionsController < ApplicationController
   end
 
   def create
-    debugger
     if !logged_in?
       render json: ["Please sign up or sign in to create an action"], status: 422
     else
       @suggestion = current_user.suggestions.new(suggestion_params)
-
       if @suggestion.save
         render :show
       else

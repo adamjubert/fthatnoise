@@ -33,8 +33,13 @@ class SuggestionForm extends React.Component {
 
   handleSubmit(e) {
     e.preventDefault();
-    this.props.processForm(this.state).then(suggestion => {
-      this.props.route.push(`/actions/${suggestion.id}`);
+    const newSuggestion = this.state;
+    if (this.props.formType === "edit") {
+      newSuggestion.id = parseInt(this.props.params.ideaId);
+    }
+
+    this.props.processForm(newSuggestion).then(suggestion => {
+      this.props.router.push(`/actions/${suggestion.id}`);
     });
   }
 
@@ -42,11 +47,10 @@ class SuggestionForm extends React.Component {
     if (this.props.formType === "edit") {
       if (this.props.suggestion.title) {
         const { suggestion } = this.props;
-
         return {
           title: suggestion.title,
           description: suggestion.description,
-          category_ids: suggestion.category_ids
+          category_ids: Object.keys(suggestion.categories).map(id => parseInt(id))
         };
       }
     }
@@ -75,16 +79,19 @@ class SuggestionForm extends React.Component {
     };
   }
 
-  categoryTags() {
+  categoryCheckboxes() {
     if (this.props.categories.length === 0) {
       return null;
     }
 
     return this.props.categories.map((category, i) => {
+      const isChecked = this.state.category_ids.includes(category.id);
+
       return (
         <li key={i}>
           <input type="checkbox" value={ category.id }
-            onChange={this.toggleCheckbox(category.id)}/>
+            onChange={this.toggleCheckbox(category.id)}
+            checked={ isChecked }/>
           { category.name }
         </li>
       );
@@ -104,10 +111,10 @@ class SuggestionForm extends React.Component {
           <legend>{ message }</legend>
 
           <input type="text" onChange={this.handleChange("title")} value={ title } placeholder="title" />
-          <textarea className="form-control" onChange={this.handleChange("desription")} value={ description } placeholder="description" />
+          <textarea className="form-control" onChange={this.handleChange("description")} value={ description } placeholder="description" />
 
           <label>Categories</label>
-          <ul>{ this.categoryTags() }</ul>
+          <ul>{ this.categoryCheckboxes() }</ul>
 
           <input type="submit" value={ message } className="button accept-button" />
         </form>

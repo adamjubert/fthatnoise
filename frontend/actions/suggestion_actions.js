@@ -9,13 +9,18 @@ export const CLEAR_SUGGESTION_ERRORS = "CLEAR_SUGGESTION_ERRORS";
 
 export const requestAllSuggestions = () => dispatch => {
   return SuggestionsApiUtil.fetchAllSuggestions()
-    .then(suggestions => dispatch(receiveAllSuggestions(suggestions)));
+    .then(suggestions => {
+      dispatch(receiveAllSuggestions(suggestions));
+      return suggestions;
+    }
+  );
 };
 
 export const requestSingleSuggestion = id => dispatch => {
   return SuggestionsApiUtil.fetchSingleSuggestion(id)
     .then(suggestion => {
       dispatch(receiveSingleSuggestion(suggestion));
+      return suggestion;
     }
   );
 };
@@ -25,7 +30,7 @@ export const createSuggestion = suggestion => dispatch => {
     .then(newSuggestion => {
       dispatch(receiveSingleSuggestion(newSuggestion));
       dispatch(clearSuggestionErrors());
-      return suggestion;
+      return newSuggestion;
     },
       err => dispatch(receiveSuggestionErrors(err.responseJSON)));
 };
@@ -35,7 +40,7 @@ export const updateSuggestion = suggestion => dispatch => {
     .then(updatedSuggestion => {
       dispatch(receiveSingleSuggestion(updatedSuggestion));
       dispatch(clearSuggestionErrors());
-      return suggestion;
+      return updatedSuggestion;
     },
       err => dispatch(receiveSuggestionErrors(err.responseJSON)));
 };

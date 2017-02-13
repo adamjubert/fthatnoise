@@ -1,7 +1,7 @@
 import { RECEIVE_ALL_EVENTS } from '../actions/event_actions';
 import { merge } from 'lodash';
 
-const EventsReducer = (oldState = {}, action) => {
+const EventsReducer = (oldState = [], action) => {
   Object.freeze(oldState);
 
   switch (action.type) {
