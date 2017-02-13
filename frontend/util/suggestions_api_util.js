@@ -27,3 +27,24 @@ export const updateSuggestion = suggestion => {
     data: { suggestion }
   });
 };
+
+export const pendingUpvoteSuggestion = id => {
+  return $.ajax({
+    method: 'PATCH',
+    url: `/api/suggestions/${id}/pending_upvote`
+  });
+};
+
+export const ignoreUpvoteSuggestion = id => {
+  return $.ajax({
+    method: 'PATCH',
+    url: `/api/suggestions/${id}/ignore_upvote`
+  });
+};
+
+export const completeUpvoteSuggestion = id => {
+  return $.ajax({
+    method: 'PATCH',
+    url: `/api/suggestions/${id}/complete_upvote`
+  });
+};

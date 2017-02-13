@@ -1,8 +1,7 @@
 class Api::EventsController < ApplicationController
-  # before_action :only_creator_can_edit_event, only: [:edit, :update, :destroy]
-  # before_action :redirect_unless_logged_in, only: [:new, :create, :edit, :update, :destroy, :near_me]
-  #
-  #
+  before_action :only_creator_can_edit_event, only: [:update, :destroy]
+  before_action :redirect_unless_logged_in, only: [:create, :update, :destroy, :near_me]
+
   def index
     @events = Event.order_by_created_at
     render :index
@@ -11,14 +10,10 @@ class Api::EventsController < ApplicationController
   def show
     @event = Event.includes(:categories, :upvotes, { comments: :user })
     .find(params[:id])
-    # @comments = Comment.includes(:user).where("idea_type = ? AND idea_id = ?",
-    # "Suggestion", params[:id])
     render :show
   end
 
   def create
-    return unless logged_in?
-
     @event = current_user.events.new(event_params)
 
     if @event.save
@@ -29,9 +24,7 @@ class Api::EventsController < ApplicationController
   end
 
   def update
-    @event = Suggestion.find(params[:id])
-
-    return unless @event.creator == current_user
+    @event = Event.find(params[:id])
 
     if @event.update(event_params)
       render :show
@@ -114,9 +107,12 @@ class Api::EventsController < ApplicationController
     params.require(:event).permit(:title, :description,
     :address, :address2, :city, :state, :date, :start_time, :end_time, category_ids: [])
   end
+
   #
-  # def only_creator_can_edit_event
-  #   event = Event.find(params[:id])
-  #   redirect_to event_url(event) unless event.creator == current_user
-  # end
+  def only_creator_can_edit_event
+    event = Event.find(params[:id])
+    unless event.creator == current_user
+      render json: ["You cannot edit someone else's action!"], status: 422
+    end
+  end
 end

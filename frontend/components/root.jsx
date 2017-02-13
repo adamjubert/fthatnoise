@@ -8,6 +8,7 @@ import EventsIndexContainer from './events/events_index_container';
 import EventShowContainer from './events/event_show_container';
 import SessionFormContainer from './session/session_form_container';
 import SuggestionFormContainer from './suggestions/suggestion_form_container';
+import EventFormContainer from './events/event_form_container';
 
 const Root = ({ store }) => {
   const _redirectIfLoggedIn = (nextState, replace) => {
@@ -22,8 +23,12 @@ const Root = ({ store }) => {
     }
   };
 
-  const SessionForm = () => {
-    return <SessionFormContainer {...props} />;
+  const SignupForm = (props) => {
+    return <SessionFormContainer {...props }/>;
+  };
+
+  const LoginForm = (props) => {
+    return <SessionFormContainer {...props }/>;
   };
 
   return (
@@ -31,13 +36,15 @@ const Root = ({ store }) => {
       <Router history={hashHistory}>
         <Route path="/" component={App}>
           <IndexRedirect to="/actions" />
-          <Route path="/signin" component={SessionFormContainer} onEnter={_redirectIfLoggedIn}/>
-          <Route path="/signup" component={SessionFormContainer} onEnter={_redirectIfLoggedIn}/>
+          <Route path="/signin" component={LoginForm} onEnter={_redirectIfLoggedIn}/>
+          <Route path="/signup" component={SignupForm} onEnter={_redirectIfLoggedIn}/>
           <Route path="/actions/:ideaId/edit" component={SuggestionFormContainer} onEnter={_redirectIfLoggedOut} />
+          <Route path="/events/:ideaId/edit" component={EventFormContainer} />
           <Route path="/actions/new" component={SuggestionFormContainer} onEnter={_redirectIfLoggedOut} />
           <Route path="/actions" component={SuggestionsIndexContainer} />
           <Route path="/actions/:ideaId" component={SuggestionShowContainer} />
           <Route path="/events" component={EventsIndexContainer} />
+          <Route path="/events/new" component={EventFormContainer} />
           <Route path="/events/:ideaId" component={EventShowContainer} />
         </Route>
       </Router>

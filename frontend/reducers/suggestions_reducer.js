@@ -10,8 +10,13 @@ const SuggestionsReducer = (oldState = [], action) => {
     case RECEIVE_ALL_SUGGESTIONS:
       return action.suggestions;
     case RECEIVE_SINGLE_SUGGESTION:
-      newState = [action.suggestion];
-      newState.concat(oldState);
+      newState = oldState.slice();
+      for (let i = 0; i < newState.length; i++) {
+        if (action.suggestion.id === newState[i].id) {
+          newState[i] = action.suggestion;
+          break;
+        }
+      }
       return newState;
     default:
       return oldState;

@@ -4,8 +4,6 @@ import { RECEIVE_ERRORS,
 
 export const RECEIVE_ALL_SUGGESTIONS = "RECEIVE_ALL_SUGGESTIONS";
 export const RECEIVE_SINGLE_SUGGESTION = "RECEIVE_SINGLE_SUGGESTION";
-export const RECEIVE_SUGGESTION_ERRORS = "RECEIVE_SUGGESTION_ERRORS";
-export const CLEAR_SUGGESTION_ERRORS = "CLEAR_SUGGESTION_ERRORS";
 
 export const requestAllSuggestions = () => dispatch => {
   return SuggestionsApiUtil.fetchAllSuggestions()
@@ -43,6 +41,30 @@ export const updateSuggestion = suggestion => dispatch => {
       return updatedSuggestion;
     },
       err => dispatch(receiveSuggestionErrors(err.responseJSON)));
+};
+
+export const pendingUpvoteSuggestion = suggestion => dispatch => {
+  return SuggestionsApiUtil.pendingUpvoteSuggestion(suggestion.id)
+    .then(updatedSuggestion => {
+      dispatch(receiveSingleSuggestion(updatedSuggestion));
+      return updatedSuggestion;
+    });
+};
+
+export const ignoreUpvoteSuggestion = suggestion => dispatch => {
+  return SuggestionsApiUtil.ignoreUpvoteSuggestion(suggestion.id)
+    .then(updatedSuggestion => {
+      dispatch(receiveSingleSuggestion(updatedSuggestion));
+      return updatedSuggestion;
+    });
+};
+
+export const completeUpvoteSuggestion = suggestion => dispatch => {
+  return SuggestionsApiUtil.completeUpvoteSuggestion(suggestion.id)
+    .then(updatedSuggestion => {
+      dispatch(receiveSingleSuggestion(updatedSuggestion));
+      return updatedSuggestion;
+    });
 };
 
 export const receiveAllSuggestions = suggestions => ({

@@ -28,4 +28,6 @@ json.array! @events do |event|
   json.creator do
     json.extract! event.creator, :id, :username
   end
+
+  json.creator_viewing current_user == event.creator
 end

@@ -1,7 +1,7 @@
 import { connect } from 'react-redux';
-import { createSuggestion, updateSuggestion, requestSingleSuggestion } from '../../actions/suggestion_actions';
+import { createEvent, updateEvent, requestSingleEvent } from '../../actions/event_actions';
 import { requestAllCategories } from '../../actions/category_actions';
-import SuggestionForm from './suggestion_form';
+import EventForm from './event_form';
 
 const mapStateToProps = (state, ownProps) => {
   const pathName = ownProps.location.pathname.slice(ownProps.location.pathname.length - 4, ownProps.location.pathname.length);
@@ -10,8 +10,8 @@ const mapStateToProps = (state, ownProps) => {
   if (pathName === "edit") formType = "edit";
 
   return {
-    errors: state.errors.suggestion,
-    suggestion: state.suggestion,
+    errors: state.errors.event,
+    event: state.event,
     categories: state.categories,
     formType
   };
@@ -19,11 +19,11 @@ const mapStateToProps = (state, ownProps) => {
 
 const mapDispatchToProps = (dispatch, ownProps) => {
   const pathName = ownProps.location.pathname.slice(ownProps.location.pathname.length -4, ownProps.location.pathname.length);
-  const formAction = pathName === "edit" ? updateSuggestion : createSuggestion;
+  const formAction = pathName === "edit" ? updateEvent : createEvent;
 
   return {
-    processForm: suggestion => dispatch(formAction(suggestion)),
-    requestSingleSuggestion: suggestion => dispatch(requestSingleSuggestion(suggestion)),
+    processForm: event => dispatch(formAction(event)),
+    requestSingleEvent: event => dispatch(requestSingleEvent(event)),
     requestAllCategories: () => dispatch(requestAllCategories())
   };
 };
@@ -31,4 +31,4 @@ const mapDispatchToProps = (dispatch, ownProps) => {
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(SuggestionForm);
+)(EventForm);

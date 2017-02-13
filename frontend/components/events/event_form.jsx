@@ -2,7 +2,7 @@ import React from 'react';
 import { withRouter } from 'react-router';
 import Errors from '../errors/errors';
 
-class SuggestionForm extends React.Component {
+class EventForm extends React.Component {
   constructor(props) {
     super(props);
     this.state = this.initialState();
@@ -12,7 +12,7 @@ class SuggestionForm extends React.Component {
 
   componentDidMount() {
     if (this.props.formType === "edit") {
-      this.props.requestSingleSuggestion(this.props.params.ideaId)
+      this.props.requestSingleEvent(this.props.params.ideaId)
         .then(() => this.setState(this.initialState()));
     }
     this.props.requestAllCategories();
@@ -21,7 +21,7 @@ class SuggestionForm extends React.Component {
   componentWillReceiveProps(nextProps) {
     if (this.props.formType === "edit") {
       if (nextProps.params.ideaId !== this.props.params.ideaId) {
-        this.props.requestSingleSuggestion(nextProps.params.ideaId)
+        this.props.requestSingleEvent(nextProps.params.ideaId)
           .then(() => this.setState(this.initialState()));
       }
     }
@@ -35,24 +35,31 @@ class SuggestionForm extends React.Component {
 
   handleSubmit(e) {
     e.preventDefault();
-    const newSuggestion = this.state;
+    const newEvent = this.state;
     if (this.props.formType === "edit") {
-      newSuggestion.id = parseInt(this.props.params.ideaId);
+      newEvent.id = parseInt(this.props.params.ideaId);
     }
 
-    this.props.processForm(newSuggestion).then(suggestion => {
-      this.props.router.push(`/actions/${suggestion.id}`);
+    this.props.processForm(newEvent).then(event => {
+      this.props.router.push(`/events/${event.id}`);
     });
   }
 
   initialState() {
     if (this.props.formType === "edit") {
-      if (this.props.suggestion.title) {
-        const { suggestion } = this.props;
+      if (this.props.event.title) {
+        const { event } = this.props;
         return {
-          title: suggestion.title,
-          description: suggestion.description,
-          category_ids: Object.keys(suggestion.categories).map(id => parseInt(id))
+          title: event.title,
+          description: event.description,
+          category_ids: Object.keys(event.categories).map(id => parseInt(id)),
+          date: event.date,
+          start_time: event.parse_start_time,
+          end_time: event.parse_end_time,
+          address: event.address,
+          address2: event.address2,
+          city: event.city,
+          state: event.state
         };
       }
     }
@@ -60,7 +67,14 @@ class SuggestionForm extends React.Component {
     return {
       title: "",
       description: "",
-      category_ids: []
+      category_ids: [],
+      date: "",
+      start_time: "",
+      end_time: "",
+      address: "",
+      address2: "",
+      city: "",
+      state: ""
     };
   }
 
@@ -73,7 +87,6 @@ class SuggestionForm extends React.Component {
         const index = category_ids.indexOf(id);
         new_category_ids = category_ids.splice(index, 1);
         this.setState({ category_ids: category_ids });
-        console.log(this.state.category_ids);
       } else {
         new_category_ids = category_ids.slice();
         new_category_ids.push(id);
@@ -101,11 +114,25 @@ class SuggestionForm extends React.Component {
     });
   }
 
-  render() {
-    const { title, description } = this.state;
-    let message = "Create Action";
+  stateSelect() {
+    const us_states = US_STATES.map((state, i) => (
+      <option value={ state[0] } key={i}>{ state[0] }</option>
+    ));
 
-    if (this.props.formType === "edit") message = "Update Action";
+    return (
+      <select onChange={this.handleChange("state")} value={ this.state.state }>
+        <option disabled value="placeholder">Select State</option>
+        { us_states }
+      </select>
+    );
+  }
+
+
+  render() {
+    const { title, description, date, start_time, end_time, address, address2, city } = this.state;
+    let message = "Create Event";
+
+    if (this.props.formType === "edit") message = "Update Event";
 
     return (
       <div>
@@ -114,6 +141,24 @@ class SuggestionForm extends React.Component {
           <legend>{ message }</legend>
 
           <input type="text" onChange={this.handleChange("title")} value={ title } placeholder="title" />
+
+          <div className="date-time">
+            <label htmlFor="event_date">Date</label>
+            <input type="date" id="event_date" value={ date } onChange={this.handleChange("date")} placeholder="date" />
+
+            <label htmlFor="event_start_time">Start Time</label>
+            <input id="event_start_time" type="time" value={ start_time } onChange={this.handleChange("start_time")} />
+
+            <label htmlFor="event_end_time">End Time</label>
+            <input id="event_end_time" type="time" value={ end_time } onChange={this.handleChange("end_time")} />
+          </div>
+
+          <input type="text" value={ address } onChange={this.handleChange("address")} placeholder="address" />
+          <input type="text" value={ address2 } onChange={this.handleChange("address2")} placeholder="address line 2 (optional)" />
+          <input type="text" value={ city } onChange={this.handleChange("city")} placeholder="city" />
+          { this.stateSelect() }
+
+
           <textarea className="form-control" onChange={this.handleChange("description")} value={ description } placeholder="description" />
 
           <label>Categories</label>
@@ -126,4 +171,4 @@ class SuggestionForm extends React.Component {
   }
 }
 
-export default withRouter(SuggestionForm);
+export default withRouter(EventForm);

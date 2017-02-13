@@ -10,15 +10,19 @@ Rails.application.routes.draw do
 
     resources :suggestions, except: [:new, :edit] do
       resources :comments, only: [:create]
+
+      patch "/pending_upvote", to: "suggestions#pending_upvote", as: "pending_upvote"
+      patch "/ignore_upvote", to: "suggestions#ignore_upvote", as: "ignore_upvote"
+      patch "/complete_upvote", to: "suggestions#complete_upvote", as: "complete_upvote"
     end
 
     resources :events, except: [:new, :edit] do
       resources :comments, only: [:create]
     end
 
-    resources :upvotes, only: [:create, :update]
+    # resources :upvotes, only: [:create, :update]
     resources :comments, only: [:destroy]
-    resources :contacts, only: [:new, :create, :index]
+    resources :contacts, only: [:create, :index]
 
     # get "/about", to: "static_pages#about", as: "about"
     # get "/contact", to: "contacts#new", as: "contact"

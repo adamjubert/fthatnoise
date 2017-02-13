@@ -12,7 +12,7 @@
 #
 
 class Upvote < ActiveRecord::Base
-  STATUSES = %w(pending complete ignore going)
+  STATUSES = %w(pending complete ignore)
 
   validates :idea, :idea_type, :user, presence: true
   validates :user_id, :uniqueness => { :scope => [:idea_type, :idea_id] }

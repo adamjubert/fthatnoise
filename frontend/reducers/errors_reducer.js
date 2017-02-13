@@ -4,13 +4,13 @@ import { CLEAR_ALL_ERRORS } from '../actions/error_actions';
 
 const defaultState = {
   session: [],
-  suggestion: []
+  suggestion: [],
+  event: []
 };
 
 const ErrorsReducer = (oldState = defaultState, action) => {
   Object.freeze(oldState);
   let newState;
-
   switch(action.type) {
     case RECEIVE_ERRORS:
       newState = { [action.key]: action.errors };
