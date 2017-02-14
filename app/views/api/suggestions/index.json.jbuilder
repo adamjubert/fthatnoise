@@ -3,7 +3,7 @@ user = current_user
 json.array! @suggestions do |suggestion|
   json.extract! suggestion, :id, :title, :shortened_description, :created_at
 
-  json.upvotes_count suggestion.upvotes.length
+  json.upvotes_count suggestion.upvotes.select { |upvote| upvote.status != "ignore" }.length
 
   json.categories do
     suggestion.categories.each do |category|

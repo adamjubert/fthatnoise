@@ -2,9 +2,9 @@ user = current_user
 
 json.extract! @event, :id, :title, :description, :date, :created_at, :formatted_date,
 :parse_start_time, :parse_end_time, :formatted_location, :formatted_time_range,
-:address, :address2, :city, :state
+:address, :address2, :city, :state, :latitude, :longitude
 
-json.upvotes_count @event.upvotes.length
+json.upvotes_count @event.upvotes.select { |upvote| upvote.status != "ignore" }.length
 
 json.categories do
   @event.categories.each do |category|

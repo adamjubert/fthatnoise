@@ -25,7 +25,7 @@ class SubNav extends React.Component {
 
         <Link to="#" className="sub-options sub-selected">Hot</Link>
         <Link to="#" className="sub-options">Trending</Link>
-        <Link to="#" className="sub-options sub-selected">Near Me</Link>
+        <Link to="#" className="sub-options">Near Me</Link>
         <Link to="#" className="sub-options">Most Recent</Link>
         <input type="text" name="" value="" placeholder="Search..." />
 

@@ -17,6 +17,7 @@ class Api::EventsController < ApplicationController
     @event = current_user.events.new(event_params)
 
     if @event.save
+      current_user.upvotes.create(idea_id: @event.id, idea_type: "Event", status: "complete")
       render :show
     else
       render json: @event.errors.full_messages, status: 422

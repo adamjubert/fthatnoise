@@ -33,7 +33,9 @@ class App extends React.Component {
           </div>
           <GreetingContainer />
         </nav>
-        { this.props.children }
+        <div className="main">
+          { this.props.children }
+        </div>
       </div>
     );
   }
