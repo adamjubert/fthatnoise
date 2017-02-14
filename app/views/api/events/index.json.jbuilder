@@ -17,9 +17,6 @@ json.array! @events do |event|
   json.upvotes_status nil
 
   event.upvotes.each do |upvote|
-    # json.set! upvote.user_id do
-    #   json.extract! upvote, :id, :user_id, :status
-    # end
     if user && upvote.user_id == user.id
       json.upvotes_status upvote.status
     end
@@ -30,4 +27,6 @@ json.array! @events do |event|
   end
 
   json.creator_viewing current_user == event.creator
+
+  json.in_past event.date < Date.today
 end

@@ -1,6 +1,6 @@
 class Api::UsersController < ApplicationController
   # before_action :cannot_sign_up_when_logged_in, only: [:new, :create]
-  # before_action :can_only_view_own_profile, only: [:show]
+  before_action :can_only_view_own_profile, only: [:show]
   # before_action :can_only_edit_own_profile, only: [:edit, :update, :destroy]
   # before_action :only_admin_can_see_index, only: [:index]
 
@@ -25,10 +25,11 @@ class Api::UsersController < ApplicationController
     end
   end
   #
-  # def show
-  #   @user = User.find(params[:id])
-  #   render :show
-  # end
+  def show
+    @upvotes = Upvote.where(user_id: params[:id]).includes(idea: [:categories, :creator, :upvotes])
+    @user = User.find(params[:id])
+    render :show
+  end
   #
   # def edit
   #   @user = User.find(params[:id])
@@ -53,14 +54,13 @@ class Api::UsersController < ApplicationController
   #   redirect_to user_url(current_user) if logged_in?
   # end
   #
-  # def can_only_view_own_profile
-  #   user = User.find(params[:id])
-  #
-  #   unless user == current_user
-  #     flash[:errors] = ["You cannot view someone else's page."]
-  #     redirect_to user_url(current_user)
-  #   end
-  # end
+  def can_only_view_own_profile
+    user = User.find(params[:id])
+
+    unless user == current_user
+      render json: ["You cannot view someone else's profile"], status: 422
+    end
+  end
   #
   # def can_only_edit_own_profile
   #   user = User.find(params[:id])

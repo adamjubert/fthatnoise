@@ -39,7 +39,7 @@ module Taggable
     if description.length < 140
       description
     else
-      "#{description[0..139]}..."
+      "#{description[0..300]}..."
     end
   end
 
