@@ -26,7 +26,7 @@ json.array! @events do |event|
     json.extract! event.creator, :id, :username
   end
 
-  json.creator_viewing current_user == event.creator
+  json.creator_viewing user == event.creator
 
   json.in_past event.date < Date.today
 end

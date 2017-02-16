@@ -1,6 +1,6 @@
 class Api::UsersController < ApplicationController
   # before_action :cannot_sign_up_when_logged_in, only: [:new, :create]
-  before_action :can_only_view_own_profile, only: [:show]
+  # before_action :can_only_view_own_profile, only: [:show]
   # before_action :can_only_edit_own_profile, only: [:edit, :update, :destroy]
   # before_action :only_admin_can_see_index, only: [:index]
 
@@ -26,6 +26,7 @@ class Api::UsersController < ApplicationController
   end
   #
   def show
+    debugger
     @upvotes = Upvote.where(user_id: params[:id]).includes(idea: [:categories, :creator, :upvotes])
     @user = User.find(params[:id])
     render :show

@@ -25,5 +25,5 @@ json.array! @suggestions do |suggestion|
     json.extract! suggestion.creator, :id, :username
   end
 
-  json.creator_viewing current_user == suggestion.creator
+  json.creator_viewing user == suggestion.creator
 end

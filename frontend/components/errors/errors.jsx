@@ -8,7 +8,7 @@ class Errors extends React.Component {
 
   render() {
     const { errors } = this.props;
-    
+
     if (errors.length > 0) {
       const errorItems = errors.map((error, i) => (
         <li key={i}>{ error }</li>

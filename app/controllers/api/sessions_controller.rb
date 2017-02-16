@@ -7,6 +7,7 @@ class Api::SessionsController < ApplicationController
 
     if @user
       login!(@user)
+      @upvotes = Upvote.where(user_id: params[:id]).includes(idea: [:categories, :creator, :upvotes])
       render 'api/users/show'
     else
       render json: ["Invalid username and password combination! Please try again :)"], status: 422
