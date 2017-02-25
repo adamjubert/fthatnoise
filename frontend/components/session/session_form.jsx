@@ -64,6 +64,7 @@ class SessionForm extends React.Component {
     return (
       <div>
         { this.otherLink() }
+        debugger
         <Errors errors={ this.props.errors } />
 
         <form className="form" onSubmit = { this.handleSubmit }>
