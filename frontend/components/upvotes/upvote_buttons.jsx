@@ -5,11 +5,11 @@ class UpvoteButtons extends React.Component {
     const { idea, ideatype, pendingUpvoteIdea, completeUpvoteIdea, ignoreUpvoteIdea } = this.props;
 
     return (
-      <div>
+      <div className="upvote-buttons-container">
         <button className="button accept-button" onClick={() => completeUpvoteIdea(idea)}>
           Already did it!
         </button>
-        <button className="button accept-button" onClick={() => pendingUpvoteIdea(idea)}>
+        <button className="button follow-button" onClick={() => pendingUpvoteIdea(idea)}>
           I'm on it!
         </button>
         <button className="button ignore-button" onClick={() => ignoreUpvoteIdea(idea)}>
@@ -23,8 +23,8 @@ class UpvoteButtons extends React.Component {
     const { idea, ideatype, pendingUpvoteIdea, completeUpvoteIdea, ignoreUpvoteIdea } = this.props;
 
     return (
-      <div>
-        <button className="button accept-button disabled" disabled onClick={() => pendingUpvoteIdea(idea)}>
+      <div className="upvote-buttons-container">
+        <button className="button follow-button disabled" disabled onClick={() => pendingUpvoteIdea(idea)}>
           You're on it!
         </button>
         <button className="button accept-button" onClick={() => completeUpvoteIdea(idea)}>
@@ -41,11 +41,11 @@ class UpvoteButtons extends React.Component {
     const { idea, ideatype, pendingUpvoteIdea, completeUpvoteIdea, ignoreUpvoteIdea } = this.props;
 
     return (
-      <div>
+      <div className="upvote-buttons-container">
         <button className="button ignore-button disabled" disabled onClick={() => ignoreUpvoteIdea(idea)}>
           You ignored
         </button>
-        <button className="button accept-button" onClick={() => pendingUpvoteIdea(idea)}>
+        <button className="button follow-button" onClick={() => pendingUpvoteIdea(idea)}>
           Changed my mind!
         </button>
         <button className="button accept-button" onClick={() => completeUpvoteIdea(idea)}>
@@ -59,7 +59,7 @@ class UpvoteButtons extends React.Component {
     const { idea, ideatype, pendingUpvoteIdea, completeUpvoteIdea, ignoreUpvoteIdea } = this.props;
 
     return (
-      <div>
+      <div className="upvote-buttons-container">
         <button className="button accept-button disabled" disabled>
           Completed :)
         </button>
@@ -69,7 +69,7 @@ class UpvoteButtons extends React.Component {
 
   creatorButtons() {
     return (
-      <div>
+      <div className="upvote-buttons-container">
         <button className="button accept-button disabled" disabled>
           Your idea :)
         </button>
