@@ -19,17 +19,22 @@ class Api::UsersController < ApplicationController
 
     if @user.save
       login!(@user)
-      render :show
+      render partial: 'user', locals: { user: @user }
     else
       render json: @user.errors.full_messages, status: 422
     end
   end
   #
   def show
-    debugger
     @upvotes = Upvote.where(user_id: params[:id]).includes(idea: [:categories, :creator, :upvotes])
     @user = User.find(params[:id])
     render :show
+  end
+
+  def profile
+    @upvotes = Upvote.where(user_id: params[:id]).includes(idea: [:categories, :creator, :upvotes])
+    @user = User.find(params[:id])
+    render :show    
   end
   #
   # def edit

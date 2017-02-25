@@ -4,6 +4,7 @@ Rails.application.routes.draw do
 
   namespace :api, defaults: {format: :json} do
     resources :users, only: [:create, :update, :show]
+    get '/profile', to: 'users#profile'
     resource :session, only: [:create, :destroy]
 
     resources :categories, only: [:index, :create]

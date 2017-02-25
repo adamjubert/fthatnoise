@@ -10,6 +10,7 @@ import SessionFormContainer from './session/session_form_container';
 import SuggestionFormContainer from './suggestions/suggestion_form_container';
 import EventFormContainer from './events/event_form_container';
 import ContactFormContainer from './contacts/contact_form_container';
+import UserProfileContainer from './users/user_profile_container';
 import AboutPage from './static/about';
 
 const Root = ({ store }) => {
@@ -49,7 +50,10 @@ const Root = ({ store }) => {
           <Route path="/events/new" component={EventFormContainer} />
           <Route path="/events/:ideaId" component={EventShowContainer} />
           <Route path="/about" component={AboutPage} />
-          <Route path="/contact" component={ContactFormContainer} />
+          <Route path="/contact" component={ ContactFormContainer } />
+          {
+            // <Route path="/profile" component={ UserProfileContainer } />
+          }
         </Route>
       </Router>
     </Provider>
