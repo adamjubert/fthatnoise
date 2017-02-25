@@ -1,5 +1,5 @@
 .button {
-  margin: 10px 0;
+  margin: 10px 5px;
   padding: 0 10px;
   font-family: $sans-serif;
   color: $white;
@@ -8,18 +8,17 @@
   height: 35px;
   position: relative;
 
-  &:hover {
-    top: 1px;
-  }
+  // &:hover {
+  //   top: 1px;
+  // }
 }
 
 .accept-button {
   background-color: $accept;
-  border-bottom: 2px solid $accept-border;
+}
 
-  &:hover {
-    border-bottom: 1px solid $accept-border;
-  }
+.follow-button {
+  background-color: $follow;
 }
 
 .ignore-button {
