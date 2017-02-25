@@ -51,7 +51,9 @@ const Root = ({ store }) => {
           <Route path="/events/:ideaId" component={EventShowContainer} />
           <Route path="/about" component={AboutPage} />
           <Route path="/contact" component={ ContactFormContainer } />
-          <Route path="/profile" component={ UserProfileContainer } />
+          {
+            // <Route path="/profile" component={ UserProfileContainer } />
+          }
         </Route>
       </Router>
     </Provider>

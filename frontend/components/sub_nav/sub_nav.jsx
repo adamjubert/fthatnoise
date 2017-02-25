@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router';
+import SearchBar from '../search_bar/search_bar_container';
 
 class SubNav extends React.Component {
   render () {
@@ -27,7 +28,7 @@ class SubNav extends React.Component {
         <Link to="#" className="sub-options">Trending</Link>
         <Link to="#" className="sub-options">Near Me</Link>
         <Link to="#" className="sub-options">Most Recent</Link>
-        <input type="text" name="" value="" placeholder="Search..." />
+        <SearchBar />
 
         <section className="action-links">
           { actionLinks }
