@@ -6,19 +6,19 @@ class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      title: "F*** That Noise"
+      title: "fthatnoise"
     };
     this.angrifyLogo = this.angrifyLogo.bind(this);
     this.deAngrifyLogo = this.deAngrifyLogo.bind(this);
   }
 
   angrifyLogo() {
-    const title = "F*** That Noise!!!";
+    const title = "fthatnoise";
     this.setState({ title });
   }
 
   deAngrifyLogo() {
-    const title = "F*** That Noise";
+    const title = "fthatnoise";
     this.setState({ title });
   }
 
@@ -28,8 +28,10 @@ class App extends React.Component {
         <nav className="main-nav">
           <div className="logo" onMouseEnter={this.angrifyLogo} onMouseLeave={this.deAngrifyLogo}>
             <Link to="/" className="logo">
-            <img src="assets/angry_cat.png" />
-            { this.state.title }</Link>
+              { this.state.title }
+              <img src="assets/angry_cat.png" />
+              com
+            </Link>
           </div>
           <GreetingContainer />
         </nav>
