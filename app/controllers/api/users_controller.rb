@@ -3,7 +3,7 @@ class Api::UsersController < ApplicationController
   # before_action :can_only_view_own_profile, only: [:show]
   # before_action :can_only_edit_own_profile, only: [:edit, :update, :destroy]
   # before_action :only_admin_can_see_index, only: [:index]
-
+  before_action :must_log_in_to_see_profile, only: [:profile]
   # def index
   #   @users = User.all
   #   render :index
@@ -32,9 +32,26 @@ class Api::UsersController < ApplicationController
   end
 
   def profile
-    @upvotes = Upvote.where(user_id: params[:id]).includes(idea: [:categories, :creator, :upvotes])
-    @user = User.find(params[:id])
-    render :show    
+    if params[:actions]
+      if params[:actions] == "mine"
+        @upvotes = current_user.suggestions
+      elsif params[:actions] == "completed"
+        @upvotes = Upvote.where(user_id: current_user.id)
+        .where(idea_type: "Suggestion")
+        .where(status: "complete")
+        .where.not(creator_id: current_user.id)
+        .includes(idea: [:categories, :creator, :upvotes])
+      else
+        @upvotes = Upvote.where(user_id: current_user.id)
+        .where(idea_type: "Suggestion")
+        .where(status: "pending")
+        .includes(idea: [:categories, :creator, :upvotes])
+      end
+    else
+    end
+
+    @user = current_user
+    render :profile
   end
   #
   # def edit
@@ -53,20 +70,25 @@ class Api::UsersController < ApplicationController
   #   end
   # end
   #
-  # private
-  #
+  private
+
+  def must_log_in_to_see_profile
+    unless logged_in?
+      render json: ["Please log in to see your profile"], status: 403
+    end
+  end
   #
   # def cannot_sign_up_when_logged_in
   #   redirect_to user_url(current_user) if logged_in?
   # end
   #
-  def can_only_view_own_profile
-    user = User.find(params[:id])
-
-    unless user == current_user
-      render json: ["You cannot view someone else's profile"], status: 422
-    end
-  end
+  # def can_only_view_own_profile
+  #   user = User.find(params[:id])
+  #
+  #   unless user == current_user
+  #     render json: ["You cannot view someone else's profile"], status: 422
+  #   end
+  # end
   #
   # def can_only_edit_own_profile
   #   user = User.find(params[:id])

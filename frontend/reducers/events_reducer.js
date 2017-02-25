@@ -1,4 +1,5 @@
 import { RECEIVE_ALL_EVENTS, RECEIVE_SINGLE_EVENT } from '../actions/event_actions';
+import { RECEIVE_CURRENT_USER } from '../actions/user_actions';
 import { merge } from 'lodash';
 
 const EventsReducer = (oldState = [], action) => {
@@ -8,6 +9,8 @@ const EventsReducer = (oldState = [], action) => {
   switch (action.type) {
     case RECEIVE_ALL_EVENTS:
       return action.events;
+    case RECEIVE_CURRENT_USER:
+      return action.user.events;
     case RECEIVE_SINGLE_EVENT:
       newState = oldState.slice();
       for (let i = 0; i < newState.length; i++) {

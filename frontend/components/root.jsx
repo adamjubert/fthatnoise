@@ -11,6 +11,7 @@ import SuggestionFormContainer from './suggestions/suggestion_form_container';
 import EventFormContainer from './events/event_form_container';
 import ContactFormContainer from './contacts/contact_form_container';
 import UserProfileContainer from './users/user_profile_container';
+import UserSuggetionsContainer from './users/user_suggestions_container';
 import AboutPage from './static/about';
 
 const Root = ({ store }) => {
@@ -51,7 +52,10 @@ const Root = ({ store }) => {
           <Route path="/events/:ideaId" component={EventShowContainer} />
           <Route path="/about" component={AboutPage} />
           <Route path="/contact" component={ ContactFormContainer } />
-          <Route path="/profile" component={ UserProfileContainer } />
+          <Route path="/profile" component={ UserProfileContainer }>
+            <IndexRoute component={ UserSuggetionsContainer } />
+            <Route path="/profile/actions" component={ UserSuggetionsContainer } />
+          </Route>
         </Route>
       </Router>
     </Provider>
