@@ -1,17 +1,21 @@
 .short-idea {
   border: 1px solid $navy;
-  width: 40%;
-  margin: 15px 40px;
-  // max-width: 900px;
+  width: 45%;
+  margin: 15px;
+  max-width: 900px;
+  height: 350px;
   background: $short-idea-background;
   display: inline-block;
+}
+
+.short-idea-event {
+  height: 350px;
 }
 
 .idea-list {
   margin: 15px auto 0;
   display: flex;
   flex-wrap: wrap;
-  // align-items: center;
   justify-content: center;
 }
 
@@ -20,52 +24,84 @@
   font-family: $sans-serif;
   font-size: 18px;
   color: $white;
-  // padding: 3px 10px;
   display: flex;
-  align-items: flex-end;
+  justify-content: space-between;
+  align-items: center;
+  height: 50px;
+
+  div {
+    padding: 5px 10px;
+  }
 
   h3, h4 {
     color: $white;
+  }
+
+  h4 {
+    font-size: 14px;
+  }
+
+  a {
+    &:hover {
+      text-decoration: underline;
+    }
   }
 }
 
 .short-idea-upvotes-count {
   display: flex;
   flex-direction: column;
+  align-items: center;
   float: right;
   background: $light-navy;
-}
-
-.upvote-buttons-container {
-  border-top: 1px solid $navy;
-  width: 100%;
-  // padding-left: 10px;
+  height: 50px;
   box-sizing: border-box;
 }
 
+.upvote-buttons-container {
+  padding: 10px;
+  display: flex;
+  align-items: center;
+}
+
 .short-idea-body {
-  // padding: 0 10px;
-  // box-sizing: border-box;
+  height: calc(100% - 50px);
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+
   span {
     font-weight: bold;
     font-family: $sans-serif;
     color: $black;
     display: block;
+    padding: 8px 0;
   }
 }
 
-.short-idea-categories-wrapper {
-  margin: 5px 0;
+.short-idea-detail-container {
+  padding: 10px 10px 0;
+  border-bottom: 1px solid $navy;
+  height: 100%;
+}
+
+.event-logistics {
+  display: flex;
+  flex-wrap: wrap;
+
+  .event-date-time {
+    width: 50%;
+  }
+
+  .event-address {
+    width: 100%;
+  }
 }
 
 .short-idea-categories {
   background-color: $light-gray;
-  padding: 0 5px;
-
-  &:hover {
-    background-color: $shiny-gray;
-    text-decoration: underline;
-  }
+  margin-right: 3px;
 }
 
 @media all and (max-width: 800px) {

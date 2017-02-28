@@ -13,16 +13,16 @@ const IdeaIndexItem = ({ idea, ideaType }) => {
 
   if (ideaType === "event") {
     eventLogistics = (
-      <div>
-        <p>{ idea.formatted_date }</p>
-        <p>{ idea.formatted_time_range }</p>
-        <p>{ idea.formatted_location }</p>
+      <div className="event-logistics">
+        <p className="event-date-time"><span>Date: </span>{ idea.formatted_date }</p>
+        <p className="event-date-time"><span>Time: </span>{ idea.formatted_time_range }</p>
+        <p className="event-address"><span>Address: </span>{ idea.formatted_location }</p>
       </div>
     );
   }
 
   return (
-  <div className="short-idea">
+    <div className={ `short-idea short-idea-${ideaType}`}>
       <div className="short-idea-header">
         <div>
           <h3><Link to={ ideaLink }>
@@ -35,10 +35,12 @@ const IdeaIndexItem = ({ idea, ideaType }) => {
         </div>
       </div>
       <div className="short-idea-body">
-        <CategoriesString categories={ idea.categories } />
-        { eventLogistics }
-        <p><span>Created by: </span>{ idea.creator.username }</p>
-        <p><span>Details: </span>{ idea.shortened_description }</p>
+        <div className="short-idea-detail-container">
+          <CategoriesString categories={ idea.categories } />
+          <p><span>Created by: </span>{ idea.creator.username }</p>
+          <p><span>Details: </span>{ idea.shortened_description }</p>
+          { eventLogistics }
+        </div>
         <UpvoteButtonsContainer idea={ idea } ideaType={ ideaType } />
       </div>
     </div>

@@ -7,13 +7,19 @@ class UpvoteButtons extends React.Component {
     return (
       <div className="upvote-buttons-container">
         <button className="button accept-button" onClick={() => completeUpvoteIdea(idea)}>
-          Already did it!
+          Complete
         </button>
         <button className="button follow-button" onClick={() => pendingUpvoteIdea(idea)}>
-          I'm on it!
+          Interested
         </button>
         <button className="button ignore-button" onClick={() => ignoreUpvoteIdea(idea)}>
-          Not for me...
+          Ignore
+        </button>
+        <button className="button share-button">
+          <i className="fa fa-facebook-square" aria-hidden="true"></i>
+        </button>
+        <button className="button share-button">
+          <i className="fa fa-twitter-square" aria-hidden="true"></i>
         </button>
       </div>
     );
@@ -24,14 +30,20 @@ class UpvoteButtons extends React.Component {
 
     return (
       <div className="upvote-buttons-container">
-        <button className="button follow-button disabled" disabled onClick={() => pendingUpvoteIdea(idea)}>
-          You're on it!
+        <button className="button follow-button disabled-button" disabled onClick={() => pendingUpvoteIdea(idea)}>
+          Interested
         </button>
         <button className="button accept-button" onClick={() => completeUpvoteIdea(idea)}>
-          Complete it!
+          Complete
         </button>
         <button className="button ignore-button" onClick={() => ignoreUpvoteIdea(idea)}>
-          Never mind...
+          Ignore
+        </button>
+        <button className="button share-button">
+          <i className="fa fa-facebook-square" aria-hidden="true"></i>
+        </button>
+        <button className="button share-button">
+          <i className="fa fa-twitter-square" aria-hidden="true"></i>
         </button>
       </div>
     );
@@ -42,14 +54,20 @@ class UpvoteButtons extends React.Component {
 
     return (
       <div className="upvote-buttons-container">
-        <button className="button ignore-button disabled" disabled onClick={() => ignoreUpvoteIdea(idea)}>
-          You ignored
+        <button className="button ignore-button disabled-button" disabled onClick={() => ignoreUpvoteIdea(idea)}>
+          Ignored
         </button>
         <button className="button follow-button" onClick={() => pendingUpvoteIdea(idea)}>
-          Changed my mind!
+          Interested
         </button>
         <button className="button accept-button" onClick={() => completeUpvoteIdea(idea)}>
-          Did it anyway!
+          Complete
+        </button>
+        <button className="button share-button">
+          <i className="fa fa-facebook-square" aria-hidden="true"></i>
+        </button>
+        <button className="button share-button">
+          <i className="fa fa-twitter-square" aria-hidden="true"></i>
         </button>
       </div>
     );
@@ -60,8 +78,14 @@ class UpvoteButtons extends React.Component {
 
     return (
       <div className="upvote-buttons-container">
-        <button className="button accept-button disabled" disabled>
-          Completed :)
+        <button className="button accept-button disabled-button" disabled>
+          Complete!
+        </button>
+        <button className="button share-button">
+          <i className="fa fa-facebook-square" aria-hidden="true"></i>
+        </button>
+        <button className="button share-button">
+          <i className="fa fa-twitter-square" aria-hidden="true"></i>
         </button>
       </div>
     );
@@ -70,8 +94,14 @@ class UpvoteButtons extends React.Component {
   creatorButtons() {
     return (
       <div className="upvote-buttons-container">
-        <button className="button accept-button disabled" disabled>
+        <button className="button accept-button disabled-button" disabled>
           Your idea :)
+        </button>
+        <button className="button share-button">
+          <i className="fa fa-facebook-square" aria-hidden="true"></i>
+        </button>
+        <button className="button share-button">
+          <i className="fa fa-twitter-square" aria-hidden="true"></i>
         </button>
       </div>
     );
@@ -94,5 +124,3 @@ class UpvoteButtons extends React.Component {
 }
 
 export default UpvoteButtons;
-
-//%w(pending complete ignore going)

@@ -1,17 +1,17 @@
 .button {
-  margin: 10px 5px;
   padding: 0 10px;
+  margin-right: 10px;
   font-family: $sans-serif;
   color: $white;
-  border-radius: 5px;
-  box-sizing: border-box;
+  border-radius: 2px;
+  font-size: 12px;
+  text-align: center;
+  text-transform: uppercase;
+  font-weight: bold;
   height: 35px;
-  position: relative;
-
-  // &:hover {
-  //   top: 1px;
-  // }
+  width: 100px;
 }
+
 
 .accept-button {
   background-color: $accept;
@@ -23,9 +23,21 @@
 
 .ignore-button {
   background-color: $ignore;
-  border-bottom: 2px solid $ignore-border;
+}
+
+.disabled-button {
+  background-color: $disabled;
 
   &:hover {
-    border-bottom: 1px solid $ignore-border;
+    cursor: auto;
+  }
+}
+
+.share-button {
+  width: 50px;
+  background: $share;
+
+  i {
+    font-size: 30px;
   }
 }
