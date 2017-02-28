@@ -21,6 +21,11 @@ class Upvote < ActiveRecord::Base
   belongs_to :idea, polymorphic: true
   belongs_to :user
 
+  belongs_to :suggestion, -> { where(upvotes: {idea_type: 'Suggestion'}) },
+  foreign_key: 'idea_id', optional: true
+
+  belongs_to :event, -> { where(upvotes: {idea_type: 'Event'}) },
+  foreign_key: 'idea_id', optional: true
 
   def self.find_by_user(idea, user)
     user.upvotes.where(idea_id: idea.id, idea_type: idea.class.to_s).first

@@ -17,7 +17,12 @@ class UserIdeas extends React.Component {
   render() {
     const { ideas, ideaType } = this.props;
 
-    if (ideas.length === 0) return null;
+    if (ideas.length === 0) return (
+      <div className="user-profile-container">
+        <h1>None so far! Why don't you check out the homepage to get started?</h1>
+      </div>
+    );
+
     const ideaIndexItems = ideas.map((idea, i) => (
       <IdeaIndexItem idea={ idea } ideaType={ ideaType } key={i} />
     ));

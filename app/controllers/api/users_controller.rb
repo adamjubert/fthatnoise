@@ -34,13 +34,15 @@ class Api::UsersController < ApplicationController
   def profile
     if params[:actions]
       if params[:actions] == "mine"
-        @upvotes = current_user.suggestions
-      elsif params[:actions] == "completed"
-        @upvotes = Upvote.where(user_id: current_user.id)
-        .where(idea_type: "Suggestion")
+        @upvotes = Upvote.includes(suggestion: [:categories, :creator, :upvotes])
+        .where(user_id: current_user.id)
         .where(status: "complete")
-        .where.not(creator_id: current_user.id)
-        .includes(idea: [:categories, :creator, :upvotes])
+        .where(suggestions: { creator: current_user } )
+      elsif params[:actions] == "completed"
+        @upvotes = Upvote.includes(suggestion: [:categories, :creator, :upvotes])
+        .where(user_id: current_user.id)
+        .where(status: "complete")
+        .where.not(suggestions: { creator: current_user } )
       else
         @upvotes = Upvote.where(user_id: current_user.id)
         .where(idea_type: "Suggestion")
@@ -48,6 +50,24 @@ class Api::UsersController < ApplicationController
         .includes(idea: [:categories, :creator, :upvotes])
       end
     else
+      if params[:events] == "mine"
+        @upvotes = Upvote.includes(event: [:categories, :creator, :upvotes])
+        .where(user_id: current_user.id)
+        .where(status: "complete")
+        .where(events: { creator: current_user } )
+      elsif params[:events] == "completed"
+        @upvotes = Upvote.includes(event: [:categories, :creator, :upvotes])
+        .where(user_id: current_user.id)
+        .where.not(events: { creator: current_user } )
+        .where.not(status: "ignore")
+        .where("events.date < ?", Date.today)
+      else
+        @upvotes = Upvote.includes(event: [:categories, :creator, :upvotes])
+        .where(user_id: current_user.id)
+        .where.not(events: { creator: current_user } )
+        .where.not(status: "ignore")
+        .where("events.date > ?", Date.today)
+      end
     end
 
     @user = current_user

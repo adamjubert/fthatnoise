@@ -5,9 +5,9 @@ import { ActionLinks, EventLinks } from '../helpers/users_helper';
 class UserProfile extends React.Component {
   userProfileLinks() {
     if (this.props.location.pathname === "/profile/events") {
-      return <EventLinks />;
+      return <EventLinks query={ this.props.location.query } pathname={ this.props.location.pathname }/>;
     } else {
-      return <ActionLinks />;
+      return <ActionLinks params={ this.props.location.query } pathname={ this.props.location.pathname }/>;
     }
   }
 
