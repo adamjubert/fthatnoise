@@ -6,6 +6,7 @@ import { clearCommentErrors, receiveCommentErrors } from './comment_actions';
 
 export const RECEIVE_ALL_SUGGESTIONS = "RECEIVE_ALL_SUGGESTIONS";
 export const RECEIVE_SINGLE_SUGGESTION = "RECEIVE_SINGLE_SUGGESTION";
+export const REMOVE_SINGLE_SUGGESTION = "REMOVE_SINGLE_SUGGESTION";
 
 export const requestAllSuggestions = () => dispatch => {
   return SuggestionsApiUtil.fetchAllSuggestions()
@@ -85,6 +86,11 @@ export const receiveAllSuggestions = suggestions => ({
 
 export const receiveSingleSuggestion = suggestion => ({
   type: RECEIVE_SINGLE_SUGGESTION,
+  suggestion
+});
+
+export const removeSingleSuggestion = suggestion => ({
+  type: REMOVE_SINGLE_SUGGESTION,
   suggestion
 });
 

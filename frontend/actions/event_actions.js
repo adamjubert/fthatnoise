@@ -6,6 +6,7 @@ import { clearCommentErrors, receiveCommentErrors } from './comment_actions';
 
 export const RECEIVE_ALL_EVENTS = "RECEIVE_ALL_EVENTS";
 export const RECEIVE_SINGLE_EVENT = "RECEIVE_SINGLE_EVENT";
+export const REMOVE_SINGLE_EVENT = "REMOVE_SINGLE_EVENT";
 
 export const requestAllEvents = () => dispatch => {
   return EventsApiUtil.fetchAllEvents()
@@ -85,6 +86,11 @@ export const receiveAllEvents = events => ({
 
 export const receiveSingleEvent = event => ({
   type: RECEIVE_SINGLE_EVENT,
+  event
+});
+
+export const removeSingleEvent = event => ({
+  type: REMOVE_SINGLE_EVENT,
   event
 });
 

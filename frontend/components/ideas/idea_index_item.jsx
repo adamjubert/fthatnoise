@@ -3,7 +3,7 @@ import { Link } from 'react-router';
 import CategoriesString from '../categories/categories_string';
 import UpvoteButtonsContainer from '../upvotes/upvote_buttons_container';
 
-const IdeaIndexItem = ({ idea, ideaType }) => {
+const IdeaIndexItem = ({ idea, ideaType, removeSingleIdea }) => {
   if (idea.upvotes_status === "ignore" ||
     (ideaType === "event" && idea.in_past)) return null;
 
@@ -41,7 +41,7 @@ const IdeaIndexItem = ({ idea, ideaType }) => {
           <p><span>Details: </span>{ idea.shortened_description }</p>
           { eventLogistics }
         </div>
-        <UpvoteButtonsContainer idea={ idea } ideaType={ ideaType } />
+        <UpvoteButtonsContainer idea={ idea } ideaType={ ideaType } removeSingleIdea={ removeSingleIdea }/>
       </div>
     </div>
   );

@@ -1,5 +1,5 @@
 .short-idea {
-  border: 1px solid $navy;
+  border: 1px solid $dark-blue;
   width: 45%;
   margin: 15px;
   max-width: 900px;
@@ -20,7 +20,7 @@
 }
 
 .short-idea-header {
-  background-color: $navy;
+  background-color: $dark-blue;
   font-family: $sans-serif;
   font-size: 18px;
   color: $white;
@@ -53,7 +53,7 @@
   flex-direction: column;
   align-items: center;
   float: right;
-  background: $light-navy;
+  background: $sky-blue;
   height: 50px;
   box-sizing: border-box;
 }
@@ -82,7 +82,7 @@
 
 .short-idea-detail-container {
   padding: 10px 10px 0;
-  border-bottom: 1px solid $navy;
+  border-bottom: 1px solid $dark-blue;
   height: 100%;
 }
 

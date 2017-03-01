@@ -2,12 +2,13 @@ import React from 'react';
 
 class UpvoteButtons extends React.Component {
   defaultButtons() {
-    const { idea, ideatype, pendingUpvoteIdea, completeUpvoteIdea, ignoreUpvoteIdea } = this.props;
+    const { idea, ideaType, pendingUpvoteIdea, completeUpvoteIdea, ignoreUpvoteIdea } = this.props;
+    const complete = ideaType === "event" ? "Going" : "Complete";
 
     return (
       <div className="upvote-buttons-container">
         <button className="button accept-button" onClick={() => completeUpvoteIdea(idea)}>
-          Complete
+          { complete }
         </button>
         <button className="button follow-button" onClick={() => pendingUpvoteIdea(idea)}>
           Interested
@@ -26,17 +27,35 @@ class UpvoteButtons extends React.Component {
   }
 
   pendingButtons() {
-    const { idea, ideatype, pendingUpvoteIdea, completeUpvoteIdea, ignoreUpvoteIdea } = this.props;
+    const { idea, ideaType, pendingUpvoteIdea, completeUpvoteIdea,
+      ignoreUpvoteIdea, removeSingleIdea } = this.props;
+    const complete = ideaType === "event" ? "Going" : "Complete";
+
+    const onClickComplete = () => {
+      if (removeSingleIdea && ideaType === "action") {
+        return () => completeUpvoteIdea(idea).then(() => removeSingleIdea(idea));
+      } else {
+        return () => completeUpvoteIdea(idea);
+      }
+    };
+
+    const onClickIgnore = () => {
+      if (removeSingleIdea && ideaType === "action") {
+        return () => ignoreUpvoteIdea(idea).then(() => removeSingleIdea(idea));
+      } else {
+        return () => ignoreUpvoteIdea(idea);
+      }
+    };
 
     return (
       <div className="upvote-buttons-container">
-        <button className="button follow-button disabled-button" disabled onClick={() => pendingUpvoteIdea(idea)}>
+        <button className="button follow-button disabled-button" disabled>
           Interested
         </button>
-        <button className="button accept-button" onClick={() => completeUpvoteIdea(idea)}>
-          Complete
+        <button className="button accept-button" onClick={ onClickComplete() }>
+          { complete }
         </button>
-        <button className="button ignore-button" onClick={() => ignoreUpvoteIdea(idea)}>
+        <button className="button ignore-button" onClick={ onClickIgnore() }>
           Ignore
         </button>
         <button className="button share-button">
@@ -50,7 +69,8 @@ class UpvoteButtons extends React.Component {
   }
 
   ignoreButtons() {
-    const { idea, ideatype, pendingUpvoteIdea, completeUpvoteIdea, ignoreUpvoteIdea } = this.props;
+    const { idea, ideaType, pendingUpvoteIdea, completeUpvoteIdea, ignoreUpvoteIdea } = this.props;
+    const complete = ideaType === "event" ? "Going" : "Complete";
 
     return (
       <div className="upvote-buttons-container">
@@ -61,7 +81,7 @@ class UpvoteButtons extends React.Component {
           Interested
         </button>
         <button className="button accept-button" onClick={() => completeUpvoteIdea(idea)}>
-          Complete
+          { complete }
         </button>
         <button className="button share-button">
           <i className="fa fa-facebook-square" aria-hidden="true"></i>
@@ -74,13 +94,29 @@ class UpvoteButtons extends React.Component {
   }
 
   completeButtons() {
-    const { idea, ideatype, pendingUpvoteIdea, completeUpvoteIdea, ignoreUpvoteIdea } = this.props;
+    const { idea, ideaType, pendingUpvoteIdea, completeUpvoteIdea, ignoreUpvoteIdea } = this.props;
+    const complete = ideaType === "event" ? "Going" : "Complete!";
+    let interestedButton = null;
+
+    if (ideaType === "event") {
+      interestedButton = (
+        <div>
+          <button className="button follow-button" onClick={() => pendingUpvoteIdea(idea)}>
+            Interested
+          </button>
+          <button className="button ignore-button" onClick={() => ignoreUpvoteIdea(idea)}>
+            Ignore
+          </button>
+        </div>
+      );
+    }
 
     return (
       <div className="upvote-buttons-container">
         <button className="button accept-button disabled-button" disabled>
-          Complete!
+          { complete }
         </button>
+        { interestedButton }
         <button className="button share-button">
           <i className="fa fa-facebook-square" aria-hidden="true"></i>
         </button>

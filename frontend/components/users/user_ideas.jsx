@@ -15,7 +15,7 @@ class UserIdeas extends React.Component {
   }
 
   render() {
-    const { ideas, ideaType } = this.props;
+    const { ideas, ideaType, removeSingleIdea } = this.props;
 
     if (ideas.length === 0) return (
       <div className="user-profile-container">
@@ -24,7 +24,7 @@ class UserIdeas extends React.Component {
     );
 
     const ideaIndexItems = ideas.map((idea, i) => (
-      <IdeaIndexItem idea={ idea } ideaType={ ideaType } key={i} />
+      <IdeaIndexItem idea={ idea } ideaType={ ideaType } key={i} removeSingleIdea={ removeSingleIdea } />
     ));
 
     return (

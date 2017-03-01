@@ -106,7 +106,7 @@ class Api::SuggestionsController < ApplicationController
 
   def upvote(status)
     @suggestion = Suggestion.find(params[:suggestion_id])
-    debugger
+
     upvote = current_user.upvotes.find_or_initialize_by(idea_type: "Suggestion", idea_id: @suggestion.id)
     upvote.status = status
     if upvote.save
