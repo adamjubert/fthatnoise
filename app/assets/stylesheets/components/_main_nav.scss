@@ -3,7 +3,7 @@
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
-  height: 100px;
+  height: 60px;
   background: $white;
   color: $orange;
   font-family: $sans-serif;
@@ -40,13 +40,13 @@
 
   li {
     display: inline-block;
-    height: 100px;
+    height: 60px;
     border: 1px solid $border-gray;
     width: 25%;
     text-align: center;
-    line-height: 100px;
+    line-height: 60px;
     color: $dark-blue;
-    font-size: 24px;
+    font-size: 16px;
 
     &:hover {
       background: $orange;
@@ -56,6 +56,11 @@
     &:first-child {
       border-left: 2px solid $border-gray;
     }
+  }
+
+  a {
+    width: 100%;
+    display: block;
   }
 }
 

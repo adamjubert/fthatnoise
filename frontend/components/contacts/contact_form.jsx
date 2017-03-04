@@ -5,9 +5,11 @@ import { withRouter } from 'react-router';
 class ContactForm extends React.Component {
   constructor(props) {
     super(props);
+    const email = this.props.currentUser ? this.props.currentUser.email : "";
+
     this.state = {
       message: "",
-      email: currentUser.email
+      email: email
     };
     this.handleSubmit = this.handleSubmit.bind(this);
   }

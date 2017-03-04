@@ -3,7 +3,8 @@ import { createContact } from '../../actions/contact_actions';
 import ContactForm from './contact_form';
 
 const mapStateToProps = state => ({
-  errors: state.errors.contact
+  errors: state.errors.contact,
+  currentUser: state.session.currentUser
 });
 
 const mapDispatchToProps = dispatch => ({
