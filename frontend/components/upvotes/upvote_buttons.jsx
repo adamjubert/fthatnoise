@@ -1,9 +1,36 @@
 import React from 'react';
+import { ShareButtons } from 'react-share';
+const {
+  FacebookShareButton,
+  TwitterShareButton
+} = ShareButtons;
+
+const IdeaShareButtons = ({ ideaLink, title }) => {
+  return (
+    <div className="idea-share-buttons">
+      <FacebookShareButton
+        url={ ideaLink }
+        title={ title }
+        className="button share-button">
+        <i className="fa fa-facebook-square" aria-hidden="true" />
+      </FacebookShareButton>
+
+      <TwitterShareButton
+        url={ ideaLink }
+        title={ title }
+        className="button share-button"
+        hashtags={ ["fthatnoise"]}>
+        <i className="fa fa-twitter-square" aria-hidden="true" />
+      </TwitterShareButton>
+    </div>
+  );
+};
 
 class UpvoteButtons extends React.Component {
   defaultButtons() {
     const { idea, ideaType, pendingUpvoteIdea, completeUpvoteIdea, ignoreUpvoteIdea } = this.props;
     const complete = ideaType === "event" ? "Going" : "Complete";
+    const ideaLink = `www.fthatnoise.com/${ideaType}s/${idea.id}`;
 
     return (
       <div className="upvote-buttons-container">
@@ -16,12 +43,8 @@ class UpvoteButtons extends React.Component {
         <button className="button ignore-button" onClick={() => ignoreUpvoteIdea(idea)}>
           Ignore
         </button>
-        <button className="button share-button">
-          <i className="fa fa-facebook-square" aria-hidden="true"></i>
-        </button>
-        <button className="button share-button">
-          <i className="fa fa-twitter-square" aria-hidden="true"></i>
-        </button>
+
+        <IdeaShareButtons ideaLink={ ideaLink } title={ idea.title } />
       </div>
     );
   }
@@ -30,6 +53,7 @@ class UpvoteButtons extends React.Component {
     const { idea, ideaType, pendingUpvoteIdea, completeUpvoteIdea,
       ignoreUpvoteIdea, removeSingleIdea } = this.props;
     const complete = ideaType === "event" ? "Going" : "Complete";
+    const ideaLink = `www.fthatnoise.com/${ideaType}s/${idea.id}`;
 
     const onClickComplete = () => {
       if (removeSingleIdea && ideaType === "action") {
@@ -58,12 +82,8 @@ class UpvoteButtons extends React.Component {
         <button className="button ignore-button" onClick={ onClickIgnore() }>
           Ignore
         </button>
-        <button className="button share-button">
-          <i className="fa fa-facebook-square" aria-hidden="true"></i>
-        </button>
-        <button className="button share-button">
-          <i className="fa fa-twitter-square" aria-hidden="true"></i>
-        </button>
+
+        <IdeaShareButtons ideaLink={ ideaLink } title={ idea.title } />
       </div>
     );
   }
@@ -71,6 +91,7 @@ class UpvoteButtons extends React.Component {
   ignoreButtons() {
     const { idea, ideaType, pendingUpvoteIdea, completeUpvoteIdea, ignoreUpvoteIdea } = this.props;
     const complete = ideaType === "event" ? "Going" : "Complete";
+    const ideaLink = `www.fthatnoise.com/${ideaType}s/${idea.id}`;
 
     return (
       <div className="upvote-buttons-container">
@@ -83,12 +104,8 @@ class UpvoteButtons extends React.Component {
         <button className="button accept-button" onClick={() => completeUpvoteIdea(idea)}>
           { complete }
         </button>
-        <button className="button share-button">
-          <i className="fa fa-facebook-square" aria-hidden="true"></i>
-        </button>
-        <button className="button share-button">
-          <i className="fa fa-twitter-square" aria-hidden="true"></i>
-        </button>
+
+        <IdeaShareButtons ideaLink={ ideaLink } title={ idea.title } />
       </div>
     );
   }
@@ -96,6 +113,7 @@ class UpvoteButtons extends React.Component {
   completeButtons() {
     const { idea, ideaType, pendingUpvoteIdea, completeUpvoteIdea, ignoreUpvoteIdea } = this.props;
     const complete = ideaType === "event" ? "Going" : "Complete!";
+    const ideaLink = `www.fthatnoise.com/${ideaType}s/${idea.id}`;
     let interestedButton = null;
 
     if (ideaType === "event") {
@@ -117,28 +135,22 @@ class UpvoteButtons extends React.Component {
           { complete }
         </button>
         { interestedButton }
-        <button className="button share-button">
-          <i className="fa fa-facebook-square" aria-hidden="true"></i>
-        </button>
-        <button className="button share-button">
-          <i className="fa fa-twitter-square" aria-hidden="true"></i>
-        </button>
+
+        <IdeaShareButtons ideaLink={ ideaLink } title={ idea.title } />
       </div>
     );
   }
 
   creatorButtons() {
+    const ideaLink = `www.fthatnoise.com/${this.props.ideaType}s/${this.props.idea.id}`;
+
     return (
       <div className="upvote-buttons-container">
         <button className="button accept-button disabled-button" disabled>
           Your idea :)
         </button>
-        <button className="button share-button">
-          <i className="fa fa-facebook-square" aria-hidden="true"></i>
-        </button>
-        <button className="button share-button">
-          <i className="fa fa-twitter-square" aria-hidden="true"></i>
-        </button>
+
+        <IdeaShareButtons ideaLink={ ideaLink } title={ this.props.idea.title } />
       </div>
     );
   }
