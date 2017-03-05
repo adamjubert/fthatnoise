@@ -1,0 +1,35 @@
+#map-container {
+  height: 100%;
+  width: 100%;
+}
+
+.event-location {
+  position: relative;
+  height: 200px;
+}
+
+.event-address {
+  position: absolute;
+  top: 50px;
+  left: 10px;
+  padding: 5px;
+  background: $white;
+  border-bottom: 1px solid $dark-gray;
+  border-radius: 5px;
+  font-size: 14px;
+
+  button {
+    color: $dark-blue;
+
+    &:hover {
+      color: $dark-blue-hover;
+      text-decoration: underline;
+    }
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .event-address {
+    font-size: 12px;
+  }
+}
