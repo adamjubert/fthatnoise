@@ -21,7 +21,7 @@ export default class SearchBar extends Component {
     if (searchInput === '') {
       this.props.requestSuggestions();
     } else {
-      this.props.requestSearch(searchInput, categories);      
+      this.props.requestSearch(searchInput, categories);
     }
   }
 
@@ -41,11 +41,12 @@ export default class SearchBar extends Component {
           value={ searchInput }
           onChange={this.handleChange}
           onKeyPress={this.handleKeyPress}
+          className="home-search"
         />
-        <button 
+      <button className="home-search-button"
           onClick={this.handleClick}
         >
-          Search
+          <i className="fa fa-search" aria-hidden="true" />
         </button>
       </div>
     );

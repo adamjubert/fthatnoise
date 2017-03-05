@@ -49,7 +49,7 @@ const Root = ({ store }) => {
           <Route path="/actions" component={SuggestionsIndexContainer} />
           <Route path="/actions/:ideaId" component={SuggestionShowContainer} />
           <Route path="/events" component={EventsIndexContainer} />
-          <Route path="/events/new" component={EventFormContainer} />
+          <Route path="/events/new" component={EventFormContainer} onEnter={_redirectIfLoggedOut} />
           <Route path="/events/:ideaId" component={EventShowContainer} />
           <Route path="/about" component={AboutPage} />
           <Route path="/contact" component={ ContactFormContainer } />

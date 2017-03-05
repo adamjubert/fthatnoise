@@ -4,28 +4,36 @@
 }
 
 .main-options {
-  font-size: 20px;
-  margin: 5px;
+  font-size: 16px;
   padding: 5px;
-  border-radius: 5px;
-  color: $main;
-  border: 1px solid $main;
-
-  &:first-child {
-    margin-left: 10px;
-  }
+  width: 80px;
+  color: $faded-blue;
+  border: 1px solid $faded-blue;
+  text-align: center;
+  font-family: $sans-serif;
 }
 
 .main-selected {
   color: $white;
-  background-color: $main;
+  background: $orange;
+  border: 1px solid $orange;
 }
 
 .sub-options {
-  color: $dark-gray;
-  margin: 5px;
+  color: $white;
+  border: 1px solid $white;
+  border-radius: 2px;
+  width: 80px;
+  text-align: center;
+  margin: 5px 10px;
   padding: 5px;
-  font-size: 18px;
+  font-size: 16px;
+  font-family: $sans-serif;
+  transition: background 0.5s;
+
+  &:hover {
+    background: $faded-blue;
+  }
 }
 
 .sub-selected {
@@ -99,6 +107,35 @@
       text-decoration: underline;
     }
   }
+}
+
+.options-container {
+  background: $dark-blue;
+  margin-top: 20px;
+}
+
+.options {
+  width: 90%;
+  margin: 0 auto;
+  padding: 5px 0;
+  max-width: 1000px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.options-toggle {
+  width: 20%;
+  display: flex;
+}
+
+.main-options {
+  width: 50%;
+}
+
+.sub-options-container {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
 }
 
 @media all and (max-width: 600px) {
