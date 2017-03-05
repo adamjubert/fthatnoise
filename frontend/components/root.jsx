@@ -1,7 +1,7 @@
 import React from 'react';
 import { Provider } from 'react-redux';
 import { Router, Route, IndexRoute, IndexRedirect, hashHistory } from 'react-router';
-import App from './app';
+import AppContainer from './app/app_container';
 import SuggestionsIndexContainer from './suggestions/suggestions_index_container';
 import SuggestionShowContainer from './suggestions/suggestion_show_container';
 import EventsIndexContainer from './events/events_index_container';
@@ -39,7 +39,7 @@ const Root = ({ store }) => {
   return (
     <Provider store={store}>
       <Router history={hashHistory}>
-        <Route path="/" component={App}>
+        <Route path="/" component={AppContainer}>
           <IndexRedirect to="/actions" />
           <Route path="/signin" component={LoginForm} onEnter={_redirectIfLoggedIn}/>
           <Route path="/signup" component={SignupForm} onEnter={_redirectIfLoggedIn}/>

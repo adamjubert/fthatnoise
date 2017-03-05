@@ -10,19 +10,32 @@
   font-weight: bold;
   height: 35px;
   width: 100px;
+  transition: background 0.5s;
 }
 
 
 .accept-button {
-  background-color: $accept;
+  background-color: $orange;
+
+  &:hover {
+    background-color: $orange-hover;
+  }
 }
 
 .follow-button {
-  background-color: $follow;
+  background-color: $yellow;
+
+  &:hover {
+    background: $yellow-hover;
+  }
 }
 
 .ignore-button {
-  background-color: $ignore;
+  background-color: $red;
+
+  &:hover {
+    background: $red-hover;
+  }
 }
 
 .disabled-button {
@@ -30,14 +43,25 @@
 
   &:hover {
     cursor: auto;
+    background: $disabled;
   }
 }
 
 .share-button {
   width: 50px;
-  background: $share;
+  background: $sky-blue;
 
   i {
     font-size: 30px;
+    margin-top: 2px;
   }
+
+  &:hover {
+    background: $sky-blue-hover;
+    cursor: pointer;
+  }
+}
+
+.idea-share-buttons {
+  display: flex;
 }

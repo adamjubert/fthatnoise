@@ -3,6 +3,7 @@ import CategoriesString from '../categories/categories_string';
 import FormattedComments from '../comments/formatted_comments';
 import CommentFormContainer from '../comments/comment_form_container';
 import UpvoteButtonsContainer from '../upvotes/upvote_buttons_container';
+import EventLocationContainer from '../events/event_location_container';
 
 class IdeaShow extends React.Component {
   componentDidMount() {
@@ -27,6 +28,8 @@ class IdeaShow extends React.Component {
           <p>{ idea.formatted_date }</p>
           <p>{ idea.formatted_time_range }</p>
           <p>{ idea.formatted_location }</p>
+
+          <EventLocationContainer idea={ idea } />
         </div>
       );
     }

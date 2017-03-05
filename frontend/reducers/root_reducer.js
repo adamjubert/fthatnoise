@@ -9,6 +9,7 @@ import errors from './errors_reducer';
 import categories from './categories_reducer';
 import userDetail from './users_reducer';
 import search from './search_reducer';
+import modal from './modal_reducer';
 
 export default combineReducers({
   session,
@@ -19,5 +20,6 @@ export default combineReducers({
   errors,
   categories,
   userDetail,
-  search
+  search,
+  modal
 });
