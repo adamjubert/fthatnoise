@@ -2,7 +2,10 @@ import { RECEIVE_ALL_EVENTS,
   RECEIVE_SINGLE_EVENT,
   REMOVE_SINGLE_EVENT } from '../actions/event_actions';
 import { RECEIVE_CURRENT_USER } from '../actions/user_actions';
+import { SEARCH_REQUESTED } from '../constants/search_constants';
+import { filterBySearch } from '../util/search_input_parse_util';
 import { merge } from 'lodash';
+
 
 const EventsReducer = (oldState = [], action) => {
   Object.freeze(oldState);
@@ -39,6 +42,8 @@ const EventsReducer = (oldState = [], action) => {
       } else {
         return newState;
       }
+    case SEARCH_REQUESTED:
+      return filterBySearch(oldState, action);
     default:
       return oldState;
   }

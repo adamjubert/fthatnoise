@@ -3,7 +3,7 @@ import { RECEIVE_ALL_SUGGESTIONS,
   REMOVE_SINGLE_SUGGESTION } from '../actions/suggestion_actions';
 import { RECEIVE_CURRENT_USER } from '../actions/user_actions';
 import { SEARCH_REQUESTED } from '../constants/search_constants';
-import { filterSuggestionsBySearch } from '../util/search_input_parse_util';
+import { filterBySearch } from '../util/search_input_parse_util';
 
 // import { merge } from 'lodash';
 
@@ -27,7 +27,7 @@ const SuggestionsReducer = (oldState = [], action) => {
       return newState;
 
     case SEARCH_REQUESTED:
-      return filterSuggestionsBySearch(oldState, action);
+      return filterBySearch(oldState, action);
     case REMOVE_SINGLE_SUGGESTION:
       newState = oldState.slice();
       let index;
