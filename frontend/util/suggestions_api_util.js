@@ -1,7 +1,8 @@
-export const fetchAllSuggestions = () => {
+export const fetchAllSuggestions = data => {
   return $.ajax({
     method: 'GET',
-    url: '/api/suggestions'
+    url: '/api/suggestions',
+    data: data
   });
 };
 

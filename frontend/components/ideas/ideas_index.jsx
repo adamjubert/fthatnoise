@@ -4,7 +4,13 @@ import SubNavContainer from '../sub_nav/sub_nav_container';
 
 class IdeasIndex extends React.Component {
   componentDidMount() {
-    this.props.requestAllIdeas();
+    this.props.requestAllIdeas(this.props.location.query);
+  }
+
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.location.query.category !== this.props.location.query.category) {
+      this.props.requestAllIdeas(nextProps.location.query);
+    }
   }
 
   render() {

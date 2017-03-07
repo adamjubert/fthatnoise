@@ -66,21 +66,18 @@ module Taggable
       .includes(:categories, :creator, :upvotes)
     end
 
+    def find_by_category(category_id)
+      Category.find(category_id)
+      .send(self.table_name.to_sym).includes(:categories, :creator, :upvotes)
+      .order("#{self.table_name}.created_at DESC")
+    end
+
     def order_by_upvotes
       self.select("#{self.table_name}.*, COUNT(upvotes.id) AS upvotes_count")
       .joins(:upvotes)
       .group("#{self.table_name}.id")
       .order("COUNT(upvotes.id) DESC")
       .includes(:categories)
-    end
-
-    def get_by_category(category_id)
-      self.select("#{self.table_name}.*, COUNT(upvotes.id) AS upvotes_count")
-      .joins(:upvotes)
-      .joins(:categories)
-      .where("categories.id = ?", category_id)
-      .group("#{self.table_name}.id, categories.id")
-      .order("#{self.table_name}.created_at DESC")
     end
 
     def test(category_id)

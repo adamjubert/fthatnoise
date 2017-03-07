@@ -16,7 +16,7 @@ const IdeaIndexItem = ({ idea, ideaType, removeSingleIdea }) => {
       <div className="event-logistics">
         <p className="event-date-time"><span>Date: </span>{ idea.formatted_date }</p>
         <p className="event-date-time"><span>Time: </span>{ idea.formatted_time_range }</p>
-        <p className="event-address"><span>Address: </span>{ idea.formatted_location }</p>
+        <p className="event-address-short-idea"><span>Address: </span>{ idea.formatted_location }</p>
       </div>
     );
   }
