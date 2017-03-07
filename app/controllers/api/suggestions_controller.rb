@@ -4,6 +4,13 @@ class Api::SuggestionsController < ApplicationController
 
   def index
     @suggestions = Suggestion.order_by_created_at
+
+    if params[:category]
+      @suggestions = Suggestion.find_by_category(params[:category])
+    else
+      @suggestions = Suggestion.order_by_created_at
+    end
+
     render :index
   end
 

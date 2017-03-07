@@ -4,6 +4,13 @@ class Api::EventsController < ApplicationController
 
   def index
     @events = Event.order_by_created_at
+
+    if params[:category]
+      @events = Event.find_by_category(params[:category])
+    else
+      @events = Event.order_by_created_at
+    end
+
     render :index
   end
 

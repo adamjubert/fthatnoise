@@ -9,7 +9,7 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  requestAllIdeas: () => dispatch(requestAllEvents())
+  requestAllIdeas: data => dispatch(requestAllEvents(data))
 });
 
 export default connect(

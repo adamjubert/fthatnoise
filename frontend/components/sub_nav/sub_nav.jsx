@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link, withRouter } from 'react-router';
 import SearchBar from '../search_bar/search_bar_container';
+import CategorySelect from '../categories/category_select_container';
 
 class SubNav extends React.Component {
   constructor(props) {
@@ -46,13 +47,16 @@ class SubNav extends React.Component {
 
   subOptions() {
     if (this.props.router.location.pathname === "/events") {
+      debugger
       return (
         <div className="options-container">
           <div className="options">
             <div className="options-toggle">
-              <Link to="/actions" className="main-options">Actions</Link>
-              <Link to="/events" className="main-options main-selected">Events</Link>
+              <Link to={{ pathname: '/actions', query: this.props.location.query }} className="main-options">Actions</Link>
+              <Link to={{ pathname: '/events', query: this.props.location.query }} className="main-options main-selected">Events</Link>
             </div>
+
+            <CategorySelect />
 
             <div className="sub-options-container">
               <Link to="#" className="sub-options">Near Me</Link>
@@ -70,9 +74,11 @@ class SubNav extends React.Component {
         <div className="options-container">
           <div className="options">
             <div className="options-toggle">
-              <Link to="/actions" className="main-options main-selected">Actions</Link>
-              <Link to="/events" className="main-options">Events</Link>
+              <Link to={{ pathname: '/actions', query: this.props.location.query }} className="main-options main-selected">Actions</Link>
+              <Link to={{ pathname: '/events', query: this.props.location.query }} className="main-options">Events</Link>
             </div>
+
+            <CategorySelect />
 
             <div className="sub-options-container">
               <Link to="#" className="sub-options">Hot</Link>

@@ -8,8 +8,8 @@ export const RECEIVE_ALL_SUGGESTIONS = "RECEIVE_ALL_SUGGESTIONS";
 export const RECEIVE_SINGLE_SUGGESTION = "RECEIVE_SINGLE_SUGGESTION";
 export const REMOVE_SINGLE_SUGGESTION = "REMOVE_SINGLE_SUGGESTION";
 
-export const requestAllSuggestions = () => dispatch => {
-  return SuggestionsApiUtil.fetchAllSuggestions()
+export const requestAllSuggestions = data => dispatch => {
+  return SuggestionsApiUtil.fetchAllSuggestions(data)
     .then(suggestions => {
       dispatch(receiveAllSuggestions(suggestions));
       return suggestions;
