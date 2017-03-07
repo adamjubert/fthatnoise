@@ -47,7 +47,6 @@ class SubNav extends React.Component {
 
   subOptions() {
     if (this.props.router.location.pathname === "/events") {
-      debugger
       return (
         <div className="options-container">
           <div className="options">

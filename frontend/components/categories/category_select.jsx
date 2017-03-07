@@ -27,7 +27,7 @@ class CategorySelect extends React.Component {
   categorySelectItems() {
     return this.props.categories.map(category => {
       return (
-        <option value={ category.id }>
+        <option value={ category.id } key={ category.id }>
           { category.name }
         </option>
       );

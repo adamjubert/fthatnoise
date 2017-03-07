@@ -1,0 +1,32 @@
+.spinner {
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  margin-top: 10px;
+  width: 180px;
+  height: 50px;
+}
+
+.spinner-img {
+  width: 55px;
+}
+
+.cat-two {
+  animation: cat_two 2s linear infinite;
+}
+
+.cat-three {
+  animation: cat_three 2s linear infinite;
+}
+
+@keyframes cat_two {
+  0% { opacity: 0; }
+  33% { opacity: 0; }
+  66% { opacity: 1; }
+}
+
+@keyframes cat_three {
+  0% { opacity: 0; }
+  66% { opacity: 0; }
+  100% { opacity: 1; }
+}
