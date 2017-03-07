@@ -2,6 +2,7 @@ import { connect } from 'react-redux';
 import component from './search_bar';
 import { updateSearchInput, searchRequest } from '../../actions/search_actions';
 import { requestAllSuggestions } from '../../actions/suggestion_actions';
+import { requestAllEvents } from '../../actions/event_actions';
 import { requestAllCategories } from '../../actions/category_actions';
 
 const mapStateToProps = (state) => {
@@ -16,6 +17,7 @@ const mapDispatchToProps = (dispatch) => {
     updateSearchInput: input => dispatch(updateSearchInput(input)),
     requestSearch: (input, categories) => dispatch(searchRequest(input, categories)),
     requestSuggestions: () => dispatch(requestAllSuggestions()),
+    requestEvents: () => dispatch(requestAllEvents()),
     requestCategories: () => dispatch(requestAllCategories())
   };
 }

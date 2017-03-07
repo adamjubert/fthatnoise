@@ -1,32 +1,39 @@
 /**
  * @param {Array} oldState - The old suggestions array, pre-filter
- * @param {Object} action - The action object passed into the suggestions reducer by our action creator
+ * @param {Object} action - The action object passed into the suggestions/events reducer by our action creator
  * @returns {Array} The new suggestions array, filtered
  */
-export const filterSuggestionsBySearch = (oldState, action) => {
+export const filterBySearch = (oldState, action) => {
   let searchArr = separateCategoriesFromQuery(action.input, action.categories);
   let titleQuery = searchArr[0];
   let categoryQuery = searchArr[1];
 
-  let filteredByCategory = oldState.filter(suggestion => {
-    for (let i = 0; i < categoryQuery.length; i++) {
-      let categoryId = categoryQuery[i];
-      if (suggestion.categories && suggestion.categories[categoryId]) { // checking for suggestion.categories is protection against suggestions without tags
-        return true;
+  let filteredByCategory = null;
+
+  if (categoryQuery.length) {
+
+    filteredByCategory = oldState.filter(item => {
+      for (let i = 0; i < categoryQuery.length; i++) {
+        let categoryId = categoryQuery[i];
+        if (item.categories && item.categories[categoryId]) { // checking for item.categories is protection against items without tags
+          return true;
+        }
       }
-    }
-  });
+    });
+
+  } else {
+    filteredByCategory = oldState;
+  }
+  
 
   if (titleQuery === '') { // if they are only searching by categories, then don't even try filtering by name
     return filteredByCategory;
   }
 
-  let filteredByName = filteredByCategory.filter(suggestion => {
-    let title = suggestion.title.toLowerCase();
+  let filteredByName = filteredByCategory.filter(item => {
+    let title = item.title.toLowerCase();
     
-    if (title.indexOf(titleQuery) > -1) {
-      return true;
-    }
+    return title.indexOf(titleQuery) > -1;
   });
 
   return filteredByName;

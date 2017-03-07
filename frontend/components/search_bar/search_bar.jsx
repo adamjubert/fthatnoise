@@ -20,6 +20,7 @@ export default class SearchBar extends Component {
     const { searchInput, categories } = this.props;
     if (searchInput === '') {
       this.props.requestSuggestions();
+      this.props.requestEvents();
     } else {
       this.props.requestSearch(searchInput, categories);
     }
