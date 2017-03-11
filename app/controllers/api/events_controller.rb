@@ -1,16 +1,16 @@
 class Api::EventsController < ApplicationController
   before_action :only_creator_can_edit_event, only: [:update, :destroy]
   before_action :redirect_unless_logged_in, only: [:create, :update, :destroy, :near_me]
+  before_action :only_valid_zip_code, only: [:index]
 
   def index
-    @events = Event.order_by_created_at
+    zip_code = params[:zip_code] ? params[:zip_code] : current_user.zip_code
 
-    if params[:category]
-      @events = Event.find_by_category(params[:category])
-    else
-      @events = Event.order_by_created_at
-    end
-
+    @events = Event.near_zip(
+      zip_code,
+      params[:category],
+      params[:distance]
+      )
     render :index
   end
 
@@ -138,11 +138,18 @@ class Api::EventsController < ApplicationController
     :address, :address2, :city, :state, :date, :start_time, :end_time, category_ids: [])
   end
 
-
   def only_creator_can_edit_event
     event = Event.find(params[:id])
     unless event.creator == current_user
       render json: ["You cannot edit someone else's action!"], status: 422
+    end
+  end
+
+  def only_valid_zip_code
+    if (params[:zip_code])
+      unless params[:zip_code] =~ /\d{5}/
+        render json: ["Please enter a zip code in the format 12345"], status: 422
+      end
     end
   end
 end

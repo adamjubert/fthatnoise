@@ -13,17 +13,27 @@ class CategorySelect extends React.Component {
   }
 
   handleChange(e) {
-    const order = this.props.location.query.order ?
+    let query = e.currentTarget.value ?
+      { category: e.currentTarget.value } : {};
+
+    if (this.props.type == "actions") {
+      const order = this.props.location.query.order ?
       this.props.location.query.order : "recent";
+
+      query = Object.assign({}, query, {order: order});
+    } else {
+      const zip_code = this.props.location.query.zip_code;
+      query = Object.assign({}, query, { zip_code: zip_code });
+    }
 
     if (e.currentTarget.value !== "") {
       this.props.router.push(
         { pathname: this.props.location.pathname,
-          query: { category: e.currentTarget.value, order: order }}
+          query: query}
       );
     } else {
       this.props.router.push(
-        { pathname: this.props.location.pathname, query: { order: order }}
+        { pathname: this.props.location.pathname, query: query}
       );
     }
   }

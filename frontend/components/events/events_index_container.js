@@ -5,7 +5,8 @@ import { requestAllEvents } from '../../actions/event_actions';
 
 const mapStateToProps = state => ({
   ideas: state.events,
-  ideaType: "event"
+  ideaType: "event",
+  currentUser: state.session.currentUser
 });
 
 const mapDispatchToProps = dispatch => ({

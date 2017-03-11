@@ -13,8 +13,8 @@ export const requestAllEvents = data => dispatch => {
     .then(events => {
       dispatch(receiveAllEvents(events));
       return events;
-    }
-  );
+    },
+      err => dispatch(receiveEventErrors(err.responseJSON)));
 };
 
 export const requestSingleEvent = id => dispatch => {

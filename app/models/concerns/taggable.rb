@@ -43,27 +43,25 @@ module Taggable
     super(ids)
   end
 
-
   module ClassMethods
     def find_with_upvotes(id)
       self.select("#{self.table_name}.*, COUNT(upvotes.id) AS upvotes_count")
       .joins(:upvotes)
       .where("#{self.table_name}.id = ?", id)
       .group("#{self.table_name}.id")
-      .includes(:categories)
-      .includes(:comments)
+      .includes(:categories, :comments)
       .first
     end
 
     def order_by(order, category_id)
       if order == "trending"
-        ideas = self.order_by_recent_upvotes(category_id)
+        ideas = self.get_by("trending", category_id)
         order_string = "count(upvotes.id) DESC"
       elsif order == "hot"
-        ideas = self.order_by_upvotes(category_id)
+        ideas = self.get_by("hot", category_id)
         order_string = "count(upvotes.id) DESC"
       else
-        ideas = self.order_by_created_at(category_id)
+        ideas = self.get_by("recent", category_id)
         order_string = "#{self.table_name}.created_at DESC"
       end
 
@@ -74,33 +72,7 @@ module Taggable
         .order(order_string)
     end
 
-    def order_by_created_at(category_id = nil)
-      if category_id
-        self
-          .select("#{self.table_name}.*, count(upvotes.id) AS upvotes_count")
-          .left_joins(:upvotes, :categories)
-          .where("categories.id = ?", category_id)
-      else
-        self
-          .select("#{self.table_name}.*, count(upvotes.id) AS upvotes_count")
-          .left_joins(:upvotes)
-      end
-    end
-
-    def order_by_upvotes(category_id = nil)
-      if category_id
-        self
-          .select("#{self.table_name}.*, count(upvotes.id) AS upvotes_count")
-          .left_joins(:upvotes, :categories)
-          .where("categories.id = ?", category_id)
-      else
-        self
-          .select("#{self.table_name}.*, count(upvotes.id) AS upvotes_count")
-          .left_joins(:upvotes)
-      end
-    end
-
-    def order_by_recent_upvotes(category_id = nil)
+    def get_by(order, category_id = nil)
       if category_id
         ideas = self
         .select("#{self.table_name}.*, count(upvotes.id) AS upvotes_count")
@@ -112,7 +84,11 @@ module Taggable
         .left_joins(:upvotes)
       end
 
-      ideas.where("upvotes.created_at > ?", 1.week.ago)
+      if order == "trending"
+        ideas.where("upvotes.created_at > ?", 1.week.ago)
+      else
+        ideas
+      end
     end
   end
 end

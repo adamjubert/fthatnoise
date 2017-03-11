@@ -44,12 +44,27 @@ class Event < ActiveRecord::Base
     self.where(state: state, city: city).order("created_at DESC")
   end
 
-  def self.order_by_recent_upvotes
-    self.select("events.*, COUNT(upvotes.id) AS upvotes_count")
-    .joins(:upvotes)
-    .where("upvotes.created_at > ?", 1.day.ago)
-    .group(:idea_id, "events.id")
-    .order("upvotes_count DESC")
+  def self.near_zip(zip_code, category_id = nil, distance)
+    distance = DEFAULT_DISTANCE unless distance
+
+    if category_id
+      ideas = self
+        .select("events.*, count(upvotes.id) AS upvotes_count")
+        .near("#{zip_code}", distance)
+        .left_joins(:upvotes, :categories)
+        .where("categories.id = ?", category_id)
+    else
+      ideas = self
+        .select("events.*, count(upvotes.id) AS upvotes_count")
+        .near("#{zip_code}", distance)
+        .left_joins(:upvotes)
+    end
+
+    ideas
+      .where.not("upvotes.status = ?", "ignore")
+      .where("events.date >= ?", Date.today)
+      .group("events.id")
+      .includes(:categories, :creator, :upvotes)
   end
 
   def in_past?
@@ -143,6 +158,8 @@ class Event < ActiveRecord::Base
       ['Wisconsin', 'WI'],
       ['Wyoming', 'WY']
     ]
+
+  DEFAULT_DISTANCE = 20
 
   private
 

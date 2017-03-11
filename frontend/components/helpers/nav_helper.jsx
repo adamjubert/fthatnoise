@@ -27,7 +27,22 @@ export const ActionFilters = ({ subNavClick, query }) => {
   );
 };
 
-export const ActionLinks = ({ currentUser, router }) => {
+export const EventFilters = ({ zipCode, currentZip, queryZip, handleZipChange }) => {
+  return (
+    <div className="sub-options-container">
+    <Link to="#" className="sub-options sub-selected">{ currentZip }</Link>
+    <input type="text" placeholder="Zip code"
+      value={ zipCode }
+      onChange={ handleZipChange }
+      className="home-search" />
+      <Link to={{pathname: "/events", query: { zip_code: queryZip }}} className="home-search-button">
+          <i className="fa fa-search" aria-hidden="true" />
+      </Link>
+    </div>
+  );
+};
+
+export const NewIdeaLinks = ({ currentUser, router }) => {
   if (currentUser) {
     return (
       <div className="create-options-container">
