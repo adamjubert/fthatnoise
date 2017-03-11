@@ -2,6 +2,7 @@ import React from 'react';
 import { Link, withRouter } from 'react-router';
 import SearchBar from '../search_bar/search_bar_container';
 import CategorySelect from '../categories/category_select_container';
+import { ActionFilters, ActionLinks } from '../helpers/nav_helper';
 
 class SubNav extends React.Component {
   constructor(props) {
@@ -9,40 +10,19 @@ class SubNav extends React.Component {
     this.state = {
       zipCode: ""
     };
+
+    this.subNavClick = this.subNavClick.bind(this);
   }
-  actionLinks() {
-    if (this.props.currentUser) {
-      return (
-        <div className="create-options-container">
-          <div className="create-options-link-container">
-            <Link to="/actions/new" className="create-options-link">
-              <div className="create-options">
-                <h4>Add Action <i className="fa fa-plus-circle" aria-hidden="true"></i></h4>
-              </div>
-              <p>
-                Suggest an action that people can do to make a difference - call your representative, write letters, support certain businesses - the possibilities are endless!
-              </p>
-            </Link>
-          </div>
-          <div className="create-options-link-container">
-            <Link to="/events/new" className="create-options-link">
-              <div className="create-options">
-                <h4>Add Event <i className="fa fa-plus-circle" aria-hidden="true"></i></h4>
-              </div>
-              <p>
-                Spread the word about events where people can join together to effect positive change. Demonstrations, hackathons, rallies, and more!
-              </p>
-            </Link>
-          </div>
-        </div>
-      );
-    } else {
-      return (
-        <div className="create-options-signin">
-          <h4>Please <Link to="signup">sign up</Link> or <Link to="signin">sign in</Link> to create an action or event.</h4>
-        </div>
-      );
-    }
+
+  subNavClick(order) {
+    const newQuery = Object.assign({}, this.props.location.query, { order: order });
+
+    return e => {
+      this.props.router.push({
+        pathname: this.props.location.pathname,
+        query: newQuery
+      });
+    };
   }
 
   subOptions() {
@@ -73,18 +53,12 @@ class SubNav extends React.Component {
         <div className="options-container">
           <div className="options">
             <div className="options-toggle">
-              <Link to={{ pathname: '/actions', query: this.props.location.query }} className="main-options main-selected">Actions</Link>
-              <Link to={{ pathname: '/events', query: this.props.location.query }} className="main-options">Events</Link>
+              <Link to={{ pathname: '/actions' }} className="main-options main-selected">Actions</Link>
+              <Link to={{ pathname: '/events' }} className="main-options">Events</Link>
             </div>
 
             <CategorySelect />
-
-            <div className="sub-options-container">
-              <Link to="#" className="sub-options">Hot</Link>
-              <Link to="#" className="sub-options">Trending</Link>
-              <Link to="#" className="sub-options">Recent</Link>
-              <SearchBar />
-            </div>
+            <ActionFilters subNavClick={ this.subNavClick } query={ this.props.location.query } />
           </div>
         </div>
       );
@@ -95,7 +69,7 @@ class SubNav extends React.Component {
     return (
       <div className="sub-nav-container">
         <section className="action-links">
-          { this.actionLinks() }
+          <ActionLinks currentUser={ this.props.currentUser } />
         </section>
 
         { this.subOptions() }

@@ -3,14 +3,7 @@ class Api::SuggestionsController < ApplicationController
   before_action :redirect_unless_logged_in, only: [:create, :update, :destroy]
 
   def index
-    @suggestions = Suggestion.order_by_created_at
-
-    if params[:category]
-      @suggestions = Suggestion.find_by_category(params[:category])
-    else
-      @suggestions = Suggestion.order_by_created_at
-    end
-
+    @suggestions = Suggestion.order_by(params[:order], params[:category])
     render :index
   end
 

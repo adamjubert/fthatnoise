@@ -2,7 +2,6 @@ module Taggable
   extend ActiveSupport::Concern
 
   included do
-  # validations and associations usually go here
     validates :creator, presence: true
     validates :title, presence: true, length: { maximum: 50 }
     validates :categories, presence: { message: "- must have between 1 and 3 categories"},
@@ -23,10 +22,6 @@ module Taggable
   def creator_name
     creator.username
   end
-
-  # def upvotes_count
-  #   upvotes.count
-  # end
 
   def recent_upvotes_count
    upvotes
@@ -60,41 +55,64 @@ module Taggable
       .first
     end
 
-    def order_by_created_at
-      self.select("#{self.table_name}.*")
-      .order("#{self.table_name}.created_at DESC")
-      .includes(:categories, :creator, :upvotes)
+    def order_by(order, category_id)
+      if order == "trending"
+        ideas = self.order_by_recent_upvotes(category_id)
+        order_string = "count(upvotes.id) DESC"
+      elsif order == "hot"
+        ideas = self.order_by_upvotes(category_id)
+        order_string = "count(upvotes.id) DESC"
+      else
+        ideas = self.order_by_created_at(category_id)
+        order_string = "#{self.table_name}.created_at DESC"
+      end
+
+      return ideas
+        .where.not("upvotes.status = ?", "ignore")
+        .group("#{self.table_name}.id")
+        .includes(:categories, :creator, :upvotes)
+        .order(order_string)
     end
 
-    def find_by_category(category_id)
-      Category.find(category_id)
-      .send(self.table_name.to_sym).includes(:categories, :creator, :upvotes)
-      .order("#{self.table_name}.created_at DESC")
+    def order_by_created_at(category_id = nil)
+      if category_id
+        self
+          .select("#{self.table_name}.*, count(upvotes.id) AS upvotes_count")
+          .left_joins(:upvotes, :categories)
+          .where("categories.id = ?", category_id)
+      else
+        self
+          .select("#{self.table_name}.*, count(upvotes.id) AS upvotes_count")
+          .left_joins(:upvotes)
+      end
     end
 
-    def order_by_upvotes
-      self.select("#{self.table_name}.*, COUNT(upvotes.id) AS upvotes_count")
-      .joins(:upvotes)
-      .group("#{self.table_name}.id")
-      .order("COUNT(upvotes.id) DESC")
-      .includes(:categories)
+    def order_by_upvotes(category_id = nil)
+      if category_id
+        self
+          .select("#{self.table_name}.*, count(upvotes.id) AS upvotes_count")
+          .left_joins(:upvotes, :categories)
+          .where("categories.id = ?", category_id)
+      else
+        self
+          .select("#{self.table_name}.*, count(upvotes.id) AS upvotes_count")
+          .left_joins(:upvotes)
+      end
     end
 
-    def test(category_id)
-      self.find_by_sql(["SELECT #{self.table_name}.*, COUNT(upvotes.id) AS upvotes_count, categories.*
-        FROM #{self.table_name}
-        INNER JOIN upvotes
-        ON upvotes.idea_id = #{self.table_name}.id AND upvotes.idea_type = \'#{self.to_s}\'
-        INNER JOIN idea_categories AS main_idea_categories
-        ON main_idea_categories.idea_id = #{self.table_name}.id AND main_idea_categories.idea_type = \'#{self.to_s}\'
-        INNER JOIN categories AS main_categories
-        ON main_categories.id = main_idea_categories.category_id
-        INNER JOIN idea_categories AS other_idea_categories
-        ON other_idea_categories.idea_id = #{self.table_name}.id AND other_idea_categories.idea_type = \'#{self.to_s}\'
-        INNER JOIN categories
-        ON categories.id = other_idea_categories.category_id
-        WHERE main_categories.id = ?
-        GROUP BY #{self.table_name}.id, categories.id", category_id])
+    def order_by_recent_upvotes(category_id = nil)
+      if category_id
+        ideas = self
+        .select("#{self.table_name}.*, count(upvotes.id) AS upvotes_count")
+        .left_joins(:upvotes, :categories)
+        .where("categories.id = ?", category_id)
+      else
+        ideas = self
+        .select("#{self.table_name}.*, count(upvotes.id) AS upvotes_count")
+        .left_joins(:upvotes)
+      end
+
+      ideas.where("upvotes.created_at > ?", 1.week.ago)
     end
   end
 end

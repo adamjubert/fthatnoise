@@ -18,7 +18,8 @@ class IdeasIndex extends React.Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    if (nextProps.location.query.category !== this.props.location.query.category) {
+    if (nextProps.location.query.category !== this.props.location.query.category
+      || nextProps.location.query.order !== this.props.location.query.order) {
       this.setState({ loading: true });
       this.props.requestAllIdeas(nextProps.location.query).then(
         () => this.setState({ loading: false })

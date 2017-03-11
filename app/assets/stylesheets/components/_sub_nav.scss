@@ -37,9 +37,8 @@
 }
 
 .sub-selected {
-  color: $black;
-  border: 1px solid $black;
-  border-radius: 5px;
+  background: $faded-blue;
+  border-radius: 2px;
 }
 
 .create-options-container {

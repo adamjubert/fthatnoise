@@ -1,4 +1,6 @@
 import React from 'react';
+import { Link } from 'react-router';
+import SearchBar from '../search_bar/search_bar_container';
 
 export const Spinner = () => {
   return (
@@ -8,4 +10,54 @@ export const Spinner = () => {
       <img src="assets/angry_cat.png" className="spinner-img cat-three"/>
     </div>
   );
+};
+
+export const ActionFilters = ({ subNavClick, query }) => {
+  const hotClass = query.order === "hot" ? "sub-options sub-selected" : "sub-options";
+  const trendingClass = query.order === "trending" ? "sub-options sub-selected" : "sub-options";
+  const recentClass = query.order === "recent" || !query.order ? "sub-options sub-selected" : "sub-options";
+
+  return (
+    <div className="sub-options-container">
+      <button className={ hotClass } onClick={ subNavClick("hot") }>Hot</button>
+      <button className={ trendingClass } onClick={ subNavClick("trending") }>Trending</button>
+      <button className={ recentClass } onClick={ subNavClick("recent") }>Recent</button>
+      <SearchBar />
+    </div>
+  );
+};
+
+export const ActionLinks = ({ currentUser, router }) => {
+  if (currentUser) {
+    return (
+      <div className="create-options-container">
+        <div className="create-options-link-container">
+          <Link to="/actions/new" className="create-options-link">
+            <div className="create-options">
+              <h4>Add Action <i className="fa fa-plus-circle" aria-hidden="true"></i></h4>
+            </div>
+            <p>
+              Suggest an action that people can do to make a difference - call your representative, write letters, support certain businesses - the possibilities are endless!
+            </p>
+          </Link>
+        </div>
+        <div className="create-options-link-container">
+          <Link to="/events/new" className="create-options-link">
+            <div className="create-options">
+              <h4>Add Event <i className="fa fa-plus-circle" aria-hidden="true"></i></h4>
+            </div>
+            <p>
+              Spread the word about events where people can join together to effect positive change. Demonstrations, hackathons, rallies, and more!
+            </p>
+          </Link>
+        </div>
+      </div>
+    );
+  } else {
+    return (
+      <div className="create-options-signin">
+        <h4>Please <Link to="signup">sign up</Link> or <Link to="signin">sign in</Link> to create an action or event.</h4>
+      </div>
+    );
+  }
 };
