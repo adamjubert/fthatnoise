@@ -150,6 +150,8 @@ class Api::EventsController < ApplicationController
       unless params[:zip_code] =~ /\d{5}/
         render json: ["Please enter a zip code in the format 12345"], status: 422
       end
+    elsif (!logged_in?)
+      render json: ["Please log in or enter a zip code to see events"], status: 422
     end
   end
 end

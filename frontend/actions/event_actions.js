@@ -11,6 +11,7 @@ export const REMOVE_SINGLE_EVENT = "REMOVE_SINGLE_EVENT";
 export const requestAllEvents = data => dispatch => {
   return EventsApiUtil.fetchAllEvents(data)
     .then(events => {
+      dispatch(clearEventErrors());
       dispatch(receiveAllEvents(events));
       return events;
     },

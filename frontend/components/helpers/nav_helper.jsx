@@ -27,12 +27,14 @@ export const ActionFilters = ({ subNavClick, query }) => {
   );
 };
 
-export const EventFilters = ({ zipCode, currentZip, queryZip, handleZipChange }) => {
+export const EventFilters = ({ zipCode, queryZip, handleZipChange }) => {
+  const currentZip = zipCode ? zipCode : "Search";
+
   return (
     <div className="sub-options-container">
     <Link to="#" className="sub-options sub-selected">{ currentZip }</Link>
     <input type="text" placeholder="Zip code"
-      value={ zipCode }
+      value={ queryZip }
       onChange={ handleZipChange }
       className="home-search" />
       <Link to={{pathname: "/events", query: { zip_code: queryZip }}} className="home-search-button">

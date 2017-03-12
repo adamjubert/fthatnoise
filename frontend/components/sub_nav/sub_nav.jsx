@@ -7,9 +7,13 @@ import { ActionFilters, EventFilters, NewIdeaLinks } from '../helpers/nav_helper
 class SubNav extends React.Component {
   constructor(props) {
     super(props);
+
+    const currentUserZip = this.props.currentUser ?
+      this.props.currentUser.zip_code : null;
+
     this.state = {
-      queryZip: this.props.currentUser.zip_code,
-      zipCode: this.props.currentUser.zip_code
+      queryZip: "",
+      zipCode: currentUserZip
     };
 
     this.subNavClick = this.subNavClick.bind(this);
@@ -17,11 +21,7 @@ class SubNav extends React.Component {
   }
 
   handleZipChange(e) {
-    this.setState({ zipCode: e.currentTarget.value });
-
-    if (e.currentTarget.value.length === 5) {
-      this.setState({ queryZip: e.currentTarget.value });
-    }
+    this.setState({ queryZip: e.currentTarget.value });
   }
 
   subNavClick(order) {
@@ -37,8 +37,6 @@ class SubNav extends React.Component {
 
   subOptions() {
     if (this.props.router.location.pathname === "/events") {
-      const currentZip = this.props.location.query.zip_code ?
-        this.props.location.query.zip_code : this.props.currentUser.zip_code;
 
       return (
         <div className="options-container">
@@ -53,7 +51,6 @@ class SubNav extends React.Component {
             <div className="sub-options-container">
               <EventFilters zipCode={ this.state.zipCode }
                 queryZip={ this.state.queryZip }
-                currentZip={ currentZip }
                 handleZipChange={ this.handleZipChange }/>
               <SearchBar />
             </div>
