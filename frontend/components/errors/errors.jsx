@@ -14,7 +14,7 @@ class Errors extends React.Component {
         <li key={i}>{ error }</li>
       ));
 
-      return <ul>{ errorItems }</ul>;
+      return <ul className="errors">{ errorItems }</ul>;
     } else {
       return null;
     }

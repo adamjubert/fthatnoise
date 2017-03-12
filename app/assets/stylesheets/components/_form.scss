@@ -2,31 +2,45 @@
   width: 80%;
   max-width: 600px;
   margin: auto;
+  font-family: $sans-serif;
+  color: $black;
+
+  legend {
+    color: $orange;
+  }
 
   input[type='text'], input[type='password'], input[type='email'], select, textarea {
     display: block;
+    box-sizing: border-box;
   }
 
   input[type='text'], input[type='password'], input[type='email'], textarea, .date-time > input {
     padding: 5px;
     width: 100%;
     border: 1px solid $dark-gray;
-    border-radius: 5px;
+    border-radius: 2px;
     margin: 5px 0;
     box-shadow: inset -1px -1px 4px 1px rgba(0, 0, 0, 0.25);
 
     &:focus {
-      border: 1px solid $main;
+      border: 1px solid $orange;
     }
   }
 
+  input[type="submit"] {
+    width: 100%;
+    margin: 0;
+    height: 40px;
+    box-sizing: border-box;
+  }
+
   .date-time > input, input[type='text'], input[type='password'], input[type='email'] {
-    height: 25px;
+    height: 40px;
   }
 
   select {
     border: 1px solid $dark-gray;
-    border-radius: 5px;
+    border-radius: 2px;
     padding: 5px;
     height: 30px;
     font-size: 16px;
@@ -39,9 +53,23 @@
 }
 
 .form-title {
-  color: $main;
+  color: $orange;
   font-size: 36px;
   margin: 15px 0;
+}
+
+.other-session-link {
+  font-family: $sans-serif;
+  margin-left: 5%;
+  margin-bottom: 10px;
+
+  button {
+    color: $faded-blue;
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
 }
 
 @media all and (max-width: $break-point) {

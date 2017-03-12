@@ -6,26 +6,14 @@ The best way to get acquainted with what is already here is to download it, seed
 
 (Roughly ordered by importance):
 
-Add search functionality for actions and events
-
-Improve location tracking to make it easier for people to find events near them
-
-A few minor but important tweaks (users index page for admins, e-mail password reset)
-
-Build upon the currently only accept/deny options for ideas to allow things like ignore
-
-Front end real time filtering of ideas based on various criteria
-
-Ability to share on other social media
-
-Improve styling and add JavaScript to front end (for example, buttons)
-
-Improve design (make it pretty!!)
-
-Upload images to idea show pages
-
-Build out user profiles
-
-Others?
+* Finish styling other app pages (should be easy if re-using existing CSS)
+* Improve search functionality for actions and events
+* Guest buttons to follow when someone is not logged in
+* E-mail password activation and reset
+* Page to create categories and add admins for admins
+* Upload images for events and suggestions
+* Pagination
+* Build out user profiles
+* Better formatted errors
 
 Please let me know if you are interested, let's put something awesome together :)

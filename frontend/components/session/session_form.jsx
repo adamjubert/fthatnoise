@@ -43,11 +43,11 @@ class SessionForm extends React.Component {
 
   otherLink() {
     if (this.props.formType === "login") {
-      return <p>Haven't joined yet? <button onClick={ () => this.props.receiveModal("signup") }>
+      return <p className="other-session-link">Haven't joined yet? <button onClick={ () => this.props.receiveModal("signup") }>
         Sign up
       </button> instead</p>;
     } else {
-      return <p>Already joined? <button onClick={ () => this.props.receiveModal("login") }>
+      return <p className="other-session-link">Already joined? <button onClick={ () => this.props.receiveModal("login") }>
         Sign in
       </button> instead</p>;
     }
@@ -73,6 +73,10 @@ class SessionForm extends React.Component {
 
     return (
       <div>
+        <button className="clear-form" onClick={ this.props.clearModal }>
+          <i className="fa fa-times" aria-hidden="true"></i>
+        </button>
+
         { this.otherLink() }
         <Errors errors={ this.props.errors } />
 
