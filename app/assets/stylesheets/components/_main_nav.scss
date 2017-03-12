@@ -64,7 +64,7 @@
   }
 }
 
-.nav-dropdown {
+.hamburger-nav {
   display: none;
 }
 
@@ -80,7 +80,7 @@
   }
 }
 
-@media all and (max-width: 600px) {
+@media all and (max-width: $break-point) {
   .logo {
     img {
       padding-left: 0;
@@ -91,7 +91,28 @@
     display: none;
   }
 
-  .nav-dropdown {
+  .hamburger-links > .nav-items {
+    display: flex;
+    flex-direction: column;
+    background: $white;
+    position: absolute;
+    width: 150px;
+    right: 15px;
+    border: 1px solid $border-gray;
+
+    li {
+      width: 100%;
+      border: none;
+      height: 40px;
+      line-height: 40px;
+    }
+
+    button {
+      width: 100%;
+    }
+  }
+
+  .hamburger-nav {
     display: block;
     font-size: 30px;
     padding: 5px;

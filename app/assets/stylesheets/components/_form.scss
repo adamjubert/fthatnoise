@@ -44,7 +44,7 @@
   margin: 15px 0;
 }
 
-@media all and (max-width: 600px) {
+@media all and (max-width: $break-point) {
   .idea {
     width: 90%;
   }

@@ -104,14 +104,14 @@
   margin-right: 3px;
 }
 
-@media all and (max-width: 800px) {
+@media all and (max-width: $break-point-two) {
   .short-idea {
     width: 90%;
     margin: 15px;
   }
 }
 
-@media all and (min-width: 800px) and (max-width: 1200px) {
+@media all and (min-width: $break-point-two) and (max-width: $break-point-three) {
   .short-idea {
     width: 80%;
     margin: 15px;

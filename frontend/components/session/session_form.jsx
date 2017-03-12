@@ -21,6 +21,12 @@ class SessionForm extends React.Component {
     this.props.clearSessionErrors();
   }
 
+  componentWillReceiveProps(nextProps) {
+    if (this.props.formType !== nextProps.formType) {
+      this.props.clearSessionErrors();
+    }
+  }
+
   handleSubmit(e) {
     e.preventDefault();
     const user = Object.assign({}, this.state);
@@ -37,9 +43,13 @@ class SessionForm extends React.Component {
 
   otherLink() {
     if (this.props.formType === "login") {
-      return <p>Haven't joined yet? <Link to="/signup">Sign up</Link> instead</p>;
+      return <p>Haven't joined yet? <button onClick={ () => this.props.receiveModal("signup") }>
+        Sign up
+      </button> instead</p>;
     } else {
-      return <p>Already joined? <Link to="/signin">{ "Sign in" }</Link> instead</p>;
+      return <p>Already joined? <button onClick={ () => this.props.receiveModal("login") }>
+        Sign in
+      </button> instead</p>;
     }
   }
 

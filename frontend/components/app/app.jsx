@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router';
 import GreetingContainer from '../greeting/greeting_container';
+import HamburgerNav from '../greeting/hamburger_nav';
 import ModalContainer from '../modal/modal_container';
 
 class App extends React.Component {
@@ -17,6 +18,7 @@ class App extends React.Component {
             </Link>
           </div>
           <GreetingContainer />
+          <HamburgerNav />
         </nav>
         <div className="main">
           { this.props.children }

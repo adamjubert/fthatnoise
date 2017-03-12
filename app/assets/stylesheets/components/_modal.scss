@@ -15,3 +15,11 @@
   width: 90%;
   height: 75%;
 }
+
+.modal-center-signup, .modal-center-login {
+  background: $white;
+  max-width: 600px;
+  margin: 20px auto;
+  width: 80%;
+  padding: 20px 0;
+}
