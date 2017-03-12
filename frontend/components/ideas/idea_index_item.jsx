@@ -41,7 +41,10 @@ const IdeaIndexItem = ({ idea, ideaType, removeSingleIdea }) => {
           <p><span>Details: </span>{ idea.shortened_description }</p>
           { eventLogistics }
         </div>
-        <UpvoteButtonsContainer idea={ idea } ideaType={ ideaType } removeSingleIdea={ removeSingleIdea }/>
+        <UpvoteButtonsContainer idea={ idea }
+          ideaType={ ideaType }
+          removeSingleIdea={ removeSingleIdea }
+        />
       </div>
     </div>
   );

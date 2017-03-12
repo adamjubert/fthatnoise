@@ -109,16 +109,37 @@
   }
 }
 
-@media all and (max-width: $break-point-two) {
+@media screen and (max-width: $break-point-two) {
   .short-idea {
     width: 90%;
     margin: 15px;
   }
 }
 
-@media all and (min-width: $break-point-two) and (max-width: $break-point-three) {
+@media screen and (min-width: $break-point-two) and (max-width: $break-point-three) {
   .short-idea {
     width: 80%;
     margin: 15px;
+  }
+}
+
+@media screen and (max-width: $break-point) {
+  .button {
+    font-size: 10px;
+    margin: 5px 0;
+    width: 75px;
+    padding: 0;
+  }
+
+  .upvote-buttons-container {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    padding: 0;
+  }
+
+  .share-button {
+    margin-left: 5px;
+    width: 45px;
   }
 }

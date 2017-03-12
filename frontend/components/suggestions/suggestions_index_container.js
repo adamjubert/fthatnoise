@@ -1,7 +1,6 @@
 import { connect } from 'react-redux';
 import IdeasIndex from '../ideas/ideas_index';
 import { requestAllSuggestions } from '../../actions/suggestion_actions';
-// import { selectAllSuggestions } from '../../reducers/suggestions_selectors';
 
 const mapStateToProps = state => ({
   ideas: state.suggestions,

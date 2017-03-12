@@ -27,20 +27,51 @@ const IdeaShareButtons = ({ ideaLink, title }) => {
 };
 
 class UpvoteButtons extends React.Component {
-  defaultButtons() {
-    const { idea, ideaType, pendingUpvoteIdea, completeUpvoteIdea, ignoreUpvoteIdea } = this.props;
+  constructor(props) {
+    super(props);
+
+    this.completeLoginCheck = this.completeLoginCheck.bind(this);
+    this.pendingUpvoteCheck = this.pendingUpvoteCheck.bind(this);
+    this.ignoreUpvoteCheck = this.ignoreUpvoteCheck.bind(this);
+  }
+
+  completeLoginCheck() {
+    if (this.props.currentUser) {
+      this.props.completeUpvoteIdea(this.props.idea);
+    } else {
+      this.props.receiveModal("login");
+    }
+  }
+
+  pendingUpvoteCheck() {
+    if (this.props.currentUser) {
+      this.props.pendingUpvoteIdea(this.props.idea);
+    } else {
+      this.props.receiveModal("login");
+    }
+  }
+
+  ignoreUpvoteCheck() {
+    if (this.props.currentUser) {
+      this.props.ignoreUpvoteIdea(this.props.idea);
+    } else {
+      this.props.receiveModal("login");
+    }
+  }
+
+  defaultButtons(ideaLink) {
+    const { idea, ideaType } = this.props;
     const complete = ideaType === "event" ? "Going" : "Complete";
-    const ideaLink = `www.fthatnoise.com/${ideaType}s/${idea.id}`;
 
     return (
       <div className="upvote-buttons-container">
-        <button className="button accept-button" onClick={() => completeUpvoteIdea(idea)}>
+        <button className="button accept-button" onClick={ this.completeLoginCheck }>
           { complete }
         </button>
-        <button className="button follow-button" onClick={() => pendingUpvoteIdea(idea)}>
+        <button className="button follow-button" onClick={ this.pendingUpvoteCheck }>
           Interested
         </button>
-        <button className="button ignore-button" onClick={() => ignoreUpvoteIdea(idea)}>
+        <button className="button ignore-button" onClick={ this.ignoreUpvoteCheck }>
           Ignore
         </button>
 
@@ -49,11 +80,11 @@ class UpvoteButtons extends React.Component {
     );
   }
 
-  pendingButtons() {
+  pendingButtons(ideaLink) {
     const { idea, ideaType, pendingUpvoteIdea, completeUpvoteIdea,
       ignoreUpvoteIdea, removeSingleIdea } = this.props;
     const complete = ideaType === "event" ? "Going" : "Complete";
-    const ideaLink = `www.fthatnoise.com/${ideaType}s/${idea.id}`;
+
 
     const onClickComplete = () => {
       if (removeSingleIdea && ideaType === "action") {
@@ -88,10 +119,9 @@ class UpvoteButtons extends React.Component {
     );
   }
 
-  ignoreButtons() {
+  ignoreButtons(ideaLink) {
     const { idea, ideaType, pendingUpvoteIdea, completeUpvoteIdea, ignoreUpvoteIdea } = this.props;
     const complete = ideaType === "event" ? "Going" : "Complete";
-    const ideaLink = `www.fthatnoise.com/${ideaType}s/${idea.id}`;
 
     return (
       <div className="upvote-buttons-container">
@@ -110,10 +140,9 @@ class UpvoteButtons extends React.Component {
     );
   }
 
-  completeButtons() {
+  completeButtons(ideaLink) {
     const { idea, ideaType, pendingUpvoteIdea, completeUpvoteIdea, ignoreUpvoteIdea } = this.props;
     const complete = ideaType === "event" ? "Going" : "Complete!";
-    const ideaLink = `www.fthatnoise.com/${ideaType}s/${idea.id}`;
     let interestedButton = null;
 
     if (ideaType === "event") {
@@ -141,9 +170,7 @@ class UpvoteButtons extends React.Component {
     );
   }
 
-  creatorButtons() {
-    const ideaLink = `www.fthatnoise.com/${this.props.ideaType}s/${this.props.idea.id}`;
-
+  creatorButtons(ideaLink) {
     return (
       <div className="upvote-buttons-container">
         <button className="button accept-button disabled-button" disabled>
@@ -157,16 +184,18 @@ class UpvoteButtons extends React.Component {
 
   render() {
     const { idea, ideaType } = this.props;
-    if (!idea.upvotes_status) {
-      return this.defaultButtons();
+    const ideaLink = `www.fthatnoise.com/#/${this.props.ideaType}s/${this.props.idea.id}`;
+
+    if (!this.props.currentUser || !idea.upvotes_status) {
+      return this.defaultButtons(ideaLink);
     } else if (idea.creator_viewing) {
-      return this.creatorButtons();
+      return this.creatorButtons(ideaLink);
     } else if (idea.upvotes_status === "pending") {
-      return this.pendingButtons();
+      return this.pendingButtons(ideaLink);
     } else if (idea.upvotes_status === "ignore") {
-      return this.ignoreButtons();
+      return this.ignoreButtons(ideaLink);
     } else {
-      return this.completeButtons();
+      return this.completeButtons(ideaLink);
     }
   }
 }

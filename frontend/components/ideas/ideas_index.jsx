@@ -40,7 +40,9 @@ class IdeasIndex extends React.Component {
       <ul className="idea-list">
         {
           this.props.ideas.map((idea, i) => (
-            <IdeaIndexItem idea={ idea } ideaType={ this.props.ideaType } key={i} />
+            <IdeaIndexItem idea={ idea }
+              ideaType={ this.props.ideaType }
+              key={i} />
           ))
         }
       </ul>
