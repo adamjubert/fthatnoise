@@ -44,7 +44,7 @@ export const EventFilters = ({ zipCode, queryZip, handleZipChange }) => {
   );
 };
 
-export const NewIdeaLinks = ({ currentUser, router }) => {
+export const NewIdeaLinks = ({ currentUser, router, receiveModal }) => {
   if (currentUser) {
     return (
       <div className="create-options-container">
@@ -53,7 +53,7 @@ export const NewIdeaLinks = ({ currentUser, router }) => {
             <div className="create-options">
               <h4>Add Action <i className="fa fa-plus-circle" aria-hidden="true"></i></h4>
             </div>
-            <p>
+            <p id="create-options-desc-one">
               Suggest an action that people can do to make a difference - call your representative, write letters, support certain businesses - the possibilities are endless!
             </p>
           </Link>
@@ -63,7 +63,7 @@ export const NewIdeaLinks = ({ currentUser, router }) => {
             <div className="create-options">
               <h4>Add Event <i className="fa fa-plus-circle" aria-hidden="true"></i></h4>
             </div>
-            <p>
+            <p id="create-options-desc-two">
               Spread the word about events where people can join together to effect positive change. Demonstrations, hackathons, rallies, and more!
             </p>
           </Link>
@@ -73,7 +73,9 @@ export const NewIdeaLinks = ({ currentUser, router }) => {
   } else {
     return (
       <div className="create-options-signin">
-        <h4>Please <Link to="signup">sign up</Link> or <Link to="signin">sign in</Link> to create an action or event.</h4>
+        <h4>Please <button onClick={ () => receiveModal("signup") }>sign up</button>
+          &nbsp;or <button onClick={ () => receiveModal("login") }>sign in</button>
+          &nbsp;to create an action or event.</h4>
       </div>
     );
   }

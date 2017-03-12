@@ -102,6 +102,11 @@
 .short-idea-categories {
   background-color: $light-gray;
   margin-right: 3px;
+  padding: 0 3px;
+
+  &:hover {
+    text-decoration: underline;
+  }
 }
 
 @media all and (max-width: $break-point-two) {

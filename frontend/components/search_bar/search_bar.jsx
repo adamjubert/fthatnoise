@@ -35,7 +35,7 @@ export default class SearchBar extends Component {
   render() {
     const { searchInput, isFetching } = this.props;
     return (
-      <div>
+      <div className="search-container">
         <input
           type="text"
           placeholder="Search..."

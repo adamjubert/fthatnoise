@@ -1,16 +1,42 @@
 import React from 'react';
-import { Link } from 'react-router';
-import { values } from 'lodash';
+import { Link, withRouter } from 'react-router';
 
-const CategoriesString = ({ categories }) => {
+class CategoriesString extends React.Component {
+  constructor(props) {
+    super(props);
+    this.categoryLinks = this.categoryLinks.bind(this);
+  }
 
-  const categoryLinks = values(categories).map((category, i) => (
-    <Link key={i} to={ `/categories/${category.id}` } className="short-idea-categories">
-      { category.name }
-    </Link>
-  ));
+  categoryLinks() {
+    if (this.props.categories) {
+      return Object.keys(this.props.categories).map(categoryId => {
+        const query = Object.assign(
+          {},
+          this.props.location.query,
+          { category: categoryId }
+        );
 
-  return <p className="short-idea-categories-wrapper">{ categoryLinks }</p>;
-};
+        return (
+          <Link key={ categoryId }
+            to={{
+              pathname: this.props.location.pathname,
+              query: query
+            }}
+            className="short-idea-categories">
+            { this.props.categories[categoryId].name }
+          </Link>
+        );
+      });
+    }
+  }
 
-export default CategoriesString;
+  render() {
+    return (
+      <div className="short-idea-categories-wrapper">
+        { this.categoryLinks() }
+      </div>
+    );
+  }
+}
+
+export default withRouter(CategoriesString);

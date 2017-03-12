@@ -78,7 +78,9 @@ class SubNav extends React.Component {
     return (
       <div className="sub-nav-container">
         <section className="action-links">
-          <NewIdeaLinks currentUser={ this.props.currentUser } />
+          <NewIdeaLinks
+            currentUser={ this.props.currentUser }
+            receiveModal={ this.props.receiveModal }/>
         </section>
 
         { this.subOptions() }

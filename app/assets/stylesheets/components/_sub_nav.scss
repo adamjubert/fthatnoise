@@ -99,8 +99,8 @@
   margin: 0 auto;
   font-size: 18px;
 
-  a {
-    color: $sky-blue;
+  button {
+    color: $faded-blue;
 
     &:hover {
       text-decoration: underline;
@@ -148,9 +148,62 @@
   justify-content: flex-end;
 }
 
-@media all and (max-width: $break-point) {
-  // ADD DROPDOWN FOR BROWSING OPTIONS
-  .hamburger-nav {
-    display: auto;
+@media all and (max-width: $intermediate-break-point) {
+  .create-options-signin {
+    h4 {
+      font-size: 16px;
+    }
+  }
+
+  #create-options-desc-one, #create-options-desc-two {
+    display: none;
+  }
+
+  .create-options {
+    height: 40px;
+
+    h4 {
+      line-height: 40px;
+    }
+  }
+
+  .create-options-link {
+    height: 100%;
+  }
+
+  .options {
+    flex-direction: column;
+    padding-bottom: 10px;
+  }
+
+  .options-toggle {
+    width: 100%;
+    padding: 10px 0;
+  }
+
+  .category-select {
+    width: 100%;
+    margin-bottom: 10px;
+  }
+
+  .sub-options-container {
+    flex-wrap: wrap;
+    justify-content: space-between;
+    width: 100%;
+  }
+
+  .search-container {
+    width: 100%;
+  }
+
+  .home-search {
+    margin: 0;
+    margin-top: 10px;
+    width: calc(100% - 35px);
+  }
+
+  .sub-options {
+    width: 25%;
+    margin: 0;
   }
 }
