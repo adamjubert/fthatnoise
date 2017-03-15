@@ -1,0 +1,28 @@
+.comment {
+  margin: 10px 0;
+
+  h4 {
+    margin-bottom: 3px;
+  }
+
+  p {
+    font-size: 14px;
+  }
+}
+
+#comment-form {
+  margin: 0;
+  width: 70%;
+}
+
+.comment-form-container {
+  width: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+@media screen and (max-width: $break-point) {
+  #comment-form {
+    width: 100%;
+  }
+}

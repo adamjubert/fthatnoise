@@ -14,9 +14,7 @@ class IdeasIndex extends React.Component {
     this.setState({ loading: true });
     this.props.requestAllIdeas(this.props.location.query).then(
       () => this.setState({ loading: false }),
-      () => {
-        this.setState({ loading: false });
-      }
+      () => this.setState({ loading: false })
     );
   }
 
@@ -36,6 +34,13 @@ class IdeasIndex extends React.Component {
   }
 
   ideaIndexItems() {
+    if (this.props.ideas.length <= 0) {
+      return (
+        <ul className="idea-list">
+          <li>No results found :(</li>
+        </ul>
+      );
+    }
     return (
       <ul className="idea-list">
         {

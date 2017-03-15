@@ -6,16 +6,20 @@ The best way to get acquainted with what is already here is to download it, seed
 
 (Roughly ordered by importance):
 
-* Finish styling other app pages (should be easy if re-using existing CSS)
 * Improve search functionality for actions and events
+* Improve category links for ideas not on home page
+* Comment author edit and delete comments
+* Improve styling
 * Guest buttons to follow when someone is not logged in
 * E-mail password activation and reset
-* Page to create categories and add admins for admins
+* Page to create categories and add other admins for admins
 * Upload images for events and suggestions
 * Pagination
 * Build out user profiles
 * Better formatted errors
 * Add flash notices (like contact has been submitted)
 * Better breakdown of followers (interested vs completed)
+* Add created at stamp to ideas
+* Improve cross browser styling
 
 Please let me know if you are interested, let's put something awesome together :)

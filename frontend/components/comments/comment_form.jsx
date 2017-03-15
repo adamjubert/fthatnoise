@@ -33,9 +33,9 @@ class CommentForm extends React.Component {
     if (this.props.formType === "edit") message = "Update Action";
 
     return (
-      <div>
+      <div className="comment-form-container">
         <Errors errors={this.props.errors} />
-        <form className="form" onSubmit={this.handleSubmit}>
+        <form className="form" id="comment-form" onSubmit={this.handleSubmit}>
           <textarea className="form-control" onChange={this.handleChange("body")} value={ body } placeholder="Your glorious comment here..." />
           <input type="submit" value={ message } className="button accept-button" />
         </form>

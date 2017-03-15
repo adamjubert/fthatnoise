@@ -45,6 +45,7 @@ class IdeaShow extends React.Component {
         { eventLogistics }
         <p>{ idea.description }</p>
 
+        <h3 className="idea-comments">Comments</h3>
         <FormattedComments comments={ idea.comments } />
         <CommentFormContainer ideaType={ ideaType } idea={ idea } />
       </div>

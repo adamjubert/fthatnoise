@@ -1,6 +1,7 @@
 .idea {
   margin: 15px auto;
   width: 80%;
+  font-family: $sans-serif;
 }
 
 .idea-title {
@@ -11,6 +12,12 @@
 
 .idea-info {
   font-size: 18px;
+}
+
+.idea-comments {
+  color: $orange;
+  margin: 15px 0;
+  font-size: 20px;
 }
 
 @media all and (max-width: $break-point) {
