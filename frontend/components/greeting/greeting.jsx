@@ -1,14 +1,19 @@
 import React from 'react';
-import { Link } from 'react-router';
+import { Link, withRouter } from 'react-router';
 
-const Greeting = ({ currentUser, logout, receiveModal }) => {
+const Greeting = ({ currentUser, logout, receiveModal, router }) => {
+  const handleLogout = () => {
+    logout();
+    router.push("/");
+  };
+
   if (currentUser) {
     return (
       <ul className="nav-items">
         <li><Link to="/about">About</Link></li>
         <li><Link to="/contact">Contact</Link></li>
         <li><Link to={{ pathname: "/profile/actions", query: { actions: "following", type: "action" }}}>{ currentUser.username }</Link></li>
-        <li><button onClick={ logout }>Log Out</button></li>
+        <li><button onClick={ handleLogout }>Log Out</button></li>
       </ul>
     );
   }
@@ -27,4 +32,4 @@ const Greeting = ({ currentUser, logout, receiveModal }) => {
   );
 };
 
-export default Greeting;
+export default withRouter(Greeting);

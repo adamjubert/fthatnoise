@@ -4,13 +4,14 @@
   margin: auto;
   font-family: $sans-serif;
   color: $black;
+  padding-bottom: 20px;
 
   legend {
     color: $orange;
     font-size: 24px;
   }
 
-  input[type='text'], input[type='password'], input[type='email'], select, textarea {
+  input[type='text'], input[type='password'], input[type='email'], select, textarea, .date-time > input {
     display: block;
     box-sizing: border-box;
   }
@@ -50,6 +51,10 @@
       border: 1px solid $main;
       outline: none;
     }
+  }
+
+  .categories-label {
+    color: $orange;
   }
 }
 

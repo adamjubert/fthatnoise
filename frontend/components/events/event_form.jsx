@@ -115,7 +115,7 @@ class EventForm extends React.Component {
   }
 
   stateSelect() {
-    const us_states = US_STATES.map((state, i) => (
+    const us_states = window.US_STATES.map((state, i) => (
       <option value={ state[0] } key={i}>{ state[0] }</option>
     ));
 
@@ -161,7 +161,7 @@ class EventForm extends React.Component {
 
           <textarea className="form-control" onChange={this.handleChange("description")} value={ description } placeholder="description" />
 
-          <label>Categories</label>
+          <label className="categories-label">Categories (select 1 to 3)</label>
           <ul>{ this.categoryCheckboxes() }</ul>
 
           <input type="submit" value={ message } className="button accept-button" />

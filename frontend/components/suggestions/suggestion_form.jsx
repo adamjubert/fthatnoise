@@ -116,7 +116,7 @@ class SuggestionForm extends React.Component {
           <input type="text" onChange={this.handleChange("title")} value={ title } placeholder="title" />
           <textarea className="form-control" onChange={this.handleChange("description")} value={ description } placeholder="description" />
 
-          <label>Categories</label>
+          <label className="categories-label">Categories (select 1 to 3)</label>
           <ul>{ this.categoryCheckboxes() }</ul>
 
           <input type="submit" value={ message } className="button accept-button" />

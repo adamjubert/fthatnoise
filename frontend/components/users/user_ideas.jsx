@@ -1,5 +1,6 @@
 import React from 'react';
 import IdeaIndexItem from '../ideas/idea_index_item';
+import { Link } from 'react-router';
 
 class UserIdeas extends React.Component {
   componentDidMount() {
@@ -19,12 +20,16 @@ class UserIdeas extends React.Component {
 
     if (ideas.length === 0) return (
       <div className="user-profile-container">
-        <h1>None so far! Why don't you check out the homepage to get started?</h1>
+        <h1>None so far! Why don't you check out the <Link to="/">home page</Link> to get started?</h1>
       </div>
     );
 
     const ideaIndexItems = ideas.map((idea, i) => (
-      <IdeaIndexItem idea={ idea } ideaType={ ideaType } key={i} removeSingleIdea={ removeSingleIdea } />
+      <IdeaIndexItem
+        idea={ idea }
+        ideaType={ ideaType }
+        key={idea.id}
+        removeSingleIdea={ removeSingleIdea } />
     ));
 
     return (
