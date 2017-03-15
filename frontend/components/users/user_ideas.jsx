@@ -1,21 +1,35 @@
 import React from 'react';
 import IdeaIndexItem from '../ideas/idea_index_item';
 import { Link } from 'react-router';
+import { Spinner } from '../helpers/nav_helper';
 
 class UserIdeas extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = { loading: true };
+  }
+
   componentDidMount() {
-    this.props.requestCurrentUser(this.props.location.query);
+    this.props.requestCurrentUser(this.props.location.query).then(
+      () => this.setState({ loading: false })
+    );
   }
 
   componentWillReceiveProps(nextProps) {
     if (nextProps.location.query.type !== this.props.location.query.type
       || nextProps.location.query.actions !== this.props.location.query.actions
       || nextProps.location.query.events !== this.props.location.query.events) {
-      this.props.requestCurrentUser(nextProps.location.query);
+      this.props.requestCurrentUser(nextProps.location.query).then(
+        () => this.setState({ loading: false })
+      );
     }
   }
 
   render() {
+    if (this.state.loading) {
+      return <Spinner />;
+    }
+
     const { ideas, ideaType, removeSingleIdea } = this.props;
 
     if (ideas.length === 0) return (

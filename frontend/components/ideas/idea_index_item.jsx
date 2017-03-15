@@ -4,8 +4,7 @@ import CategoriesString from '../categories/categories_string';
 import UpvoteButtonsContainer from '../upvotes/upvote_buttons_container';
 
 const IdeaIndexItem = ({ idea, ideaType, removeSingleIdea }) => {
-  if (idea.upvotes_status === "ignore" ||
-    (ideaType === "event" && idea.in_past)) return null;
+  if (idea.upvotes_status === "ignore") return null;
 
   const ideaLink = `${ideaType}s/${idea.id}`;
 

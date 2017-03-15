@@ -6,7 +6,7 @@ import UserIdeas from './user_ideas';
 const mapStateToProps = state => ({
   ideas: state.events,
   ideaType: "event",
-  user: state.userDetail,
+  user: state.userDetail
 });
 
 const mapDispatchToProps = dispatch => ({
