@@ -7,7 +7,7 @@ Upvote.destroy_all
 Comment.destroy_all
 
 User.create(username: "aa", email: "aa@nyc.com",
-password: "password", password_confirmation: "password")
+password: "password", password_confirmation: "password", zip_code: 10001)
 
 categories = [
   "Immigration",

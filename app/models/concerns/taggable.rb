@@ -3,7 +3,7 @@ module Taggable
 
   included do
     validates :creator, presence: true
-    validates :title, presence: true, length: { maximum: 50 }
+    validates :title, presence: true, length: { maximum: 150 }
     validates :categories, presence: { message: "- must have between 1 and 3 categories"},
       length: { maximum: 3, message: "- cannot have more than 3 categories" }
 
