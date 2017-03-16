@@ -6,6 +6,10 @@
     ).html_safe %>
   <% end %>
 
+  window.images = {
+    angryCatLogo: "<%= image_path("angry_cat.png") %>"
+  }
+
   window.US_STATES = <%=raw Event::US_STATES %>
 </script>
 

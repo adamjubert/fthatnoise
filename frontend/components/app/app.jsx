@@ -13,7 +13,7 @@ class App extends React.Component {
           <div className="logo">
             <Link to="/" className="logo">
               fthatnoise
-              <img src="assets/angry_cat.png" />
+              <img src={ window.images.angryCatLogo } />
               com
             </Link>
           </div>

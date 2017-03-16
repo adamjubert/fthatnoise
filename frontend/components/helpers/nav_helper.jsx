@@ -5,9 +5,9 @@ import SearchBar from '../search_bar/search_bar_container';
 export const Spinner = () => {
   return (
     <div className="spinner">
-      <img src="assets/angry_cat.png" className="spinner-img"/>
-      <img src="assets/angry_cat.png" className="spinner-img cat-two"/>
-      <img src="assets/angry_cat.png" className="spinner-img cat-three"/>
+      <img src={ window.images.angryCatLogo } className="spinner-img"/>
+      <img src={ window.images.angryCatLogo } className="spinner-img cat-two"/>
+      <img src={ window.images.angryCatLogo } className="spinner-img cat-three"/>
     </div>
   );
 };
