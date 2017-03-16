@@ -8,8 +8,12 @@ class SubNav extends React.Component {
   constructor(props) {
     super(props);
 
-    const currentUserZip = this.props.currentUser ?
-      this.props.currentUser.zip_code : null;
+    const currentUserZip = this.props.location.query.zip_code;
+
+    if (!currentUserZip) {
+      currentUserZip = this.props.currentUser ?
+        this.props.currentUser.zip_code : null;
+    }
 
     this.state = {
       queryZip: "",
