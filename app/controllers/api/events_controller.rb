@@ -147,7 +147,7 @@ class Api::EventsController < ApplicationController
 
   def only_valid_zip_code
     if (params[:zip_code])
-      unless params[:zip_code] =~ /\d{5}/
+      unless params[:zip_code] =~ /\A\d{5}\z/
         render json: ["Please enter a zip code in the format 12345"], status: 422
       end
     elsif (!logged_in?)

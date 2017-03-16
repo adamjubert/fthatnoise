@@ -8,16 +8,8 @@ class SubNav extends React.Component {
   constructor(props) {
     super(props);
 
-    const currentUserZip = this.props.location.query.zip_code;
-
-    if (!currentUserZip) {
-      currentUserZip = this.props.currentUser ?
-        this.props.currentUser.zip_code : null;
-    }
-
     this.state = {
-      queryZip: "",
-      zipCode: currentUserZip
+      queryZip: ""
     };
 
     this.subNavClick = this.subNavClick.bind(this);
@@ -39,6 +31,16 @@ class SubNav extends React.Component {
     };
   }
 
+  buttonZipCode() {
+    if (this.props.router.location.query.zip_code) {
+      return this.props.router.location.query.zip_code;
+    } else if (this.props.currentUser) {
+      return this.props.currentUser.zip_code;
+    }
+
+    return null;
+  }
+
   subOptions() {
     if (this.props.router.location.pathname === "/events") {
 
@@ -53,7 +55,7 @@ class SubNav extends React.Component {
             <CategorySelect type={ "events" }/>
 
             <div className="sub-options-container">
-              <EventFilters zipCode={ this.state.zipCode }
+              <EventFilters zipCode={ this.buttonZipCode() }
                 queryZip={ this.state.queryZip }
                 handleZipChange={ this.handleZipChange }/>
               <SearchBar />

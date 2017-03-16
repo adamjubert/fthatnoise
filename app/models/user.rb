@@ -19,7 +19,7 @@ class User < ActiveRecord::Base
   validates :email, :password_digest, :session_token, presence: true
   validates :username, presence: true, uniqueness: true, length: { maximum: 25 }
   validates :password, length: { minimum: 6, allow_nil: true }
-  validates_format_of :zip_code, :with => /\d{5}/, :message => "should be in the form 12345", allow_nil: true
+  validates_format_of :zip_code, :with => /\A\d{5}\z/, :message => "should be in the form 12345", allow_nil: true
   validates :zip_code, numericality: { only_integer: true }, allow_nil: true
   after_initialize :ensure_session_token
 
