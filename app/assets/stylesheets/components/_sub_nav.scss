@@ -11,12 +11,24 @@
   border: 1px solid $faded-blue;
   text-align: center;
   font-family: $sans-serif;
+  transition: 0.5s;
+}
+
+.main-options:hover {
+  background: #0091c1;
+  color: white;
+  transition: 0.5s;
 }
 
 .main-selected {
   color: $white;
   background: $orange;
   border: 1px solid $orange;
+}
+
+.main-selected:hover {
+  color: $white;
+  background: $orange;
 }
 
 .sub-options {
@@ -129,8 +141,12 @@
 .category-select {
   padding: 5px 0;
   height: 30px;
-  border-radius: 2px;
+  border: none;
   -webkit-border-radius: 2px;
+
+  &:hover {
+    cursor: pointer;
+  }
 
   &:focus {
     outline: none;
