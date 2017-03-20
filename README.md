@@ -7,6 +7,8 @@ The best way to get acquainted with what is already here is to download it, seed
 (Roughly ordered by importance):
 
 * Fix Facebook link
+* Add Log In Modal on Comment Button
+* Make buttons have toggle look
 * Flag if inappropriate
 * Improve search functionality for actions and events
 * Improve category links for ideas not on home page

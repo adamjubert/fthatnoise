@@ -9,7 +9,7 @@ const FormattedComments = ({ comments }) => {
   ));
 
   return (
-    <ul>
+    <ul className="idea-comments">
       { formattedCommentItems }
     </ul>
   );

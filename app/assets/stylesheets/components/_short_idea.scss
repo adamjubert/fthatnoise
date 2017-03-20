@@ -78,7 +78,7 @@
 }
 
 .short-idea-detail-container {
-  padding: 10px 10px 0;
+  padding: 10px 10px 20px;
   border-bottom: 1px solid $dark-blue;
   height: 100%;
 }
@@ -110,6 +110,7 @@
   .short-idea {
     width: 90%;
     margin: 15px;
+    height: auto;
   }
 }
 
@@ -117,6 +118,7 @@
   .short-idea {
     width: 80%;
     margin: 15px;
+    height: auto;
   }
 }
 

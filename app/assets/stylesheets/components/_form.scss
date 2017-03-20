@@ -58,6 +58,11 @@
   }
 }
 
+textarea {
+  height: 300px;
+  resize: none;
+}
+
 .form-title {
   color: $orange;
   font-size: 36px;
@@ -83,7 +88,15 @@
     width: 90%;
   }
 
+  .form {
+    width: 90%;
+  }
+
   input[type='date'], input[type='time'] {
     display: block;
+  }
+
+  textarea {
+    height: 200px;
   }
 }

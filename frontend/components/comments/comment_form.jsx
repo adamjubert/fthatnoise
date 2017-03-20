@@ -36,7 +36,7 @@ class CommentForm extends React.Component {
       <div className="comment-form-container">
         <Errors errors={this.props.errors} />
         <form className="form" id="comment-form" onSubmit={this.handleSubmit}>
-          <textarea className="form-control" onChange={this.handleChange("body")} value={ body } placeholder="Your glorious comment here..." />
+          <textarea className="comment-input" onChange={this.handleChange("body")} value={ body } placeholder="Your glorious comment here..." />
           <input type="submit" value={ message } className="button accept-button" />
         </form>
       </div>
