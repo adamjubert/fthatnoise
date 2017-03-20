@@ -2,6 +2,7 @@ import React from 'react';
 import { Link } from 'react-router';
 import CategoriesString from '../categories/categories_string';
 import UpvoteButtonsContainer from '../upvotes/upvote_buttons_container';
+import { IdeaShareButtons } from '../helpers/buttons_helper';
 
 const IdeaIndexItem = ({ idea, ideaType, removeSingleIdea }) => {
   if (idea.upvotes_status === "ignore") return null;
@@ -34,6 +35,8 @@ const IdeaIndexItem = ({ idea, ideaType, removeSingleIdea }) => {
         </div>
       </div>
       <div className="short-idea-body">
+        <IdeaShareButtons ideaLink={ ideaLink } title={ idea.title } />
+        
         <div className="short-idea-detail-container">
           <CategoriesString categories={ idea.categories } />
           <p><span>Created by: </span>{ idea.creator.username }</p>

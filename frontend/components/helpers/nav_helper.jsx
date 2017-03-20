@@ -33,13 +33,16 @@ export const EventFilters = ({ zipCode, queryZip, handleZipChange }) => {
   return (
     <div className="sub-options-container">
     <Link to="#" className="sub-options sub-selected">{ currentZip }</Link>
-    <input type="text" placeholder="Zip code"
-      value={ queryZip }
-      onChange={ handleZipChange }
-      className="home-search" />
-      <Link to={{pathname: "/events", query: { zip_code: queryZip }}} className="home-search-button">
-          <i className="fa fa-search" aria-hidden="true" />
-      </Link>
+    
+    <div className="search-container">
+      <input type="text" placeholder="Zip code"
+        value={ queryZip }
+        onChange={ handleZipChange }
+        className="home-search" />
+        <Link to={{pathname: "/events", query: { zip_code: queryZip }}} className="home-search-button">
+            <i className="fa fa-search" aria-hidden="true" />
+        </Link>
+      </div>
     </div>
   );
 };

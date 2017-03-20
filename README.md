@@ -6,6 +6,8 @@ The best way to get acquainted with what is already here is to download it, seed
 
 (Roughly ordered by importance):
 
+* Fix Facebook link
+* Flag if inappropriate
 * Improve search functionality for actions and events
 * Improve category links for ideas not on home page
 * Comment author edit and delete comments

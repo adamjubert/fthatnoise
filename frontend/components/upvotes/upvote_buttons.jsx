@@ -1,30 +1,4 @@
 import React from 'react';
-import { ShareButtons } from 'react-share';
-const {
-  FacebookShareButton,
-  TwitterShareButton
-} = ShareButtons;
-
-const IdeaShareButtons = ({ ideaLink, title }) => {
-  return (
-    <div className="idea-share-buttons">
-      <FacebookShareButton
-        url={ ideaLink }
-        title={ title }
-        className="button share-button">
-        <i className="fa fa-facebook-square" aria-hidden="true" />
-      </FacebookShareButton>
-
-      <TwitterShareButton
-        url={ ideaLink }
-        title={ title }
-        className="button share-button"
-        hashtags={ ["fthatnoise"]}>
-        <i className="fa fa-twitter-square" aria-hidden="true" />
-      </TwitterShareButton>
-    </div>
-  );
-};
 
 class UpvoteButtons extends React.Component {
   constructor(props) {
@@ -69,13 +43,11 @@ class UpvoteButtons extends React.Component {
           { complete }
         </button>
         <button className="button follow-button" onClick={ this.pendingUpvoteCheck }>
-          Interested
+          &nbsp;Interested
         </button>
         <button className="button ignore-button" onClick={ this.ignoreUpvoteCheck }>
           Ignore
         </button>
-
-        <IdeaShareButtons ideaLink={ ideaLink } title={ idea.title } />
       </div>
     );
   }
@@ -105,7 +77,7 @@ class UpvoteButtons extends React.Component {
     return (
       <div className="upvote-buttons-container">
         <button className="button follow-button disabled-button" disabled>
-          Interested
+          <i className="fa fa-check" aria-hidden="true"></i>&nbsp;Interested
         </button>
         <button className="button accept-button" onClick={ onClickComplete() }>
           { complete }
@@ -113,8 +85,6 @@ class UpvoteButtons extends React.Component {
         <button className="button ignore-button" onClick={ onClickIgnore() }>
           Ignore
         </button>
-
-        <IdeaShareButtons ideaLink={ ideaLink } title={ idea.title } />
       </div>
     );
   }
@@ -134,8 +104,6 @@ class UpvoteButtons extends React.Component {
         <button className="button accept-button" onClick={() => completeUpvoteIdea(idea)}>
           { complete }
         </button>
-
-        <IdeaShareButtons ideaLink={ ideaLink } title={ idea.title } />
       </div>
     );
   }
@@ -149,7 +117,7 @@ class UpvoteButtons extends React.Component {
       interestedButton = (
         <div>
           <button className="button follow-button" onClick={() => pendingUpvoteIdea(idea)}>
-            Interested
+            <i className="fa fa-check" aria-hidden="true"></i>&nbsp;Interested
           </button>
           <button className="button ignore-button" onClick={() => ignoreUpvoteIdea(idea)}>
             Ignore
@@ -164,8 +132,6 @@ class UpvoteButtons extends React.Component {
           { complete }
         </button>
         { interestedButton }
-
-        <IdeaShareButtons ideaLink={ ideaLink } title={ idea.title } />
       </div>
     );
   }
@@ -176,8 +142,6 @@ class UpvoteButtons extends React.Component {
         <button className="button accept-button disabled-button" disabled>
           Your idea :)
         </button>
-
-        <IdeaShareButtons ideaLink={ ideaLink } title={ this.props.idea.title } />
       </div>
     );
   }
