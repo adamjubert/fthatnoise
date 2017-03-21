@@ -1,6 +1,7 @@
 user = current_user
 
-json.extract! @suggestion, :id, :title, :description, :created_at
+json.extract! @suggestion, :id, :title, :description, :created_at,
+  :shortened_description
 
 json.upvotes_count @suggestion.upvotes.select { |upvote| upvote.status != "ignore" }.length
 
