@@ -10,6 +10,7 @@ The best way to get acquainted with what is already here is to download it, seed
 * Add Log In Modal on Comment Button
 * Make buttons have toggle look
 * Flag if inappropriate
+* Photos for actions and events
 * Improve search functionality for actions and events
 * Improve category links for ideas not on home page
 * Comment author edit and delete comments
