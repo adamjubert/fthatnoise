@@ -8,6 +8,7 @@ const IdeaIndexItem = ({ idea, ideaType, removeSingleIdea }) => {
   if (idea.upvotes_status === "ignore") return null;
 
   const ideaLink = `${ideaType}s/${idea.id}`;
+  const fullIdeaLink = "www.fthatnoise.com/#/" + ideaLink;
 
   let eventLogistics = null;
 
@@ -34,16 +35,25 @@ const IdeaIndexItem = ({ idea, ideaType, removeSingleIdea }) => {
           <h3>{ idea.upvotes_count }</h3>
         </div>
       </div>
+
       <div className="short-idea-body">
-        <IdeaShareButtons ideaLink={ ideaLink } title={ idea.title } />
-        
+        <IdeaShareButtons
+          ideaLink={ fullIdeaLink }
+          title={ idea.title }
+        />
+
         <div className="short-idea-detail-container">
-          <CategoriesString categories={ idea.categories } />
+          <CategoriesString
+            categories={ idea.categories }
+            ideaType={ ideaType }
+            />
           <p><span>Created by: </span>{ idea.creator.username }</p>
           <p><span>Details: </span>{ idea.shortened_description }</p>
           { eventLogistics }
         </div>
-        <UpvoteButtonsContainer idea={ idea }
+
+        <UpvoteButtonsContainer
+          idea={ idea }
           ideaType={ ideaType }
           removeSingleIdea={ removeSingleIdea }
         />

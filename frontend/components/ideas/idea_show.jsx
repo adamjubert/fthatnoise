@@ -36,7 +36,10 @@ class IdeaShow extends React.Component {
 
     return (
       <div className="idea">
-        <CategoriesString categories={ idea.categories } />
+        <CategoriesString
+          categories={idea.categories}
+          ideaType={ideaType}
+        />
 
         <h1 className="idea-title">{ idea.title }</h1>
         <h3 className="idea-info">Created by: { idea.creator.username }</h3>
@@ -46,8 +49,8 @@ class IdeaShow extends React.Component {
         <p>{ idea.description }</p>
 
         <h3 className="idea-comments-header">Comments</h3>
-        <CommentFormContainer ideaType={ ideaType } idea={ idea } />
-        <FormattedComments comments={ idea.comments } />
+        <CommentFormContainer ideaType={ideaType} idea={idea} />
+        <FormattedComments comments={idea.comments} />
       </div>
     );
   }

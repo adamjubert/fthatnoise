@@ -35,7 +35,6 @@ class UpvoteButtons extends React.Component {
 
   render() {
     const { idea, ideaType } = this.props;
-    const ideaLink = `www.fthatnoise.com/#/${this.props.ideaType}s/${this.props.idea.id}`;
 
     const complete = ideaType === "event" ? "Going!" : "Complete!";
     let completeClass = "button accept-button";

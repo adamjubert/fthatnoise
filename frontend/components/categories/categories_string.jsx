@@ -19,7 +19,7 @@ class CategoriesString extends React.Component {
         return (
           <Link key={ categoryId }
             to={{
-              pathname: this.props.location.pathname,
+              pathname: `/${this.props.ideaType}s`,
               query: query
             }}
             className="short-idea-categories">
