@@ -36,17 +36,19 @@ class IdeaShow extends React.Component {
 
     return (
       <div className="idea">
-        <CategoriesString
-          categories={idea.categories}
-          ideaType={ideaType}
-        />
+        <div className="space-between">
+          <CategoriesString
+            categories={idea.categories}
+            ideaType={ideaType}
+          />
+          <h3>{ idea.upvotes_count } followers</h3>
+        </div>
 
         <h1 className="idea-title">{ idea.title }</h1>
         <h3 className="idea-info">Created by: { idea.creator.username }</h3>
-        <h3 className="idea-info">{ idea.upvotes_count } followers</h3>
-        <UpvoteButtonsContainer idea={idea} ideaType={ideaType} />
         { eventLogistics }
         <p>{ idea.description }</p>
+        <UpvoteButtonsContainer idea={idea} ideaType={ideaType} />
 
         <h3 className="idea-comments-header">Comments</h3>
         <CommentFormContainer ideaType={ideaType} idea={idea} />

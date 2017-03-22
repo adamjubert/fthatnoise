@@ -37,9 +37,9 @@ class UpvoteButtons extends React.Component {
     const { idea, ideaType } = this.props;
 
     const complete = ideaType === "event" ? "Going!" : "Complete!";
-    let completeClass = "button accept-button";
-    let interestedClass = "button follow-button";
-    let ignoreClass = "button ignore-button";
+    let completeClass = "button action-buttons accept-button";
+    let interestedClass = "button action-buttons follow-button";
+    let ignoreClass = "button action-buttons ignore-button";
 
     if (idea.upvotes_status === "complete") {
       completeClass += " selected-button";

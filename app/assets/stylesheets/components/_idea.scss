@@ -4,13 +4,21 @@
   font-family: $sans-serif;
 }
 
+.idea p {
+  margin: 20px 0;
+
+}
+
 .idea-title {
   font-size: 36px;
   color: $main;
 }
 
 .idea-info {
-  font-size: 18px;
+  color: $orange;
+  font-size: 16px;
+  display: flex;
+  justify-content: space-between;
 }
 
 .idea-comments-header {
@@ -23,4 +31,9 @@
   .idea {
     width: 90%;
   }
+}
+
+.space-between {
+  display: flex;
+  justify-content: space-between;
 }

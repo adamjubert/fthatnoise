@@ -72,6 +72,11 @@
   display: flex;
 }
 
+.action-buttons {
+  border-radius: 0;
+  margin-right: 0;
+}
+
 @media screen and (max-width: $break-point) {
   .idea-share-buttons {
     top: 5px;
