@@ -18,18 +18,18 @@
 }
 
 .accept-button {
-  background-color: $orange;
+  background-color: $dark-green;
 
   &:hover {
-    background-color: $orange-hover;
+    // background-color: $orange-hover;
   }
 }
 
 .follow-button {
-  background-color: $yellow;
+  background-color: $dark-green;
 
   &:hover {
-    background: $yellow-hover;
+    // background: $yellow-hover;
   }
 }
 
@@ -37,16 +37,21 @@
   background-color: $red;
 
   &:hover {
-    background: $red-hover;
+    // background: $red-hover;
+    // opacity: 0.8;
+    // transition: 0.5s;
   }
 }
 
 .selected-button {
-  background-color: $disabled;
-
+  // background-color: $disabled;
+  opacity: 0.7;
+  transition: 0.5s;
   &:hover {
     cursor: auto;
-    background: $disabled;
+    // background: $disabled;
+    opacity: 0.7;
+    transition: 0.5s;
   }
 }
 
@@ -75,6 +80,13 @@
 .action-buttons {
   border-radius: 0;
   margin-right: 0;
+  width: 34%;
+  transition: 0.5s;
+
+  &:hover {
+    transition: 0.5s;
+    opacity: 0.7;
+  }
 }
 
 @media screen and (max-width: $break-point) {
